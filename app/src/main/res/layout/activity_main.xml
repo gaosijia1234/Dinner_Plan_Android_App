@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <ImageButton
         android:id="@+id/top_mainImageBtn"
         android:layout_width="wrap_content"
