@@ -1,9 +1,11 @@
-package com.example.sijiagao.whatsfordinner;
+package com.example.sijiagao.whatsfordinner.controller;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.sijiagao.whatsfordinner.R;
 
 public class RecipeActivity extends AppCompatActivity {
 
