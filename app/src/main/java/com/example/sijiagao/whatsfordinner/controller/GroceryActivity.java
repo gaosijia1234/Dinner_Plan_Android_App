@@ -1,7 +1,9 @@
-package com.example.sijiagao.whatsfordinner;
+package com.example.sijiagao.whatsfordinner.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.sijiagao.whatsfordinner.R;
 
 public class GroceryActivity extends AppCompatActivity {
 
