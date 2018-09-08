@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">What\'sForDinner</string>
+
+    <string-array name="recipes">
+        <item>Hamburger</item>
+        <item>Potato Chowder</item>
+        <item>Chicken Fried Rice</item>
+        <item>American Chop Suey</item>
+        <item>Meatball Spaghetti</item>
+    </string-array>
+
+    <string-array name="numbersOfRecipe">
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+    </string-array>
+</resources>
