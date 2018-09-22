@@ -16,4 +16,11 @@
         <item>1</item>
         <item>1</item>
     </string-array>
+
+    <string-array name="newDishSpinner1">
+        <item>apple</item>
+        <item>salt</item>
+        <item>pepper</item>
+    </string-array>
+
 </resources>
