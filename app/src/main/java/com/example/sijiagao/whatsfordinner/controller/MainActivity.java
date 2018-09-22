@@ -15,8 +15,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Button recipeBtn = findViewById(R.id.recipeBtn);
+        ImageButton newDishImageBtn = findViewById(R.id.newDishImageBtn);
         ImageButton recipeImageBtn = findViewById(R.id.recipeImageBtn);
+        ImageButton mealImageBtn = findViewById(R.id.mealImageBtn);
+        ImageButton groceryImageBtn = findViewById(R.id.groceryImageBtn);
+
+        // new Onlick
+        newDishImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newDishIntent = new Intent(getApplicationContext(), NewdishActivity.class);
+                startActivity(newDishIntent);
+            }
+        });
+
         recipeImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,5 +36,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(recipeIntent);
             }
         });
+
+        mealImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mealsIntent = new Intent(getApplicationContext(), MealActivity.class);
+                startActivity(mealsIntent);
+            }
+        });
+
+        groceryImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent groceryIntent = new Intent(getApplicationContext(), GroceryActivity.class);
+                startActivity(groceryIntent);
+            }
+        });
+
     }
 }
