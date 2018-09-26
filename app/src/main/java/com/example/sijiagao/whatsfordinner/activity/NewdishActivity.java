@@ -1,10 +1,19 @@
 package com.example.sijiagao.whatsfordinner.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
@@ -26,6 +35,30 @@ public class NewdishActivity extends AppCompatActivity {
                 getResources().getStringArray(R.array.newDishSpinner1));
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner1.setAdapter(spinnerAdapter);
+
+        // recipe name
+        TextView recipeNamePlainText = findViewById(R.id.recipeNamePlainText);
+        String recipeName = recipeNamePlainText.toString();
+
+        // recipe image
+        ImageView recipeImageImageView = findViewById(R.id.recipeImageImageView);
+        String recipeIamgeLoc = recipeImageImageView.toString();
+        //System.out.println(recipeIamgeLoc);
+
+        // recipe add btn
+//        ImageButton recipeAddImageBtn = findViewById(R.id.recipeImageBtn);
+//        recipeAddImageBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
+
+
+
+
+
     }
 
 
