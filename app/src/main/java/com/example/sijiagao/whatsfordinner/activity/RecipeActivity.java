@@ -1,4 +1,4 @@
-package com.example.sijiagao.whatsfordinner.controller;
+package com.example.sijiagao.whatsfordinner.activity;
 
 import android.content.res.Resources;
 import android.os.Bundle;

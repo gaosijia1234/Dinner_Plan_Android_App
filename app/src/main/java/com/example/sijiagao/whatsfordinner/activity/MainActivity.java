@@ -1,7 +1,9 @@
-package com.example.sijiagao.whatsfordinner.controller;
+package com.example.sijiagao.whatsfordinner.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -55,5 +57,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    protected void showApplicationInformation (View view ) {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setMessage(generateAlerDialogMessage());
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int which ) {
+                     dialog.dismiss();
+                 }
+                });
+        alertDialog.show();
+    }
+
+    private String generateAlerDialogMessage()  {
+        return "Author: Charlene Jiang, Rui Jin, SiJia Gao" + "\n" +
+                "Version Number : 1.0.0" + "\n" +
+                "https://github.com/jiangxiaoyu1996" + "\n"+
+                "Copyright Charlene, Rui, SiJia 2018";
     }
 }

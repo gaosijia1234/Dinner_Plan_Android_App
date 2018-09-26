@@ -1,13 +1,13 @@
-package com.example.sijiagao.whatsfordinner.controller;
+package com.example.sijiagao.whatsfordinner.activity;
 
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 public class NewdishActivity extends AppCompatActivity {
 
@@ -27,5 +27,6 @@ public class NewdishActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner1.setAdapter(spinnerAdapter);
     }
+
 
 }
