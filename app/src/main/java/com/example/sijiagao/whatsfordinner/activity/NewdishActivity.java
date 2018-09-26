@@ -27,14 +27,14 @@ public class NewdishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_newdish);
 
         Resources resource = getResources();
-        Spinner spinner1 = findViewById(R.id.spinner1);
+//        Spinner spinner1 = findViewById(R.id.spinner1);
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 NewdishActivity.this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.newDishSpinner1));
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        spinner1.setAdapter(spinnerAdapter);
+//        spinner1.setAdapter(spinnerAdapter);
 
         // recipe name
         TextView recipeNamePlainText = findViewById(R.id.recipeNamePlainText);
@@ -53,6 +53,18 @@ public class NewdishActivity extends AppCompatActivity {
 //
 //            }
 //        });
+
+
+        String[] myIngredient = { "tomato","salt","pepper"};
+
+        //Create Array Adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
+        //Find TextView control
+        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientTextView);
+        //Set the number of characters the user must type before the drop down list is shown
+        acTextView.setThreshold(1);
+        //Set the adapter
+        acTextView.setAdapter(adapter);
 
 
 
