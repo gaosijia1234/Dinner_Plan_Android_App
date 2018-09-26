@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 public class NewdishActivity extends AppCompatActivity {
 
@@ -26,5 +27,6 @@ public class NewdishActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner1.setAdapter(spinnerAdapter);
     }
+
 
 }
