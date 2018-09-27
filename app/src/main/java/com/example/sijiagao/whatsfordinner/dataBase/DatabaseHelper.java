@@ -2,12 +2,17 @@ package com.example.sijiagao.whatsfordinner.dataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.sijiagao.whatsfordinner.model.ingredient.Ingredient;
+import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 
@@ -18,8 +23,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //TABLE
     private static final String TABLE_RECIPES ="recipes";
     private static final String TABLE_RECIPE_INGREDIENTS ="recipeIngredients";
-    private static final String TABLE_INGREDIENTS="ingredients";
-
 
     //RECIPE TABLE
     private static final String ATTRIBUTE_RECIPE_NAME  ="name";
@@ -32,13 +35,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY ="quantity";
     private static final String ATTRIBUTE_RECIPE_INGREDIENTS_UNIT ="unit";
 
-
-    //INGREDIENTS
-    private static final String ATTRIBUTE_INGREDIENTS_NAME ="name";
-
-
     private static final String TAG = DatabaseHelper.class.getName();
     private static DatabaseHelper sInstance;
+
+
     /**
      * Constructor should be private to prevent direct instantiation.
      * Make a call to the static method "getInstance()" instead.
@@ -79,19 +79,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 ATTRIBUTE_RECIPE_INGREDIENTS_UNIT + " VARCHAR(255)" +
                 ")";
 
-        String CREATE_INGRENDIENTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_INGREDIENTS +
-                "("+ ATTRIBUTE_INGREDIENTS_NAME + " VARCHAR(255)" + ")";
-
         db.execSQL(CREATE_RECIPES_TABLE);
         db.execSQL(CREATE_RECIPE_INGREDIENT_TABLE);
-        db.execSQL(CREATE_INGRENDIENTS_TABLE);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db , int oldVersion, int newVersion) {
         if(oldVersion != newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENTS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE_INGREDIENTS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES);
             onCreate(db);
@@ -120,13 +114,63 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
                 db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
                 db.setTransactionSuccessful();
-
-                db.insertOrThrow(TABLE_INGREDIENTS, null, new ContentValues(r.getIngredientName()));
             }
         } catch(Exception e){
             Log.d(TAG, "Error while trying to add recipe to database");
         } finally {
             db.endTransaction();
         }
+    }
+
+    public Recipe getRecipeByName(String recipeName){
+        Recipe recipe = null;
+        SQLiteDatabase db = getReadableDatabase();
+        List<Ingredient> ingredientList = new ArrayList<>();
+
+        String RECIPE_INGREDIENTS_QUERY =
+                "SELECT * FROM " + TABLE_RECIPE_INGREDIENTS + " WHERE " + ATTRIBUTE_RECIPE_INGREDIENTS_NAME +
+                " = '" + recipeName.trim() + "' COLLATE NOCASE";
+        Cursor c1 = db.rawQuery(RECIPE_INGREDIENTS_QUERY, null);
+        try{
+            c1.moveToFirst();
+            while(c1 != null){
+                IngredientUnit unit =
+                        new IngredientUnit(
+                                c1.getString(c1.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT)),
+                                c1.getDouble(c1.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY)));
+                Ingredient ingredient =
+                        new Ingredient(c1.getString(c1.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT)), unit);
+                ingredientList.add(ingredient);
+                c1.moveToNext();
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get recipe ingredients from database");
+        } finally {
+            if( c1 != null && !c1.isClosed()){
+                c1.close();
+            }
+        }
+
+        String RECIPE_QUERY =
+                "SELECT * FROM " + TABLE_RECIPES + " WHERE " + ATTRIBUTE_RECIPE_NAME + " = '" +
+                recipeName.trim() + "' COLLATE NOCASE";
+        Cursor c2 = db.rawQuery(RECIPE_QUERY, null);
+        try{
+            c2.moveToFirst();
+            recipe = new Recipe(
+                    c2.getString(c2.getColumnIndex(ATTRIBUTE_RECIPE_NAME)),
+                    ingredientList,
+                    c2.getString(c2.getColumnIndex(ATTRIBUTE_RECIPE_DIRECTIONS)),
+                    c2.getString(c2.getColumnIndex(ATTRIBUTE_RECIPE_IMAGE))
+            );
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get recipe from database");
+        } finally {
+            if( c1 != null && !c1.isClosed()){
+                c1.close();
+            }
+        }
+
+        return recipe;
     }
 }
