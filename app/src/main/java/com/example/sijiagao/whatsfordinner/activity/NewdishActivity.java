@@ -16,10 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.model.ingredient.Ingredient;
+import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 public class NewdishActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +28,6 @@ public class NewdishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_newdish);
 
         Resources resource = getResources();
-//        Spinner spinner1 = findViewById(R.id.spinner1);
-
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
-                NewdishActivity.this,
-                android.R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.newDishSpinner1));
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-//        spinner1.setAdapter(spinnerAdapter);
-
         // recipe name
         TextView recipeNamePlainText = findViewById(R.id.recipeNamePlainText);
         String recipeName = recipeNamePlainText.toString();
@@ -54,17 +46,46 @@ public class NewdishActivity extends AppCompatActivity {
 //            }
 //        });
 
+        // **************************************** for drop down menu *****************************************************
 
-        String[] myIngredient = { "tomato","salt","pepper"};
+//        TextView ingredientTextView1 = findViewById(R.id.ingredientTextView1);
+//        TextView ingredientTVQuantity1 = findViewById(R.id.ingredientTVQuantity1);
+//        TextView ingredientTVUnit1 = findViewById(R.id.ingredientTVUnit1);
+//
+//        TextView ingredientTextView2 = findViewById(R.id.ingredientTextView2);
+//        TextView ingredientTVQuantity2 = findViewById(R.id.ingredientTVQuantity2);
+//        TextView ingredientTVUnit2 = findViewById(R.id.ingredientTVUnit2);
+//
+//        String ingredient1 = ingredientTextView1.toString();
+//        double ingredientQty1 = Double.parseDouble(ingredientTVQuantity1.toString());
+//        String ingredientUnit1 = ingredientTVUnit1.toString();
+//
+//        String ingredient2 = ingredientTextView2.toString();
+//        double ingredientQty2 = Double.parseDouble(ingredientTVQuantity2.toString());
+//        String ingredientUnit2 = ingredientTVUnit2.toString();
+
+
+
+        String[] myIngredient = { "tomato","salt","pepper","tst"};
 
         //Create Array Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
         //Find TextView control
-        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientTextView);
+        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientTextView1);
         //Set the number of characters the user must type before the drop down list is shown
         acTextView.setThreshold(1);
         //Set the adapter
         acTextView.setAdapter(adapter);
+        // *******************************************************************************************************************
+
+        // button Done
+        Button doneBtnNewDish = findViewById(R.id.doneBtnNewDish);
+        doneBtnNewDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
 

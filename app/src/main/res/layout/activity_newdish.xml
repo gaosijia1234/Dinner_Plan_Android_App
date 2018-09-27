@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,193 +7,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     tools:context=".activity.NewdishActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="370dp"
+    <Button
+        android:id="@+id/doneBtnNewDish"
+        android:layout_width="91dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="160dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
-
-        <AutoCompleteTextView
-            android:id="@+id/ingredientTextView"
-            android:layout_width="match_parent"
-            android:layout_height="67dp">
-        </AutoCompleteTextView>
-
-        <AutoCompleteTextView
-            android:id="@+id/ingredientTextView2"
-            android:layout_width="match_parent"
-            android:layout_height="67dp">
-        </AutoCompleteTextView>
-
-        <AutoCompleteTextView
-            android:id="@+id/ingredientTextView3"
-            android:layout_width="match_parent"
-            android:layout_height="67dp">
-        </AutoCompleteTextView>
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="114dp"-->
-        <!--android:orientation="vertical">-->
-
-
-        <!--<TextView-->
-        <!--android:id="@+id/ingredientNumTextView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="65dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="number of ingre" />-->
-
-        <!--<AutoCompleteTextView-->
-        <!--android:id="@+id/ingredientUnitTextView"-->
-        <!--android:layout_width="186dp"-->
-        <!--android:layout_height="67dp"-->
-        <!--android:text="Unit">-->
-
-        <!--</AutoCompleteTextView>-->
-
-        <!--</LinearLayout>-->
-
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinner1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="53dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.498" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinner2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="53dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.498" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinner3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="53dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.498" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinner3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="53dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.498" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinner4"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="53dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.498" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinner5"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="53dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.498" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinner6"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="53dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.498" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinner7"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="53dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.498" />-->
-
-
-    </LinearLayout>
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Done"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText" />
 
     <EditText
         android:id="@+id/recipeNamePlainText"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -206,13 +39,32 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <Button
+        android:id="@+id/recipeAddBtn"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Add"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText"
+        app:layout_constraintVertical_bias="0.476" />
+
     <ImageView
         android:id="@+id/recipeImageImageView"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -220,31 +72,273 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.142"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText"
         app:srcCompat="@drawable/recipe_main" />
 
-    <ImageButton
-        android:id="@+id/recipeAddImageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="160dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.73"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView1"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:maxLength="17"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity1"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789."
+                        android:hint="Quantity"
+                        android:inputType="number"
+                        android:maxLength="5"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit1"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"
+                        android:maxLength="8"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView2"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity2"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit2"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView3"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity3"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit3"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView4"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity4"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit4"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView5"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity5"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit5"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView6"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity6"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit6"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView7"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity7"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit7"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView8"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity8"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit8"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView9"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity9"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit9"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+
+                <TableRow>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTextView10"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:hint="Ingredient"
+                        android:text=""
+                        android:textSize="18sp"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVQuantity10"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity"></AutoCompleteTextView>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ingredientTVUnit10"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Unit"></AutoCompleteTextView>
+                </TableRow>
+            </TableLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>
