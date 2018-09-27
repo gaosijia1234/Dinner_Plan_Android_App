@@ -83,7 +83,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="370dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="160dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -106,6 +106,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="180dp"
                         android:layout_height="match_parent"
                         android:hint="Ingredient"
+                        android:maxLength="17"
                         android:text=""
                         android:textSize="18sp"></AutoCompleteTextView>
 
@@ -113,13 +114,17 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/ingredientTVQuantity1"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
-                        android:hint="Quantity"></AutoCompleteTextView>
+                        android:digits="0123456789."
+                        android:hint="Quantity"
+                        android:inputType="number"
+                        android:maxLength="5"></AutoCompleteTextView>
 
                     <AutoCompleteTextView
                         android:id="@+id/ingredientTVUnit1"
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
-                        android:hint="Unit"></AutoCompleteTextView>
+                        android:hint="Unit"
+                        android:maxLength="8"></AutoCompleteTextView>
                 </TableRow>
 
                 <TableRow>
