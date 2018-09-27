@@ -7,9 +7,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     tools:context=".activity.NewdishActivity">
 
+    <Button
+        android:id="@+id/doneBtnNewDish"
+        android:layout_width="91dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Done"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText" />
+
     <EditText
         android:id="@+id/recipeNamePlainText"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -22,13 +39,32 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <Button
+        android:id="@+id/recipeAddBtn"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Add"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText"
+        app:layout_constraintVertical_bias="0.476" />
+
     <ImageView
         android:id="@+id/recipeImageImageView"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -36,33 +72,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.135"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText"
         app:srcCompat="@drawable/recipe_main" />
 
-    <ImageButton
-        android:id="@+id/recipeAddImageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="370dp"
         android:layout_marginBottom="8dp"
@@ -89,8 +107,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_height="match_parent"
                         android:hint="Ingredient"
                         android:text=""
-                        android:textSize="18sp">
-                    </AutoCompleteTextView>
+                        android:textSize="18sp"></AutoCompleteTextView>
 
                     <AutoCompleteTextView
                         android:id="@+id/ingredientTVQuantity1"
@@ -317,28 +334,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         </ScrollView>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/doneBtnNewDish"
-        android:layout_width="97dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Done"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.878"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
-
-
-
-
 
 
 </android.support.constraint.ConstraintLayout>
