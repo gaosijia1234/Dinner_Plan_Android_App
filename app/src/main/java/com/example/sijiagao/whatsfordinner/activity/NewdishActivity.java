@@ -55,12 +55,12 @@ public class NewdishActivity extends AppCompatActivity {
 //        });
 
 
-        String[] myIngredient = { "tomato","salt","pepper"};
+        String[] myIngredient = { "tomato","salt","pepper","tst"};
 
         //Create Array Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
         //Find TextView control
-        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientTextView);
+        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientTextView1);
         //Set the number of characters the user must type before the drop down list is shown
         acTextView.setThreshold(1);
         //Set the adapter
