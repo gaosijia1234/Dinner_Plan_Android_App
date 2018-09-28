@@ -27,6 +27,14 @@ public class FragmentGrocey extends Fragment {
         // Required empty public constructor
     }
 
+    public static FragmentGrocey newInstance(String message) {
+
+        Bundle args = new Bundle();
+        args.putString(FragmentGrocey.MESSAGE_KEY, message);
+        FragmentGrocey fragment = new FragmentGrocey();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -48,6 +56,7 @@ public class FragmentGrocey extends Fragment {
         View view = inflater.inflate(R.layout.fragment_grocey, container, false);
 
         Bundle arguments = getArguments();
+
         if (arguments != null) {
             String message = arguments.getString(MESSAGE_KEY);
             TextView tvMessage = (TextView) view.findViewById(R.id.message);

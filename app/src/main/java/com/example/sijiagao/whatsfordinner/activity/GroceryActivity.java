@@ -21,14 +21,8 @@ public class GroceryActivity extends AppCompatActivity {
 
     public void addClickHandler(View view) {
 
-        //passing Arguments
-        Bundle arguments = new Bundle();
-        arguments.putString(FragmentGrocey.MESSAGE_KEY, "Message for Pass Argument");
 
-        FragmentGrocey fragment = new FragmentGrocey();
-
-        fragment.setArguments(arguments);
-
+        FragmentGrocey fragment = FragmentGrocey.newInstance("Pass message from GroceryActivity");
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment1,fragment)
