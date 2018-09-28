@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -47,23 +48,20 @@ public class NewdishActivity extends AppCompatActivity {
 //        });
 
         // **************************************** for drop down menu *****************************************************
+        // name of the ingre
+        TextView ingredientNameTV1 = findViewById(R.id.ingredientNameTV1);
+        // quantity of the ingre
+        TextView ingredientTVQuantity1 = findViewById(R.id.ingredientQuantityTV1);
+        // unit of the ingre
+        TextView ingredientUnitTV1 = findViewById(R.id.ingredientUnitTV1);
 
-//        TextView ingredientTextView1 = findViewById(R.id.ingredientTextView1);
-//        TextView ingredientTVQuantity1 = findViewById(R.id.ingredientTVQuantity1);
-//        TextView ingredientTVUnit1 = findViewById(R.id.ingredientTVUnit1);
-//
-//        TextView ingredientTextView2 = findViewById(R.id.ingredientTextView2);
-//        TextView ingredientTVQuantity2 = findViewById(R.id.ingredientTVQuantity2);
-//        TextView ingredientTVUnit2 = findViewById(R.id.ingredientTVUnit2);
-//
-//        String ingredient1 = ingredientTextView1.toString();
-//        double ingredientQty1 = Double.parseDouble(ingredientTVQuantity1.toString());
-//        String ingredientUnit1 = ingredientTVUnit1.toString();
-//
-//        String ingredient2 = ingredientTextView2.toString();
-//        double ingredientQty2 = Double.parseDouble(ingredientTVQuantity2.toString());
-//        String ingredientUnit2 = ingredientTVUnit2.toString();
-
+        String ingredientName1 = ingredientNameTV1.toString();
+        try {
+            double ingredientQty1 = Double.parseDouble(ingredientTVQuantity1.toString());
+        } catch (NumberFormatException e) {
+            // ingredientQty1 did not contain a valid double
+        }
+        String ingredientUnit1 = ingredientUnitTV1.toString();
 
 
         String[] myIngredient = { "tomato","salt","pepper","tst"};
@@ -71,7 +69,7 @@ public class NewdishActivity extends AppCompatActivity {
         //Create Array Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
         //Find TextView control
-        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientTextView1);
+        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV1);
         //Set the number of characters the user must type before the drop down list is shown
         acTextView.setThreshold(1);
         //Set the adapter
