@@ -38,14 +38,23 @@ public class NewdishActivity extends AppCompatActivity {
         String recipeIamgeLoc = recipeImageImageView.toString();
         //System.out.println(recipeIamgeLoc);
 
-        // recipe add btn
-//        ImageButton recipeAddImageBtn = findViewById(R.id.recipeImageBtn);
-//        recipeAddImageBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        // recipe "add" button
+        Button recipeAddBtn = findViewById(R.id.recipeAddBtn);
+        recipeAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        // recipe "Done" button
+        Button recipeDoneBtn = findViewById(R.id.recipeDoneBtn);
+        recipeDoneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         // **************************************** for drop down menu *****************************************************
         // name of the ingre
@@ -75,20 +84,6 @@ public class NewdishActivity extends AppCompatActivity {
         //Set the adapter
         acTextView.setAdapter(adapter);
         // *******************************************************************************************************************
-
-        // button Done
-        Button doneBtnNewDish = findViewById(R.id.doneBtnNewDish);
-        doneBtnNewDish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
-
-
-
 
     }
 
