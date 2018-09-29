@@ -142,9 +142,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
 
                 db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
-
-                db.setTransactionSuccessful();
             }
+            db.setTransactionSuccessful();
         }catch(Exception e){
             Log.d(TAG, "Error while trying to add recipe in recipe ingredient table in database");
         } finally {
@@ -183,9 +182,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
                 db.update(TABLE_RECIPE_INGREDIENTS, values2, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ?",
                         new String[]{updatedRecipe.getRecipeName()});
-
-                db.setTransactionSuccessful();
             }
+            db.setTransactionSuccessful();
         }catch (Exception e){
             Log.d(TAG, "Error while trying to update recipe in recipe ingredient table in database");
         }finally {
