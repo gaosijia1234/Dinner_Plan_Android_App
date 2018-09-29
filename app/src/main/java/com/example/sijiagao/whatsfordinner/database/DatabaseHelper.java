@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //RECIPE TABLE
     private static final String ATTRIBUTE_RECIPE_NAME  ="name";
     private static final String ATTRIBUTE_RECIPE_DIRECTIONS ="directions";
-    private static final String ATTRIBUTE_RECIPE_IMAGE =" image";
+    private static final String ATTRIBUTE_RECIPE_IMAGE ="image";
 
     //RECIPE_INGREDIENTS TABLE
     private static final String ATTRIBUTE_RECIPE_INGREDIENTS_NAME  ="name";
