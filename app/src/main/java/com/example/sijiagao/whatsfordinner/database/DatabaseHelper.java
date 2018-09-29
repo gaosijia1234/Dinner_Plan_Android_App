@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //RECIPE TABLE
     private static final String ATTRIBUTE_RECIPE_NAME  ="name";
     private static final String ATTRIBUTE_RECIPE_DIRECTIONS ="directions";
-    private static final String ATTRIBUTE_RECIPE_IMAGE =" image";
+    private static final String ATTRIBUTE_RECIPE_IMAGE ="image";
 
     //RECIPE_INGREDIENTS TABLE
     private static final String ATTRIBUTE_RECIPE_INGREDIENTS_NAME  ="name";
@@ -142,9 +142,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
 
                 db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
-
-                db.setTransactionSuccessful();
             }
+            db.setTransactionSuccessful();
         }catch(Exception e){
             Log.d(TAG, "Error while trying to add recipe in recipe ingredient table in database");
         } finally {
