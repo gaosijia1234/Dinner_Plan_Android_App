@@ -1,4 +1,4 @@
-package com.example.sijiagao.whatsfordinner.dataBase;
+package com.example.sijiagao.whatsfordinner.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -92,10 +92,31 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    public boolean checkRecipeExistence(String recipeName) {
+        SQLiteDatabase db = getReadableDatabase();
+        boolean existence = false;
+
+        String RECIPE_EXISTENCE_QUERY = "SELECT * FROM " + TABLE_RECIPES + " WHERE " + ATTRIBUTE_RECIPE_NAME
+                + "=" + recipeName;
+        Cursor c = db.rawQuery(RECIPE_EXISTENCE_QUERY, null);
+        try{
+            c.moveToFirst();
+            if(c != null){
+                existence = true;
+            }
+        }catch(Exception e){
+            Log.d(TAG, "Error while trying to check whether a recipe exists in database");
+        }finally {
+            c.close();
+        }
+
+        return existence;
+    }
+
     public void addRecipe(Recipe recipe){
         SQLiteDatabase db = getWritableDatabase();
-        db.beginTransaction();
 
+        db.beginTransaction();
         try{
             ContentValues values1 = new ContentValues();
             values1.put(ATTRIBUTE_RECIPE_NAME, recipe.getRecipeName());
@@ -103,8 +124,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             values1.put(ATTRIBUTE_RECIPE_IMAGE, recipe.getImagePath());
 
             db.insertOrThrow(TABLE_RECIPES, null, values1);
-            db.setTransactionSuccessful();
 
+            db.setTransactionSuccessful();
+        } catch(Exception e){
+            Log.d(TAG, "Error while trying to add recipe in recipe table in database");
+        } finally {
+            db.endTransaction();
+        }
+
+        db.beginTransaction();
+        try{
             for(Ingredient r: recipe.getIngredients()){
                 ContentValues values2 = new ContentValues();
                 values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_NAME, recipe.getRecipeName());
@@ -113,11 +142,79 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
 
                 db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
+
                 db.setTransactionSuccessful();
             }
-        } catch(Exception e){
-            Log.d(TAG, "Error while trying to add recipe to database");
+        }catch(Exception e){
+            Log.d(TAG, "Error while trying to add recipe in recipe ingredient table in database");
         } finally {
+            db.endTransaction();
+        }
+    }
+
+    public void updateRecipe(Recipe updatedRecipe){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            values.put(ATTRIBUTE_RECIPE_NAME, updatedRecipe.getRecipeName());
+            values.put(ATTRIBUTE_RECIPE_DIRECTIONS, updatedRecipe.getCookingDirections());
+            values.put(ATTRIBUTE_RECIPE_IMAGE, updatedRecipe.getImagePath());
+
+            db.update(TABLE_RECIPES, values, ATTRIBUTE_RECIPE_NAME + " = ?",
+                new String[]{updatedRecipe.getRecipeName()});
+
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while trying to update recipe in recipe table in database");
+        }finally {
+            db.endTransaction();
+        }
+
+        db.beginTransaction();
+        try{
+            for(Ingredient r: updatedRecipe.getIngredients()){
+                ContentValues values2 = new ContentValues();
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_NAME, updatedRecipe.getRecipeName());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT, r.getIngredientName());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY, r.getUnit().getQuantity());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
+
+                db.update(TABLE_RECIPE_INGREDIENTS, values2, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ?",
+                        new String[]{updatedRecipe.getRecipeName()});
+
+                db.setTransactionSuccessful();
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to update recipe in recipe ingredient table in database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    public void deleteRecipe(String recipeName){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            db.delete(TABLE_RECIPES, ATTRIBUTE_RECIPE_NAME + " = ?",
+                    new String[]{recipeName});
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to delete recipe in recipe table in database");
+        }finally {
+            db.endTransaction();
+        }
+
+        db.beginTransaction();
+        try{
+            db.delete(TABLE_RECIPE_INGREDIENTS, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ?",
+                    new String[]{recipeName});
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to delete recipe in recipe ingredient table in database");
+        }finally {
             db.endTransaction();
         }
     }
@@ -172,5 +269,33 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
 
         return recipe;
+    }
+
+    public List<String> getExistingIngredientList(){
+        SQLiteDatabase db = getReadableDatabase();
+        List<String> existingIngredients = null;
+
+        String INGREDIENT_QUERY = "SELECT " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + " FROM " +
+                TABLE_RECIPE_INGREDIENTS;
+        Cursor c = db.rawQuery(INGREDIENT_QUERY, null);
+
+        try{
+            c.moveToFirst();
+            while(c != null){
+                String ingredient = c.getString(c.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT));
+                if(!existingIngredients.contains(ingredient)){
+                    existingIngredients.add(ingredient);
+                }
+                c.moveToNext();
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get existing ingredients from database");
+        }finally {
+            if( c != null && !c.isClosed()){
+                c.close();
+            }
+        }
+
+        return existingIngredients;
     }
 }
