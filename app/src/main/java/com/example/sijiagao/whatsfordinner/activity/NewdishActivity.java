@@ -29,6 +29,8 @@ public class NewdishActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newdish);
+
+
     }
 
 
@@ -57,7 +59,8 @@ public class NewdishActivity extends AppCompatActivity {
         ingredientTVQuantity3.setKeyListener(DigitsKeyListener.getInstance(true,true));
 
         String recipeName = recipeNamePlainText.getText().toString();
-        //String recipeIamgeLoc = recipeImageImageView.getImageAlpha().toString();
+
+
         String recipeIamgeLoc = "image!!!";
 
         //Direction area goes here
