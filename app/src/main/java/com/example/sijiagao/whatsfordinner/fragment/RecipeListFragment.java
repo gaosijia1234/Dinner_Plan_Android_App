@@ -16,22 +16,22 @@ import com.example.sijiagao.whatsfordinner.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentRecipe extends Fragment {
+public class RecipeListFragment extends Fragment {
 
       public static final String TAG = "LifecycleEvents";
       public static final String MESSAGE_KEY="message_key";
 
 
 
-    public FragmentRecipe() {
+    public RecipeListFragment() {
         // Required empty public constructor
     }
 
-    public static FragmentRecipe newInstance(String message) {
+    public static RecipeListFragment newInstance(String message) {
 
         Bundle args = new Bundle();
-        args.putString(FragmentRecipe.MESSAGE_KEY, message);
-        FragmentRecipe fragment = new FragmentRecipe();
+        args.putString(RecipeListFragment.MESSAGE_KEY, message);
+        RecipeListFragment fragment = new RecipeListFragment();
         fragment.setArguments(args);
         return fragment;
     }
