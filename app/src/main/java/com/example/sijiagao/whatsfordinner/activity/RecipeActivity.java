@@ -13,8 +13,8 @@ import com.example.sijiagao.whatsfordinner.fragment.RecipeDetailFragment;
 
 public class RecipeActivity extends AppCompatActivity {
 
-    ListView recipeListView;
-    String[] recipes;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +30,20 @@ public class RecipeActivity extends AppCompatActivity {
 
 
        // RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("Pass message from GroceryActivity");
+
+
+
+
+
+
         RecipeDetailFragment fragment = new RecipeDetailFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.detailFragment,fragment)
                 .commit();
+
+
+
 
         //DatabaseHelper helper = DatabaseHelper.getInstance(this);
        // Log.i("test", helper.getRecipeByName("smartwater").toString());
