@@ -1,6 +1,7 @@
 package com.example.sijiagao.whatsfordinner.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -63,8 +64,12 @@ public class NewdishActivity extends AppCompatActivity {
         Log.i(TAG,"clickDone");
 
         TextView recipeNamePlainText = findViewById(R.id.recipeNamePlainText);
-        ImageView recipeImageImageView = findViewById(R.id.recipeImageImageView);
         String recipeName = recipeNamePlainText.getText().toString();
+        TextView recipeDirectionText = findViewById(R.id.recipeDirection);
+        String recipeDirection = recipeDirectionText.getText().toString();
+
+
+        ImageView recipeImageImageView = findViewById(R.id.recipeImageImageView);
         String recipeIamgeLoc = "image!!!";
 
         ArrayList<String> igList = new ArrayList<>();
@@ -77,12 +82,13 @@ public class NewdishActivity extends AppCompatActivity {
             listIngredient.add( new Ingredient(name, tempUnit));
            }
 
-        tempRecipe = new Recipe(recipeName,listIngredient,"direction!!!","image");
-        DatabaseHelper helper = DatabaseHelper.getInstance(this);
-        helper.addRecipe(tempRecipe);
-        Log.i(TAG, "name is " + tempRecipe.getRecipeName());
-        Log.i(TAG, "add recipe success");
-
+           if (!tempRecipe.getRecipeName().matches("")) {
+               tempRecipe = new Recipe(recipeName, listIngredient, recipeDirection, "image");
+               DatabaseHelper helper = DatabaseHelper.getInstance(this);
+               helper.addRecipe(tempRecipe);
+               Log.i(TAG, "name is " + tempRecipe.getRecipeName());
+               Log.i(TAG, "add recipe success");
+             }
 //      ingredientTVQuantity1.setKeyListener(DigitsKeyListener.getInstance(true,true));
 //      ingredientTVQuantity2.setKeyListener(DigitsKeyListener.getInstance(true,true));
 //      ingredientTVQuantity3.setKeyListener(DigitsKeyListener.getInstance(true,true));
@@ -129,10 +135,8 @@ public class NewdishActivity extends AppCompatActivity {
 
         }*/
 
-
-
-
-       //tempRecipe.setRecipeName(recipeName);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
 
 
     }
