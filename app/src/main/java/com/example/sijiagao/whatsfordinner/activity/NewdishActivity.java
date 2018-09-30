@@ -25,9 +25,6 @@ import java.util.List;
 public class NewdishActivity extends AppCompatActivity {
     public static final String TAG = "NewdishActivity";
 
-     private Recipe tempRecipe;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +32,12 @@ public class NewdishActivity extends AppCompatActivity {
     }
 
 
-    // Buttons //
+    // Buttons for add image to ImageView//
     public void clickAddImage(View view) {
         Log.i(TAG,"clickAddImage");
-
     }
 
-
+  // Helper function to get all TextView in ViewGroup//
     public static void findViews(Context context, View v, ArrayList array){
         try {
                if (v instanceof ViewGroup) {
@@ -60,14 +56,14 @@ public class NewdishActivity extends AppCompatActivity {
         }
     }
 
+    // Click Done Button to save data to DataBase //
     public void clickDone(View view) {
         Log.i(TAG,"clickDone");
 
         TextView recipeNamePlainText = findViewById(R.id.recipeNamePlainText);
         String recipeName = recipeNamePlainText.getText().toString();
-        TextView recipeDirectionText = findViewById(R.id.recipeDirection);
+        TextView recipeDirectionText = findViewById(R.id.recipeDirecion);
         String recipeDirection = recipeDirectionText.getText().toString();
-
 
         ImageView recipeImageImageView = findViewById(R.id.recipeImageImageView);
         String recipeIamgeLoc = "image!!!";
@@ -78,12 +74,13 @@ public class NewdishActivity extends AppCompatActivity {
         List<Ingredient> listIngredient = new ArrayList<>();
         for (int i=0 ; i<igList.size(); i +=3) {
             String name = igList.get(i);
-            IngredientUnit tempUnit = new IngredientUnit(igList.get(i+2),Double.parseDouble(igList.get(i+1)));
+            IngredientUnit tempUnit = new IngredientUnit(igList.get(i+2),
+                                    Double.parseDouble(igList.get(i+1)));
             listIngredient.add( new Ingredient(name, tempUnit));
            }
 
+           Recipe tempRecipe= new Recipe(recipeName, listIngredient, recipeDirection, "image");
            if (!tempRecipe.getRecipeName().matches("")) {
-               tempRecipe = new Recipe(recipeName, listIngredient, recipeDirection, "image");
                DatabaseHelper helper = DatabaseHelper.getInstance(this);
                helper.addRecipe(tempRecipe);
                Log.i(TAG, "name is " + tempRecipe.getRecipeName());
