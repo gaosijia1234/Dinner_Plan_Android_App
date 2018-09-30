@@ -32,6 +32,16 @@ public class NewdishActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newdish);
+
+        String[] myIngredient = { "tomato","salt","pepper","tst"};
+        //Create Array Adapter
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
+        //Find TextView control
+        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV1);
+        //Set the number of characters the user must type before the drop down list is shown
+        acTextView.setThreshold(1);
+        //Set the adapter
+        acTextView.setAdapter(adapter);
     }
 
 
@@ -118,24 +128,7 @@ public class NewdishActivity extends AppCompatActivity {
 //            Log.i(TAG, "error while parse double");
 //        }
 //
-//
 
-        // ***************************************** Drop down menu function **************************************************
-
-//        String[] myIngredient = { "tomato","salt","pepper","tst"};
-//        //Create Array Adapter
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
-//        //Find TextView control
-//        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV1);
-//        //Set the number of characters the user must type before the drop down list is shown
-//        acTextView.setThreshold(1);
-//        //Set the adapter
-//        acTextView.setAdapter(adapter);
-        // *******************************************************************************************************************
-
-
-
-//
 
         /*if (helper.checkRecipeExistence(tempRecipe.getRecipeName()))
         {  Log.i(TAG, "recipe already existed error ");
