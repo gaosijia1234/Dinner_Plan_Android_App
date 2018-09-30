@@ -75,7 +75,7 @@ public class NewdishActivity extends AppCompatActivity {
 
         TextView recipeNamePlainText = findViewById(R.id.recipeNamePlainText);
         String recipeName = recipeNamePlainText.getText().toString();
-        TextView recipeDirectionText = findViewById(R.id.recipeDirecion);
+        TextView recipeDirectionText = findViewById(R.id.recipeDirection);
         String recipeDirection = recipeDirectionText.getText().toString();
 
         ImageView recipeImageImageView = findViewById(R.id.recipeImageImageView);
