@@ -27,7 +27,7 @@ public class RecipeActivity extends AppCompatActivity {
         // now we need to merge recipeListView(layout) and recipes(content) together
         recipeListView.setAdapter(new ArrayAdapter<String>(this, R.layout.recipe_listview_detail, recipes));
 
-        DatabaseHelper helper = DatabaseHelper.getInstance(this);
-        Log.i("test", helper.getRecipeByName("smartwater").toString());
+        //DatabaseHelper helper = DatabaseHelper.getInstance(this);
+       // Log.i("test", helper.getRecipeByName("smartwater").toString());
     }
 }
