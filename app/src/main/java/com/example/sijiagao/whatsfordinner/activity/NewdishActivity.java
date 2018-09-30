@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
 import com.example.sijiagao.whatsfordinner.model.ingredient.Ingredient;
@@ -83,9 +86,19 @@ public class NewdishActivity extends AppCompatActivity {
            if (!tempRecipe.getRecipeName().matches("")) {
                DatabaseHelper helper = DatabaseHelper.getInstance(this);
                helper.addRecipe(tempRecipe);
+               Toast toast = Toast.makeText(this, "Recipe Added", Toast.LENGTH_SHORT);
+               toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+               toast.show();
                Log.i(TAG, "name is " + tempRecipe.getRecipeName());
+               Log.i(TAG, "direction is " + tempRecipe.getCookingDirections());
                Log.i(TAG, "add recipe success");
              }
+             else {
+               Toast toast = Toast.makeText(this, "Nothing Added", Toast.LENGTH_SHORT);
+               toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+               toast.show();
+           }
+
 //      ingredientTVQuantity1.setKeyListener(DigitsKeyListener.getInstance(true,true));
 //      ingredientTVQuantity2.setKeyListener(DigitsKeyListener.getInstance(true,true));
 //      ingredientTVQuantity3.setKeyListener(DigitsKeyListener.getInstance(true,true));
