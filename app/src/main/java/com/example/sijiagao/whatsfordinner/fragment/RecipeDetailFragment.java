@@ -16,22 +16,22 @@ import com.example.sijiagao.whatsfordinner.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentGrocey extends Fragment {
+public class RecipeDetailFragment extends Fragment {
 
       public static final String TAG = "LifecycleEvents";
       public static final String MESSAGE_KEY="message_key";
 
 
 
-    public FragmentGrocey() {
+    public RecipeDetailFragment() {
         // Required empty public constructor
     }
 
-    public static FragmentGrocey newInstance(String message) {
+    public static RecipeDetailFragment newInstance(String message) {
 
         Bundle args = new Bundle();
-        args.putString(FragmentGrocey.MESSAGE_KEY, message);
-        FragmentGrocey fragment = new FragmentGrocey();
+        args.putString(RecipeDetailFragment.MESSAGE_KEY, message);
+        RecipeDetailFragment fragment = new RecipeDetailFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,7 +53,7 @@ public class FragmentGrocey extends Fragment {
                              Bundle savedInstanceState) {
         Log.i(TAG,"onCreateView");
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_grocey, container, false);
+        View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
         Bundle arguments = getArguments();
 

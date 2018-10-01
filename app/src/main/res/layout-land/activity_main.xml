@@ -9,15 +9,20 @@
 
     <ImageButton
         android:id="@+id/top_mainImageBtn"
-        android:layout_width="263dp"
-        android:layout_height="287dp"
+        android:layout_width="253dp"
+        android:layout_height="210dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/top_main"
-        tools:layout_editor_absoluteX="16dp" />
+        app:srcCompat="@drawable/top_main" />
 
     <ImageButton
         android:id="@+id/recipeImageBtn"
@@ -38,7 +43,7 @@
         app:srcCompat="@drawable/recipe_main" />
 
     <ImageButton
-        android:id="@+id/mealsImageBtn"
+        android:id="@+id/mealImageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -128,7 +133,7 @@
         app:layout_constraintVertical_bias="0.949" />
 
     <ImageButton
-        android:id="@+id/groceriesImageBtn"
+        android:id="@+id/groceryImageBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
