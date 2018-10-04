@@ -1,13 +1,18 @@
 package com.example.sijiagao.whatsfordinner.fragment;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.sijiagao.whatsfordinner.R;
 
@@ -15,7 +20,7 @@ import com.example.sijiagao.whatsfordinner.R;
  * A simple {@link Fragment} subclass.
  */
 public class RecipeListFragment extends Fragment {
-
+    public static final String TAG = "yes";
 
     public RecipeListFragment() {
         // Required empty public constructor
@@ -34,8 +39,36 @@ public class RecipeListFragment extends Fragment {
         ListView lv;
         lv =(ListView) view.findViewById(R.id.recipe_listview);
         lv.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.recipe_listview_detail, sampleList));
+        Log.i(TAG,"before clickDone");
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.i(TAG, "clickDone in LandScape"); // for later send to meal
+                }
+            });
+        }
+
+        else {
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.i(TAG, "clickDone in portrait"); // for later send to meal
+                }
+            });
+
+        }
+
+
 
         return view;
     }
 
+
+    public void clickForInfo(View view) {
+        Log.i("TEST_Info","clickDone");
+
+    }
 }
