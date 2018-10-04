@@ -6,7 +6,7 @@ Team Information
 
 Name: Xiaoyu Jiang -- Email: xiaoyu.jiang@sjsu.edu -- Student ID: 010701730
 
-Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 12345678
+Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
 
 Name: Sijia Gao -- Email: sijia.gao@sjsu.edu -- Student ID: 012563863
 
