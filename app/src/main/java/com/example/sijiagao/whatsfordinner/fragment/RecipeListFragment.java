@@ -1,6 +1,7 @@
 package com.example.sijiagao.whatsfordinner.fragment;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -39,12 +40,28 @@ public class RecipeListFragment extends Fragment {
         lv =(ListView) view.findViewById(R.id.recipe_listview);
         lv.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.recipe_listview_detail, sampleList));
         Log.i(TAG,"before clickDone");
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i(TAG,"clickDone"); // for later send to meal
-            }
-        });
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.i(TAG, "clickDone in LandScape"); // for later send to meal
+                }
+            });
+        }
+
+        else {
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.i(TAG, "clickDone in portrait"); // for later send to meal
+                }
+            });
+
+        }
+
+
 
         return view;
     }
