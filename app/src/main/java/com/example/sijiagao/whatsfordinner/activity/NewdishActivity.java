@@ -33,7 +33,7 @@ public class NewdishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newdish);
 
-        String[] myIngredient = { "tomato","salt","pepper","tst"};
+        String[] myIngredient = { "tomato","salt","pepper","tst","lamp","cool","whatever", "pc","mac"};
         //Create Array Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
         //Find TextView control
