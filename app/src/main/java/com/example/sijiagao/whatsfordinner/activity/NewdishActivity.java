@@ -42,6 +42,10 @@ public class NewdishActivity extends AppCompatActivity {
         acTextView.setThreshold(1);
         //Set the adapter
         acTextView.setAdapter(adapter);
+
+
+        TextView ingredientQuantityTV1 = findViewById(R.id.ingredientQuantityTV1);
+        ingredientQuantityTV1.setKeyListener((DigitsKeyListener.getInstance(true,true)));
     }
 
 
@@ -92,9 +96,11 @@ public class NewdishActivity extends AppCompatActivity {
             listIngredient.add( new Ingredient(name, tempUnit));
            }
 
+           DatabaseHelper helper = DatabaseHelper.getInstance(this);
            Recipe tempRecipe= new Recipe(recipeName, listIngredient, recipeDirection, "image");
            if (!tempRecipe.getRecipeName().matches("")) {
-               DatabaseHelper helper = DatabaseHelper.getInstance(this);
+
+               Log.i(TAG,"true or fasle is :"+ Boolean.toString(helper.checkRecipeExistence(recipeName)));
                helper.addRecipe(tempRecipe);
                Toast toast = Toast.makeText(this, "Recipe Added", Toast.LENGTH_SHORT);
                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);

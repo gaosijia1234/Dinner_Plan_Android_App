@@ -1,14 +1,17 @@
 package com.example.sijiagao.whatsfordinner.activity;
 
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
 import com.example.sijiagao.whatsfordinner.fragment.RecipeDetailFragment;
 
 public class RecipeActivity extends AppCompatActivity {
@@ -30,23 +33,19 @@ public class RecipeActivity extends AppCompatActivity {
 
 
        // RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("Pass message from GroceryActivity");
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            RecipeDetailFragment fragment = new RecipeDetailFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.detailFragment,fragment)
+                    .commit();
+        }
 
 
 
 
-
-
-        RecipeDetailFragment fragment = new RecipeDetailFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.detailFragment,fragment)
-                .commit();
-
-
-
-
-        //DatabaseHelper helper = DatabaseHelper.getInstance(this);
-       // Log.i("test", helper.getRecipeByName("smartwater").toString());
+       // DatabaseHelper helper = DatabaseHelper.getInstance(this);
+        //Log.i("test", helper.getRecipeByName("smartwater").toString());
 
     }
 
