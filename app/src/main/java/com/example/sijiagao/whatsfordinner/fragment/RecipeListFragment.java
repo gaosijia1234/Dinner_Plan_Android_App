@@ -29,7 +29,8 @@ public class RecipeListFragment extends Fragment {
          View view =inflater.inflate(R.layout.fragment_recipe_list, container, false);
 
 
-        String[] sampleList = {"apple", "ham", "BBQ","Coke"};
+        String[] sampleList = {"apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke"
+        ,"apple", "ham", "BBQ","Coke"};
         ListView lv;
         lv =(ListView) view.findViewById(R.id.recipe_listview);
         lv.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.recipe_listview_detail, sampleList));
