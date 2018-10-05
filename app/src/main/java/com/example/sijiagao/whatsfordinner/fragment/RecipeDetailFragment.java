@@ -56,7 +56,7 @@ public class RecipeDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
         Bundle arguments = getArguments();
-
+        //MESSAGE_KEY = recipe name here. later for DataBase use
         if (arguments != null) {
             String message = arguments.getString(MESSAGE_KEY);
             TextView tvMessage = (TextView) view.findViewById(R.id.recipe_detail_textview);
@@ -71,6 +71,7 @@ public class RecipeDetailFragment extends Fragment {
         super.onResume();
         Log.i(TAG,"onResume");
 
+//
     }
 
     @Override

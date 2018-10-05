@@ -50,16 +50,22 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
 
 
     @Override
-    public void onListItemClick(String rName) {
+    public void onListItemClick_LandMode(String rName) {
 //        RecipeDetailFragment fragment = new RecipeDetailFragment();
-        RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("I am " + rName);
+
+        RecipeDetailFragment fragment2 = RecipeDetailFragment.newInstance("I am " + rName);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.detailFragment,fragment)
+                .replace(R.id.detailFragment,fragment2)
                 .commit();
     }
 
 
+    @Override
+    public void onListItemClick_PortraitMode(String rName) {
+//        build reset update recipe here
+
+    }
 
 //    public void addClickHandler(View view) {
 //        RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("Pass message from GroceryActivity");
