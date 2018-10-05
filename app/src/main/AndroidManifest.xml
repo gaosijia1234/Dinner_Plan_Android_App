@@ -19,7 +19,8 @@
         <activity android:name=".activity.RecipeActivity" />
         <activity android:name=".activity.MealActivity" />
         <activity android:name=".activity.GroceryActivity" />
-        <activity android:name=".activity.NewdishActivity"></activity>
+        <activity android:name=".activity.NewdishActivity" />
+        <activity android:name=".activity.DayMealActivity"></activity>
     </application>
 
 </manifest>
