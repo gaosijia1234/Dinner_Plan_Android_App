@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         //test
 
         ImageButton newDishImageBtn = findViewById(R.id.newDishImageBtn);
-        ImageButton recipeImageBtn = findViewById(R.id.recipeImageBtn);
-        ImageButton mealImageBtn = findViewById(R.id.mealImageBtn);
+        ImageButton recipeImageBtn  = findViewById(R.id.recipeImageBtn);
+        ImageButton mealImageBtn    = findViewById(R.id.mealImageBtn);
         ImageButton groceryImageBtn = findViewById(R.id.groceryImageBtn);
 
         // new Onlick

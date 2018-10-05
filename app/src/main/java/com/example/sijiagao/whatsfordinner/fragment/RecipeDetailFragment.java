@@ -28,7 +28,6 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     public static RecipeDetailFragment newInstance(String message) {
-
         Bundle args = new Bundle();
         args.putString(RecipeDetailFragment.MESSAGE_KEY, message);
         RecipeDetailFragment fragment = new RecipeDetailFragment();
@@ -71,7 +70,6 @@ public class RecipeDetailFragment extends Fragment {
         super.onResume();
         Log.i(TAG,"onResume");
 
-//
     }
 
     @Override
