@@ -16,6 +16,9 @@ import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
 import com.example.sijiagao.whatsfordinner.fragment.RecipeDetailFragment;
 import com.example.sijiagao.whatsfordinner.fragment.RecipeListFragment;
+import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
+
+import java.util.List;
 
 public class RecipeActivity extends AppCompatActivity implements RecipeListFragment.ListFragmentListener    {
 
@@ -24,6 +27,9 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        List<Recipe> recipeList = db.getAllRecipes();
 
 //       Resources resource = getResources();
 //       recipeListView = findViewById(R.id.recipeListView);
@@ -41,10 +47,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
                     .add(R.id.detailFragment,fragment)
                     .commit();
         }
-
-        // DatabaseHelper helper = DatabaseHelper.getInstance(this);
-        //Log.i("test", helper.getRecipeByName("smartwater").toString());
-
     }
 
 

@@ -182,7 +182,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV1"
@@ -192,7 +192,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV1"
@@ -200,7 +200,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="match_parent"
                                 android:hint="Unit"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -213,7 +213,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV2"
@@ -223,7 +223,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV2"
@@ -231,7 +231,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -244,7 +244,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV3"
@@ -254,7 +254,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV3"
@@ -262,7 +262,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -275,7 +275,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV4"
@@ -285,7 +285,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV4"
@@ -293,7 +293,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -306,7 +306,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV5"
@@ -316,7 +316,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV5"
@@ -324,7 +324,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -337,7 +337,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV6"
@@ -347,7 +347,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV6"
@@ -355,7 +355,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -368,7 +368,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV7"
@@ -378,7 +378,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV7"
@@ -386,7 +386,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -399,7 +399,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV8"
@@ -409,7 +409,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV8"
@@ -417,7 +417,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -430,7 +430,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV9"
@@ -440,7 +440,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV9"
@@ -448,7 +448,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                         <TableRow>
@@ -461,7 +461,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:maxLength="17"
                                 android:text=""
                                 android:textSize="18sp"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientQuantityTV10"
@@ -471,7 +471,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:hint="Quantity"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
 
                             <AutoCompleteTextView
                                 android:id="@+id/ingredientUnitTV10"
@@ -479,7 +479,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
                                 android:maxLength="8"
-                                android:singleLine="true"></AutoCompleteTextView>
+                                android:singleLine="true" />
                         </TableRow>
 
                     </TableLayout>

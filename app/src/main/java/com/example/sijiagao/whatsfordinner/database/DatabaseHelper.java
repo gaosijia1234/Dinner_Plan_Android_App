@@ -269,31 +269,58 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipe;
     }
 
+    public List<Recipe> getAllRecipes(){
+        SQLiteDatabase db = getReadableDatabase();
+        List<Recipe> recipeList = new ArrayList<>();
+        String RECIPE_QUERY =
+                "SELECT * FROM " + TABLE_RECIPES;
+        Cursor c1 = db.rawQuery(RECIPE_QUERY, null);
+        try{
+            c1.moveToNext();
+            while(c1 != null){
+                String recipeName = c1.getString(c1.getColumnIndex(ATTRIBUTE_RECIPE_NAME));
+                recipeList.add(getRecipeByName(recipeName));
+                c1.moveToNext();
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get all recipes from database");
+        } finally {
+            if( c1 != null && !c1.isClosed()){
+                c1.close();
+            }
+        }
+
+        return recipeList;
+    }
+
     public List<String> getExistingIngredientList(){
         SQLiteDatabase db = getReadableDatabase();
-        List<String> existingIngredients = null;
+        List<String> existingIngredients = new ArrayList<>();
 
         String INGREDIENT_QUERY = "SELECT " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + " FROM " +
                 TABLE_RECIPE_INGREDIENTS;
         Cursor c = db.rawQuery(INGREDIENT_QUERY, null);
-
-        try{
-            c.moveToFirst();
-            while(c != null){
-                String ingredient = c.getString(c.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT));
-                if(!existingIngredients.contains(ingredient)){
-                    existingIngredients.add(ingredient);
+        if(c.getCount() == 0){
+            return existingIngredients;
+        }else{
+            try{
+                c.moveToFirst();
+                while(c != null){
+                    String ingredient = c.getString(c.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT));
+                    if(!existingIngredients.contains(ingredient)){
+                        existingIngredients.add(ingredient);
+                    }
+                    c.moveToNext();
                 }
-                c.moveToNext();
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to get existing ingredients from database");
+            }finally {
+                if( c != null && !c.isClosed()){
+                    c.close();
+                }
             }
-        }catch (Exception e){
-            Log.d(TAG, "Error while trying to get existing ingredients from database");
-        }finally {
-            if( c != null && !c.isClosed()){
-                c.close();
-            }
-        }
 
-        return existingIngredients;
+            return existingIngredients;
+        }
     }
 }
