@@ -1,9 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MealActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:text="Monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/mondayBtn"
+        android:onClick="mondayBtnClick"/>
+
+    <Button
+        android:text="Tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/tuesdayBtn"
+        android:onClick="tuesdayBtnClick"/>
+
+    <Button
+        android:text="Wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/wednesdayBtn"
+        android:onClick="wednesdayBtnClick"/>
+
+    <Button
+        android:text="Thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/thursdayBtn"
+        android:onClick="thursdayBtnClick"/>
+
+    <Button
+        android:text="Friday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/fridayBtn"
+        android:onClick="fridayBtnClick"/>
+
+    <Button
+        android:text="Saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/saturdayBtn"
+        android:onClick="saturdayBtnClick"/>
+
+    <Button
+        android:text="Sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/btnSunday"
+        android:onClick="btnSundayClick"/>
+</TableLayout>
