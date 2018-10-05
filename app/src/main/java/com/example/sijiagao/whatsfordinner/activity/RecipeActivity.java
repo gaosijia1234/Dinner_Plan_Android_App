@@ -42,8 +42,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
                     .commit();
         }
 
-
-       // DatabaseHelper helper = DatabaseHelper.getInstance(this);
+        // DatabaseHelper helper = DatabaseHelper.getInstance(this);
         //Log.i("test", helper.getRecipeByName("smartwater").toString());
 
     }
@@ -51,8 +50,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
 
     @Override
     public void onListItemClick_LandMode(String rName) {
-//        RecipeDetailFragment fragment = new RecipeDetailFragment();
-
         RecipeDetailFragment fragment2 = RecipeDetailFragment.newInstance("I am " + rName);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -63,27 +60,14 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
 
     @Override
     public void onListItemClick_PortraitMode(String rName) {
-//        build reset update recipe here
+//        add recipe number to meal later
 
     }
 
-//    public void addClickHandler(View view) {
-//        RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("Pass message from GroceryActivity");
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.fragment1,fragment)
-//                .commit();
-//    }
-//
-//
-//    public void removeClickHandler(View view) {
-//        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment1);
-//        if ( fragment != null ) {
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .remove(fragment)
-//                    .commit();
-//        }
-//    }
+    @Override
+    public void onListItemLongClick_Mode(String name) {
+
+
+    }
 
 }

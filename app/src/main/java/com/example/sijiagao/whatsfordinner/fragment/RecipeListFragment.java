@@ -48,6 +48,7 @@ public class RecipeListFragment extends Fragment {
 
 
         if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -61,12 +62,21 @@ public class RecipeListFragment extends Fragment {
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.i(TAG, "clickDone in portrait"); // for later send to meal
+                    Log.i(TAG, "clickDone in Portrait"); // for later send to meal
                     mListener.onListItemClick_PortraitMode(sampleList[position]);
                 }
             });
 
         }
+
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "Long Click Occurs");
+                mListener.onListItemLongClick_Mode(sampleList[position]);
+                return false;
+            }
+        });
 
         return view;
     }
@@ -94,5 +104,6 @@ public class RecipeListFragment extends Fragment {
     public interface ListFragmentListener {
         void onListItemClick_LandMode(String name);
         void onListItemClick_PortraitMode(String name);
+        void onListItemLongClick_Mode(String name);
     }
 }
