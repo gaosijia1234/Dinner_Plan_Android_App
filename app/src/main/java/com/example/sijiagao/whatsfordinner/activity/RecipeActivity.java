@@ -50,9 +50,13 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
 
 
     @Override
-    public void onListItemClick() {
-        TextView tv = findViewById(R.id.recipe_detail_textview);
-        tv.setText("new new");
+    public void onListItemClick(String rName) {
+//        RecipeDetailFragment fragment = new RecipeDetailFragment();
+        RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("I am " + rName);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.detailFragment,fragment)
+                .commit();
     }
 
 

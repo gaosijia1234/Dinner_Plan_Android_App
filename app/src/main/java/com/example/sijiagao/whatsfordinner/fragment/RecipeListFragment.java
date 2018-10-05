@@ -26,6 +26,9 @@ public class RecipeListFragment extends Fragment {
     public static final String TAG = "yes";
     private ListFragmentListener mListener;
 
+    String[] sampleList = {"apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke"
+            ,"apple", "ham", "BBQ","Coke"};
+
     public RecipeListFragment() {
         // Required empty public constructor
     }
@@ -38,8 +41,6 @@ public class RecipeListFragment extends Fragment {
          View view =inflater.inflate(R.layout.fragment_recipe_list, container, false);
 
 
-        String[] sampleList = {"apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke"
-        ,"apple", "ham", "BBQ","Coke"};
         ListView lv;
         lv =(ListView) view.findViewById(R.id.recipe_listview);
         lv.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.recipe_listview_detail, sampleList));
@@ -51,7 +52,8 @@ public class RecipeListFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Log.i(TAG, "clickDone in LandScape"); // for later send to meal
-                    mListener.onListItemClick();
+
+                    mListener.onListItemClick(sampleList[position]);
                 }
             });
         }
@@ -90,6 +92,6 @@ public class RecipeListFragment extends Fragment {
 
 
     public interface ListFragmentListener {
-        void onListItemClick();
+        void onListItemClick(String name);
     }
 }

@@ -20,6 +20,7 @@
         android:layout_marginStart="8dp"
         android:fadeScrollbars="false"
         android:scrollbars="vertical"
+        android:textFilterEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

@@ -59,7 +59,7 @@ public class RecipeDetailFragment extends Fragment {
 
         if (arguments != null) {
             String message = arguments.getString(MESSAGE_KEY);
-            TextView tvMessage = (TextView) view.findViewById(R.id.message);
+            TextView tvMessage = (TextView) view.findViewById(R.id.recipe_detail_textview);
             tvMessage.setText(message);
         }
 
