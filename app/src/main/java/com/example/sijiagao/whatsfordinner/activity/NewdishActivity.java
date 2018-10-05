@@ -39,12 +39,49 @@ public class NewdishActivity extends AppCompatActivity {
 
         //Create Array Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
-        //Find TextView control
-        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV1);
-        //Set the number of characters the user must type before the drop down list is shown
-        acTextView.setThreshold(1);
+
+        /*int[] ingredientIDs = new int[] {R.id.ingredientNameTV1, R.id.ingredientNameTV2, R.id.ingredientNameTV3,
+                R.id.ingredientNameTV4, R.id.ingredientNameTV5, R.id.ingredientNameTV6, R.id.ingredientNameTV7,
+                R.id.ingredientNameTV8, R.id.ingredientNameTV9, R.id.ingredientNameTV10};
+        for(int id: ingredientIDs){
+            AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(id);
+            acTextView.setThreshold(1);
+            acTextView.setAdapter(adapter);
+        }*/
+
+        //Find TextView control, Set the number of characters the user must type before the drop down list is shown,
         //Set the adapter
+        AutoCompleteTextView acTextView = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV1);
+        acTextView.setThreshold(1);
         acTextView.setAdapter(adapter);
+        AutoCompleteTextView acTextView2 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV2);
+        acTextView2.setThreshold(1);
+        acTextView2.setAdapter(adapter);
+        AutoCompleteTextView acTextView3 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV3);
+        acTextView3.setThreshold(1);
+        acTextView3.setAdapter(adapter);
+        AutoCompleteTextView acTextView4 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV4);
+        acTextView4.setThreshold(1);
+        acTextView4.setAdapter(adapter);
+        AutoCompleteTextView acTextView5 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV5);
+        acTextView5.setThreshold(1);
+        acTextView5.setAdapter(adapter);
+        AutoCompleteTextView acTextView6 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV6);
+        acTextView6.setThreshold(1);
+        acTextView6.setAdapter(adapter);
+        AutoCompleteTextView acTextView7 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV7);
+        acTextView7.setThreshold(1);
+        acTextView7.setAdapter(adapter);
+        AutoCompleteTextView acTextView8 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV8);
+        acTextView8.setThreshold(1);
+        acTextView8.setAdapter(adapter);
+        AutoCompleteTextView acTextView9 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV9);
+        acTextView9.setThreshold(1);
+        acTextView9.setAdapter(adapter);
+        AutoCompleteTextView acTextView10 = (AutoCompleteTextView) findViewById(R.id.ingredientNameTV10);
+        acTextView10.setThreshold(1);
+        acTextView10.setAdapter(adapter);
+
 
         TextView ingredientQuantityTV1 = findViewById(R.id.ingredientQuantityTV1);
         ingredientQuantityTV1.setKeyListener((DigitsKeyListener.getInstance(true,true)));
