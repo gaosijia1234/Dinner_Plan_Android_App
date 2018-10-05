@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,14 +26,18 @@ import com.example.sijiagao.whatsfordinner.R;
 public class RecipeListFragment extends Fragment {
     public static final String TAG = "yes";
     private ListFragmentListener mListener;
-
-    String[] sampleList = {"apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke"
-            ,"apple", "ham", "BBQ","Coke"};
+    private String[] sampleList = {};
 
     public RecipeListFragment() {
         // Required empty public constructor
     }
 
+    /*public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        if(getArguments() != null){
+            sampleList = getArguments().getStringArray("data");
+        }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
