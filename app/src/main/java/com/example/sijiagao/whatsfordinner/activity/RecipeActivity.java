@@ -29,7 +29,12 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
         setContentView(R.layout.activity_recipe);
 
         DatabaseHelper db = DatabaseHelper.getInstance(this);
-        List<Recipe> recipeList = db.getAllRecipes();
+        String[] sampleList = db.getAllRecipeNames().toArray(new String[0]);
+
+        /*Bundle bundle = new Bundle();
+        bundle.putStringArray("data", sampleList);
+        Fragment rFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_list);
+        rFragment.setArguments(bundle);*/
 
 //       Resources resource = getResources();
 //       recipeListView = findViewById(R.id.recipeListView);

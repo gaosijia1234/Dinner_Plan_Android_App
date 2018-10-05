@@ -12,6 +12,7 @@ import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
@@ -293,6 +294,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipeList;
     }
 
+    public List<String> getAllRecipeNames(){
+        return getAllRecipeNames(getAllRecipes());
+    }
+
     public List<String> getExistingIngredientList(){
         SQLiteDatabase db = getReadableDatabase();
         List<String> existingIngredients = new ArrayList<>();
@@ -322,5 +327,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
             return existingIngredients;
         }
+    }
+
+    private List<String> getAllRecipeNames(List<Recipe> recipes){
+        List<String> recipeNames = new ArrayList<>();
+        for(Recipe r: recipes){
+            recipeNames.add(r.getRecipeName());
+        }
+
+        Collections.sort(recipeNames);
+        return recipeNames;
     }
 }
