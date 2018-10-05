@@ -33,7 +33,10 @@ public class NewdishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newdish);
 
-        String[] myIngredient = { "tomato","salt","pepper","tst","lamp","cool","whatever", "pc","mac"};
+        //String[] myIngredient = { "tomato","salt","pepper","tst","lamp","cool","whatever", "pc","mac"};
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        String[] myIngredient = db.getExistingIngredientList().toArray(new String[0]);
+
         //Create Array Adapter
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
         //Find TextView control
@@ -99,7 +102,7 @@ public class NewdishActivity extends AppCompatActivity {
            Recipe tempRecipe= new Recipe(recipeName, listIngredient, recipeDirection, "image");
            if (!tempRecipe.getRecipeName().matches("")) {
 
-               Log.i(TAG,"true or fasle is :"+ Boolean.toString(helper.checkRecipeExistence(recipeName)));
+               //Log.i(TAG,"true or fasle is :"+ Boolean.toString(helper.checkRecipeExistence(recipeName)));
                helper.addRecipe(tempRecipe);
                Toast toast = Toast.makeText(this, "Recipe Added", Toast.LENGTH_SHORT);
                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);

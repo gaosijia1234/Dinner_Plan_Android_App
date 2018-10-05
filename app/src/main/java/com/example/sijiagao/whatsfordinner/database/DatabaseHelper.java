@@ -271,29 +271,32 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public List<String> getExistingIngredientList(){
         SQLiteDatabase db = getReadableDatabase();
-        List<String> existingIngredients = null;
+        List<String> existingIngredients = new ArrayList<>();
 
         String INGREDIENT_QUERY = "SELECT " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + " FROM " +
                 TABLE_RECIPE_INGREDIENTS;
         Cursor c = db.rawQuery(INGREDIENT_QUERY, null);
-
-        try{
-            c.moveToFirst();
-            while(c != null){
-                String ingredient = c.getString(c.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT));
-                if(!existingIngredients.contains(ingredient)){
-                    existingIngredients.add(ingredient);
+        if(c.getCount() == 0){
+            return existingIngredients;
+        }else{
+            try{
+                c.moveToFirst();
+                while(c != null){
+                    String ingredient = c.getString(c.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT));
+                    if(!existingIngredients.contains(ingredient)){
+                        existingIngredients.add(ingredient);
+                    }
+                    c.moveToNext();
                 }
-                c.moveToNext();
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to get existing ingredients from database");
+            }finally {
+                if( c != null && !c.isClosed()){
+                    c.close();
+                }
             }
-        }catch (Exception e){
-            Log.d(TAG, "Error while trying to get existing ingredients from database");
-        }finally {
-            if( c != null && !c.isClosed()){
-                c.close();
-            }
-        }
 
-        return existingIngredients;
+            return existingIngredients;
+        }
     }
 }
