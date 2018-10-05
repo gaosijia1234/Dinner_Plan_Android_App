@@ -9,7 +9,7 @@
 
     <FrameLayout
         android:id="@+id/detailFragment"
-        android:layout_width="258dp"
+        android:layout_width="390dp"
         android:layout_height="327dp"
         android:layout_centerInParent="true"
         android:layout_marginBottom="8dp"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/fragment"
         android:name="com.example.sijiagao.whatsfordinner.fragment.RecipeListFragment"
-        android:layout_width="247dp"
+        android:layout_width="150dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
