@@ -2,6 +2,7 @@ package com.example.sijiagao.whatsfordinner.activity;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
 import com.example.sijiagao.whatsfordinner.fragment.RecipeDetailFragment;
+import com.example.sijiagao.whatsfordinner.fragment.RecipeListFragment;
 
-public class RecipeActivity extends AppCompatActivity {
-
-
+public class RecipeActivity extends AppCompatActivity implements RecipeListFragment.ListFragmentListener    {
 
 
     @Override
@@ -42,12 +43,18 @@ public class RecipeActivity extends AppCompatActivity {
         }
 
 
-
-
        // DatabaseHelper helper = DatabaseHelper.getInstance(this);
         //Log.i("test", helper.getRecipeByName("smartwater").toString());
 
     }
+
+
+    @Override
+    public void onListItemClick() {
+        TextView tv = findViewById(R.id.recipe_detail_textview);
+        tv.setText("new new");
+    }
+
 
 
 //    public void addClickHandler(View view) {

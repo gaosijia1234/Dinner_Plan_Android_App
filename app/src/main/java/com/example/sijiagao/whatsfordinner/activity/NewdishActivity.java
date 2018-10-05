@@ -43,7 +43,6 @@ public class NewdishActivity extends AppCompatActivity {
         //Set the adapter
         acTextView.setAdapter(adapter);
 
-
         TextView ingredientQuantityTV1 = findViewById(R.id.ingredientQuantityTV1);
         ingredientQuantityTV1.setKeyListener((DigitsKeyListener.getInstance(true,true)));
     }
