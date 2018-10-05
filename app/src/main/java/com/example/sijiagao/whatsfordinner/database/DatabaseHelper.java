@@ -269,6 +269,30 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipe;
     }
 
+    public List<Recipe> getAllRecipes(){
+        SQLiteDatabase db = getReadableDatabase();
+        List<Recipe> recipeList = new ArrayList<>();
+        String RECIPE_QUERY =
+                "SELECT * FROM " + TABLE_RECIPES;
+        Cursor c1 = db.rawQuery(RECIPE_QUERY, null);
+        try{
+            c1.moveToNext();
+            while(c1 != null){
+                String recipeName = c1.getString(c1.getColumnIndex(ATTRIBUTE_RECIPE_NAME));
+                recipeList.add(getRecipeByName(recipeName));
+                c1.moveToNext();
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get all recipes from database");
+        } finally {
+            if( c1 != null && !c1.isClosed()){
+                c1.close();
+            }
+        }
+
+        return recipeList;
+    }
+
     public List<String> getExistingIngredientList(){
         SQLiteDatabase db = getReadableDatabase();
         List<String> existingIngredients = new ArrayList<>();
