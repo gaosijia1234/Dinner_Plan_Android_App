@@ -27,12 +27,16 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-
+        Log.i("uu","new landscape");
        // DatabaseHelper db = DatabaseHelper.getInstance(this);
        // String[] sampleList = db.getAllRecipeNames().toArray(new String[0]);
 
        // RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("Pass message from GroceryActivity");
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+
+       // Fragment rFragment = getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
+                ){
             RecipeDetailFragment fragment = new RecipeDetailFragment();
             getSupportFragmentManager()
                     .beginTransaction()
