@@ -64,6 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     // Called when the database connection is being configured.
     // Configure database settings for things like foreign key support, write-ahead logging, etc.
     @Override
+    //not used
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
         db.setForeignKeyConstraintsEnabled(true);
@@ -76,7 +77,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "(" +
                 ATTRIBUTE_RECIPE_NAME + " VARCHAR(255), " +
                 ATTRIBUTE_RECIPE_DIRECTIONS + " VARCHAR(255), " +
-                ATTRIBUTE_RECIPE_IMAGE + " VARCHAR(255)" +
+                ATTRIBUTE_RECIPE_IMAGE + " VARCHAR(255), " +
+                "PRIMARY KEY (" + ATTRIBUTE_RECIPE_NAME + ")" +
                 ")";
 
         String CREATE_RECIPE_INGREDIENT_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_RECIPE_INGREDIENTS +
@@ -84,13 +86,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " VARCHAR(255), " +
                 ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + " VARCHAR(255), " +
                 ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY + " DOUBLE, " +
-                ATTRIBUTE_RECIPE_INGREDIENTS_UNIT + " VARCHAR(255)" +
+                ATTRIBUTE_RECIPE_INGREDIENTS_UNIT + " VARCHAR(255), " +
+                "PRIMARY KEY (" + ATTRIBUTE_RECIPE_INGREDIENTS_NAME + "," + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + "), " +
+                "FOREIGN KEY (" + ATTRIBUTE_RECIPE_INGREDIENTS_NAME + ") REFERENCES " + TABLE_RECIPES + "(" + ATTRIBUTE_RECIPE_NAME + ")" +
                 ")";
 
         String CREATE_MEAL_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_MEALS +
                 "(" +
                 ATTRIBUTE_MEAL_RECIPE_NAME + " VARCHAR(225), " +
-                ATTRIBUTE_MEAL_RECIPE_COUNT + " INT" +
+                ATTRIBUTE_MEAL_RECIPE_COUNT + " INT, " +
+                "PRIMARY KEY (" + ATTRIBUTE_MEAL_RECIPE_NAME + ")" +
                 ")";
 
         db.execSQL(CREATE_RECIPES_TABLE);
