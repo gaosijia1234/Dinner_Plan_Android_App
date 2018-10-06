@@ -30,10 +30,8 @@ public class RecipeListFragment extends Fragment {
     public static final String TAG = "yes";
     private ListFragmentListener mListener;
     private String[] sampleList = {"Empty"};
-    private String[] sampleList2 = {"a","b","c","d"};
 
     public RecipeListFragment() {
-
         // Required empty public constructor
     }
 
@@ -47,7 +45,7 @@ public class RecipeListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-         View view =inflater.inflate(R.layout.fragment_recipe_list, container, false);
+        View view =inflater.inflate(R.layout.fragment_recipe_list, container, false);
 
         ListView lv;
         lv =(ListView) view.findViewById(R.id.recipe_listview);
@@ -117,7 +115,6 @@ public class RecipeListFragment extends Fragment {
     public String[] getSampleList() {
         return sampleList;
     }
-
     public void setSampleList(String[] sampleList) {
         this.sampleList = sampleList;
     }
