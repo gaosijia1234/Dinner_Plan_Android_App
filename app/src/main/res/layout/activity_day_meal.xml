@@ -49,94 +49,122 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/breakfastLabelTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:fontFamily="serif"
-                    android:singleLine="true"
-                    android:text="Breakfast"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <!--breakfast-->
+                    <TextView
+                        android:id="@+id/breakfastLabelTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:fontFamily="serif"
+                        android:singleLine="true"
+                        android:text="Breakfast"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/breakfastInputTV"
-                    android:layout_width="180dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:hint="Eating out"
-                    android:maxLength="17"
-                    android:singleLine="true"
-                    android:textSize="18sp"></AutoCompleteTextView>
+                    <AutoCompleteTextView
+                        android:id="@+id/breakfastInputTV"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:hint="Eating out"
+                        android:maxLength="17"
+                        android:singleLine="true"
+                        android:textSize="18sp"/>
 
-                <TextView
-                    android:id="@+id/lunchLabelTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:fontFamily="serif"
-                    android:singleLine="true"
-                    android:text="Lunch"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <Button
+                        android:id="@+id/breakfastDoneBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Button"
+                        android:onClick="breakfastDoneBtnClick"/>
+                <!--end breackfast-->
 
-                <AutoCompleteTextView
-                    android:id="@+id/lunchInputTV"
-                    android:layout_width="180dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:hint="Eating out"
-                    android:maxLength="17"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textSize="18sp"></AutoCompleteTextView>
+                <!--lunch-->
+                    <TextView
+                        android:id="@+id/lunchLabelTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:fontFamily="serif"
+                        android:singleLine="true"
+                        android:text="Lunch"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/dinnerLabelTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:fontFamily="serif"
-                    android:singleLine="true"
-                    android:text="Dinner"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <AutoCompleteTextView
+                        android:id="@+id/lunchInputTV"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:hint="Eating out"
+                        android:maxLength="17"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="18sp"/>
 
-                <AutoCompleteTextView
-                    android:id="@+id/dinnerInputTV"
-                    android:layout_width="180dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:hint="Eating out"
-                    android:maxLength="17"
-                    android:singleLine="true"
-                    android:text=""
-                    android:textSize="18sp"></AutoCompleteTextView>
+                    <Button
+                        android:id="@+id/lunchDoneBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Button"
+                        android:onClick="lunchDoneBtnClick"/>
+                <!--end of lunch-->
+
+                <!--dinner-->
+                    <TextView
+                        android:id="@+id/dinnerLabelTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:fontFamily="serif"
+                        android:singleLine="true"
+                        android:text="Dinner"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/dinnerInputTV"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:hint="Eating out"
+                        android:maxLength="17"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="18sp"/>
+
+                    <Button
+                        android:id="@+id/dinnerDoneBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Button"
+                        android:onClick="dinnerDoneBtnClick"/>
+                <!--end of dinner-->
+
 
                 <Button
                     android:id="@+id/dayMealDoneBtn"
