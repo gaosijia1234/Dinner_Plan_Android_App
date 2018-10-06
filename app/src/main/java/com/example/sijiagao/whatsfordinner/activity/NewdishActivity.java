@@ -3,7 +3,10 @@ package com.example.sijiagao.whatsfordinner.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
+import android.net.UrlQuerySanitizer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -28,10 +31,21 @@ import java.util.List;
 public class NewdishActivity extends AppCompatActivity {
     public static final String TAG = "NewdishActivity";
 
+    public static final int PICK_IMAGE = 100;
+    Uri imageUri;
+
+
+
+    ImageView recipeImageImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newdish);
+
+        recipeImageImageView = findViewById(R.id.recipeImageImageView);
+        String recipeIamgeLoc = "image!!!";
+
 
         //String[] myIngredient = { "tomato","salt","pepper","tst","lamp","cool","whatever", "pc","mac"};
         DatabaseHelper db = DatabaseHelper.getInstance(this);
@@ -88,10 +102,36 @@ public class NewdishActivity extends AppCompatActivity {
     }
 
 
+    public void imageGalleryBtnClick(View view) {
+        Log.i(TAG,"imageGalleryBtnClick");
+
+        openGallery();
+    }
+
+    public void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            recipeImageImageView.setImageURI(imageUri);
+        }
+    }
+
+    public void imageUrlBtnClick(View view) {
+        Log.i(TAG,"imageUrlBtnClick");
+
+
+    }
     // Buttons for add image to ImageView//
     public void clickAddImage(View view) {
         Log.i(TAG,"clickAddImage");
     }
+
 
   // Helper function to get all TextView in ViewGroup//
     public static void findViews(Context context, View v, ArrayList array){

@@ -73,6 +73,7 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
     public void onListItemClick_PortraitMode(String rName) {
 //        add recipe number to meal later
 
+
     }
 
     @Override

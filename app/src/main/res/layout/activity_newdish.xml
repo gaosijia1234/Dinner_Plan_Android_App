@@ -85,7 +85,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         app:srcCompat="@drawable/recipe_main" />
 
                     <Button
-                        android:id="@+id/imageAddBtn"
+                        android:id="@+id/imageGalleryBtn"
                         android:layout_width="89dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -96,13 +96,20 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_marginTop="8dp"
                         android:layout_weight="1"
                         android:fontFamily="serif"
-                        android:onClick="clickAddImage"
-                        android:text="Add"
-                        app:layout_constraintBottom_toTopOf="@+id/editText"
+                        android:onClick="imageGalleryBtnClick"
+                        android:text="Gallery"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.501"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText" />
+
+                    <Button
+                        android:id="@+id/imageUrlBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="imageUrlBtnClick"
+                        android:text="Url" />
 
                     <Button
                         android:id="@+id/recipeDoneBtn"
