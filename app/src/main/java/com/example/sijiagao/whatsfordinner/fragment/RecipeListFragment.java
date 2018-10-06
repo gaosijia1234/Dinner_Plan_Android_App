@@ -18,6 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.activity.RecipeActivity;
+import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
+import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,8 +32,12 @@ public class RecipeListFragment extends Fragment {
     public static final String TAG = "yes";
     private ListFragmentListener mListener;
 
-    String[] sampleList = {"apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke"
-            ,"apple", "ham", "BBQ","Coke"};
+
+//    RecipeActivity recipeActivity = (RecipeActivity) getActivity();
+//    String[] sampleList = recipeActivity.getRecipeList().toArray(new String[0]);
+
+//    String[] sampleList = {"apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke","apple", "ham", "BBQ","Coke"
+//            ,"apple", "ham", "BBQ","Coke"};
 
     public RecipeListFragment() {
         // Required empty public constructor
@@ -38,8 +48,8 @@ public class RecipeListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         View view =inflater.inflate(R.layout.fragment_recipe_list, container, false);
-
+        final String[] sampleList = getArguments().getStringArray("myString");
+        View view = inflater.inflate(R.layout.fragment_recipe_list, container, false);
 
         ListView lv;
         lv =(ListView) view.findViewById(R.id.recipe_listview);
