@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
+
+import java.util.TreeMap;
 
 public class MealActivity extends AppCompatActivity {
 
@@ -13,6 +16,12 @@ public class MealActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal);
+
+        //DatabaseHelper db = DatabaseHelper.getInstance(this);
+        //db.addRecipeToMeal("Cherry Water");
+        //db.consumeRecipeFromMeal("Cherry Water");
+        //db.consumeRecipeFromMeal("Cherry Water");
+        //TreeMap<String, Integer> test = db.getAllMeal();
     }
 
 

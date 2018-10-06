@@ -14,6 +14,7 @@ import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
 
@@ -24,21 +25,26 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //TABLE
     private static final String TABLE_RECIPES ="recipes";
     private static final String TABLE_RECIPE_INGREDIENTS ="recipeIngredients";
+    private static final String TABLE_MEALS = "meals";
 
-    //RECIPE TABLE
+    //RECIPES TABLE
     private static final String ATTRIBUTE_RECIPE_NAME  ="name";
     private static final String ATTRIBUTE_RECIPE_DIRECTIONS ="directions";
     private static final String ATTRIBUTE_RECIPE_IMAGE ="image";
 
     //RECIPE_INGREDIENTS TABLE
-    private static final String ATTRIBUTE_RECIPE_INGREDIENTS_NAME  ="name";
-    private static final String ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT  ="ingredient";
-    private static final String ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY ="quantity";
-    private static final String ATTRIBUTE_RECIPE_INGREDIENTS_UNIT ="unit";
+    private static final String ATTRIBUTE_RECIPE_INGREDIENTS_NAME  = "name";
+    private static final String ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT  = "ingredient";
+    private static final String ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY = "quantity";
+    private static final String ATTRIBUTE_RECIPE_INGREDIENTS_UNIT = "unit";
+
+    //MEALS TABLE
+    private static final String ATTRIBUTE_MEAL_RECIPE_NAME = "name";
+    private static final String ATTRIBUTE_MEAL_RECIPE_COUNT = "count";
 
     private static final String TAG = DatabaseHelper.class.getName();
     private static DatabaseHelper sInstance;
-
+    //privaye TreeMap<String, Unit>
 
     /**
      * Constructor should be private to prevent direct instantiation.
@@ -64,6 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     @Override
+    //tested
     public void onCreate(SQLiteDatabase db) {
         String CREATE_RECIPES_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_RECIPES +
                 "(" +
@@ -80,40 +87,39 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 ATTRIBUTE_RECIPE_INGREDIENTS_UNIT + " VARCHAR(255)" +
                 ")";
 
+        String CREATE_MEAL_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_MEALS +
+                "(" +
+                ATTRIBUTE_MEAL_RECIPE_NAME + " VARCHAR(225), " +
+                ATTRIBUTE_MEAL_RECIPE_COUNT + " INT" +
+                ")";
+
         db.execSQL(CREATE_RECIPES_TABLE);
         db.execSQL(CREATE_RECIPE_INGREDIENT_TABLE);
+        db.execSQL(CREATE_MEAL_TABLE);
     }
 
     @Override
+    //not tested
     public void onUpgrade(SQLiteDatabase db , int oldVersion, int newVersion) {
         if(oldVersion != newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE_INGREDIENTS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEALS);
             onCreate(db);
         }
     }
 
+    //tested
     public boolean checkRecipeExistence(String recipeName) {
         SQLiteDatabase db = getReadableDatabase();
-        boolean existence = false;
 
         String RECIPE_EXISTENCE_QUERY = "SELECT * FROM " + TABLE_RECIPES + " WHERE " + ATTRIBUTE_RECIPE_NAME
-                + "=" + recipeName;
+                + "='" + recipeName + "'";
         Cursor c = db.rawQuery(RECIPE_EXISTENCE_QUERY, null);
-        try{
-            c.moveToFirst();
-            if(c != null){
-                existence = true;
-            }
-        }catch(Exception e){
-            Log.d(TAG, "Error while trying to check whether a recipe exists in database");
-        }finally {
-            c.close();
-        }
-
-        return existence;
+        return c.getCount() != 0;
     }
 
+    //tested
     public void addRecipe(Recipe recipe){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -152,6 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //not tested
     public void updateRecipe(Recipe updatedRecipe){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -192,6 +199,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //not tested
     public void deleteRecipe(String recipeName){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -218,6 +226,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //tested
     public Recipe getRecipeByName(String recipeName){
         Recipe recipe = null;
         SQLiteDatabase db = getReadableDatabase();
@@ -229,7 +238,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         Cursor c1 = db.rawQuery(RECIPE_INGREDIENTS_QUERY, null);
         try{
             c1.moveToFirst();
-            while(c1 != null){
+            while(!c1.isAfterLast()){
                 IngredientUnit unit =
                         new IngredientUnit(
                                 c1.getString(c1.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT)),
@@ -270,6 +279,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipe;
     }
 
+    //tested
     public List<Recipe> getAllRecipes(){
         SQLiteDatabase db = getReadableDatabase();
         List<Recipe> recipeList = new ArrayList<>();
@@ -278,7 +288,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         Cursor c1 = db.rawQuery(RECIPE_QUERY, null);
         try{
             c1.moveToNext();
-            while(c1 != null){
+            while(!c1.isAfterLast()){
                 String recipeName = c1.getString(c1.getColumnIndex(ATTRIBUTE_RECIPE_NAME));
                 recipeList.add(getRecipeByName(recipeName));
                 c1.moveToNext();
@@ -294,10 +304,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipeList;
     }
 
+    //tested
     public List<String> getAllRecipeNames(){
         return getAllRecipeNames(getAllRecipes());
     }
 
+    //tested
     public List<String> getExistingIngredientList(){
         SQLiteDatabase db = getReadableDatabase();
         List<String> existingIngredients = new ArrayList<>();
@@ -310,7 +322,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }else{
             try{
                 c.moveToFirst();
-                while(c != null){
+                while(!c.isAfterLast()){
                     String ingredient = c.getString(c.getColumnIndex(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT));
                     if(!existingIngredients.contains(ingredient)){
                         existingIngredients.add(ingredient);
@@ -320,7 +332,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             }catch (Exception e){
                 Log.d(TAG, "Error while trying to get existing ingredients from database");
             }finally {
-                if( c != null && !c.isClosed()){
+                if(!c.isClosed()){
                     c.close();
                 }
             }
@@ -329,6 +341,101 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //tested
+    public void addRecipeToMeal(String recipeName){
+        SQLiteDatabase db = getWritableDatabase();
+
+        boolean mealExistance = checkExistingMeal(recipeName);
+
+        if(!mealExistance){
+            db.beginTransaction();
+            try{
+                ContentValues values1 = new ContentValues();
+                values1.put(ATTRIBUTE_MEAL_RECIPE_NAME, recipeName);
+                values1.put(ATTRIBUTE_MEAL_RECIPE_COUNT, 1);
+                db.insertOrThrow(TABLE_MEALS, null, values1);
+                db.setTransactionSuccessful();
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to add new recipe in meal table in database");
+            }finally {
+                db.endTransaction();
+            }
+        }else{
+            db.beginTransaction();
+            try{
+                ContentValues values2 = new ContentValues();
+                values2.put(ATTRIBUTE_MEAL_RECIPE_NAME, recipeName);
+                values2.put(ATTRIBUTE_MEAL_RECIPE_COUNT, getExsitingRecipeCount(recipeName) + 1);
+                db.update(TABLE_MEALS, values2, ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'", null);
+                db.setTransactionSuccessful();
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to increase recipe count in meal table in database");
+            }finally {
+                db.endTransaction();
+            }
+        }
+    }
+
+    //tested
+    public void consumeRecipeFromMeal(String recipeName){
+        SQLiteDatabase db = getWritableDatabase();
+        int count = getExsitingRecipeCount(recipeName);
+
+        if(count == 1){
+            db.beginTransaction();
+            try{
+                db.delete(TABLE_MEALS, ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'", null);
+                db.setTransactionSuccessful();
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to delete a recipe in meal table from database");
+            }finally {
+                db.endTransaction();
+            }
+        }else{
+            db.beginTransaction();
+            try{
+                ContentValues values1 = new ContentValues();
+                values1.put(ATTRIBUTE_MEAL_RECIPE_NAME, recipeName);
+                values1.put(ATTRIBUTE_MEAL_RECIPE_COUNT, count - 1);
+                db.update(TABLE_MEALS, values1, ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'", null);
+                db.setTransactionSuccessful();
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to add new recipe in meal table in database");
+            }finally {
+                db.endTransaction();
+            }
+        }
+    }
+
+    //tested
+    public TreeMap<String, Integer> getAllMeal(){
+        SQLiteDatabase db = getReadableDatabase();
+        TreeMap<String, Integer> mealMap = new TreeMap<>();
+        String MEAL_QUERY = "SELECT * FROM " + TABLE_MEALS;
+        Cursor c = db.rawQuery(MEAL_QUERY, null);
+        if(c.getCount() == 0){
+            return mealMap;
+        }else{
+            try{
+                c.moveToFirst();
+                while(!c.isAfterLast()){
+                    mealMap.put(c.getString(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_NAME)),
+                            c.getInt(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_COUNT)));
+                    c.moveToNext();
+                }
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to get all meals in meal table from database");
+            }finally {
+                if(!c.isClosed()){
+                    c.close();
+                }
+            }
+        }
+
+        return mealMap;
+    }
+
+    //tested
     private List<String> getAllRecipeNames(List<Recipe> recipes){
         List<String> recipeNames = new ArrayList<>();
         for(Recipe r: recipes){
@@ -337,5 +444,36 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
 
         return recipeNames;
+    }
+
+    //tested
+    private Boolean checkExistingMeal(String recipeName){
+        SQLiteDatabase db = getReadableDatabase();
+        String MEAL_CHECK_QUERY = "SELECT *" + " FROM " + TABLE_MEALS +
+                " WHERE " + ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'";
+        Cursor c = db.rawQuery(MEAL_CHECK_QUERY, null);
+        return c.getCount() != 0;
+    }
+
+    //tested
+    private int getExsitingRecipeCount(String recipeName){
+        SQLiteDatabase db = getReadableDatabase();
+        int count = 0;
+
+        String MEAL_COUNT_QUERY = "SELECT " + ATTRIBUTE_MEAL_RECIPE_COUNT + " FROM " + TABLE_MEALS +
+                " WHERE " + ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'";
+        Cursor c = db.rawQuery(MEAL_COUNT_QUERY, null);
+        try{
+            c.moveToFirst();
+            count =  c.getInt(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_COUNT));
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get existing recipe count in meal table from database");
+        }finally {
+            if( c != null && !c.isClosed()){
+                c.close();
+            }
+        }
+
+        return count;
     }
 }

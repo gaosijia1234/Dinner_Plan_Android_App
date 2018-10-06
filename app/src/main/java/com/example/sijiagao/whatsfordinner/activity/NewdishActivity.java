@@ -137,9 +137,9 @@ public class NewdishActivity extends AppCompatActivity {
 
            DatabaseHelper helper = DatabaseHelper.getInstance(this);
            Recipe tempRecipe= new Recipe(recipeName, listIngredient, recipeDirection, "image");
-           if (!tempRecipe.getRecipeName().matches("")) {
+           if (!tempRecipe.getRecipeName().matches("") && !helper.checkRecipeExistence(recipeName)) {
 
-               //Log.i(TAG,"true or fasle is :"+ Boolean.toString(helper.checkRecipeExistence(recipeName)));
+               Log.i(TAG,"true or fasle is :"+ Boolean.toString(helper.checkRecipeExistence(recipeName)));
                helper.addRecipe(tempRecipe);
                Toast toast = Toast.makeText(this, "Recipe Added", Toast.LENGTH_SHORT);
                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
@@ -149,7 +149,10 @@ public class NewdishActivity extends AppCompatActivity {
                Log.i(TAG, "add recipe success");
              }
              else {
-               Toast toast = Toast.makeText(this, "Nothing Added", Toast.LENGTH_SHORT);
+               String error = "";
+               if(tempRecipe.getRecipeName().matches("")) error = "Nothing Added";
+               if(helper.checkRecipeExistence(recipeName)) error = "Duplicated Recipe Name";
+               Toast toast = Toast.makeText(this, error, Toast.LENGTH_SHORT);
                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                toast.show();
            }
