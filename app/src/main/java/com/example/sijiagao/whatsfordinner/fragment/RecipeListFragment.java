@@ -20,31 +20,34 @@ import android.widget.Toast;
 import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
 
+import java.util.Collection;
+import java.util.Collections;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RecipeListFragment extends Fragment {
     public static final String TAG = "yes";
     private ListFragmentListener mListener;
-    private String[] sampleList = {};
+    private String[] sampleList = {"Empty"};
+    private String[] sampleList2 = {"a","b","c","d"};
 
     public RecipeListFragment() {
+
         // Required empty public constructor
     }
 
-    /*public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        if(getArguments() != null){
-            sampleList = getArguments().getStringArray("data");
-        }
-    }*/
+        mListener.passDataBase(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         View view =inflater.inflate(R.layout.fragment_recipe_list, container, false);
 
+         View view =inflater.inflate(R.layout.fragment_recipe_list, container, false);
 
         ListView lv;
         lv =(ListView) view.findViewById(R.id.recipe_listview);
@@ -103,12 +106,19 @@ public class RecipeListFragment extends Fragment {
         mListener = null;
     }
 
-
-
-
     public interface ListFragmentListener {
         void onListItemClick_LandMode(String name);
         void onListItemClick_PortraitMode(String name);
         void onListItemLongClick_Mode(String name);
+        void passDataBase(RecipeListFragment rf);
+    }
+
+
+    public String[] getSampleList() {
+        return sampleList;
+    }
+
+    public void setSampleList(String[] sampleList) {
+        this.sampleList = sampleList;
     }
 }

@@ -27,25 +27,16 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-
-        DatabaseHelper db = DatabaseHelper.getInstance(this);
-        String[] sampleList = db.getAllRecipeNames().toArray(new String[0]);
-
-        /*Bundle bundle = new Bundle();
-        bundle.putStringArray("data", sampleList);
-        Fragment rFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_list);
-        rFragment.setArguments(bundle);*/
-
-//       Resources resource = getResources();
-//       recipeListView = findViewById(R.id.recipeListView);
-//       recipes = getResources().getStringArray(R.array.recipes);
-//
-//        // now we need to merge recipeListView(layout) and recipes(content) together
-//        recipeListView.setAdapter(new ArrayAdapter<String>(this, R.layout.recipe_listview_detail, recipes));
-
+        Log.i("uu","new landscape");
+       // DatabaseHelper db = DatabaseHelper.getInstance(this);
+       // String[] sampleList = db.getAllRecipeNames().toArray(new String[0]);
 
        // RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("Pass message from GroceryActivity");
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+
+       // Fragment rFragment = getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
+                ){
             RecipeDetailFragment fragment = new RecipeDetailFragment();
             getSupportFragmentManager()
                     .beginTransaction()
@@ -75,6 +66,15 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
     public void onListItemLongClick_Mode(String name) {
 
 
+    }
+
+
+    @Override
+    public void passDataBase(RecipeListFragment rf){
+        Log.i("DATABASE","DataBase pass");
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        String[] sampleList = db.getAllRecipeNames().toArray(new String[0]);
+        rf.setSampleList(sampleList);
     }
 
 }
