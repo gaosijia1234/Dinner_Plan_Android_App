@@ -335,7 +335,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             recipeNames.add(r.getRecipeName());
         }
 
-        Collections.sort(recipeNames);
+
         return recipeNames;
     }
 }
