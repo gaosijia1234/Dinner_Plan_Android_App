@@ -158,7 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
-    //not tested
+    //tested
     public void updateRecipe(Recipe updatedRecipe){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -199,7 +199,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
-    //not tested
+    //tested
     public void deleteRecipe(String recipeName){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -433,6 +433,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
 
         return mealMap;
+    }
+
+    //tested
+    public void clearMeals(){
+        SQLiteDatabase db = getWritableDatabase();
+        try{
+            db.delete(TABLE_MEALS, null, null);
+        }catch(Exception e){
+            Log.d(TAG, "Error while deleting meals in meal table from database");
+        }
     }
 
     //tested
