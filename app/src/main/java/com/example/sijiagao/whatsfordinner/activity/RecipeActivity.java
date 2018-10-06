@@ -21,34 +21,47 @@ import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 import java.util.List;
 
 public class RecipeActivity extends AppCompatActivity implements RecipeListFragment.ListFragmentListener    {
+     private RecipeDetailFragment fragment2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-        Log.i("uu","new landscape");
+        Log.i("uu","new Recipe_Activity");
        // DatabaseHelper db = DatabaseHelper.getInstance(this);
        // String[] sampleList = db.getAllRecipeNames().toArray(new String[0]);
-
        // RecipeDetailFragment fragment = RecipeDetailFragment.newInstance("Pass message from GroceryActivity");
-
        // Fragment rFragment = getSupportFragmentManager().findFragmentById(R.id.detailFragment);
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
-                ){
+        fragment2 = (RecipeDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detailFragment);
+
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
+              && fragment2 == null  ){
+            Log.i("uu","new fg2");
             RecipeDetailFragment fragment = new RecipeDetailFragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.detailFragment,fragment)
                     .commit();
         }
+
+        else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE
+                && fragment2 != null) {
+            Log.i("uu","old fg2");
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.detailFragment,fragment2)
+                    .commit();
+
+        }
     }
 
 
     @Override
     public void onListItemClick_LandMode(String rName) {
-        RecipeDetailFragment fragment2 = RecipeDetailFragment.newInstance("I am " + rName);
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        fragment2 = RecipeDetailFragment.newInstance(rName);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.detailFragment,fragment2)
@@ -64,7 +77,6 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
 
     @Override
     public void onListItemLongClick_Mode(String name) {
-
 
     }
 

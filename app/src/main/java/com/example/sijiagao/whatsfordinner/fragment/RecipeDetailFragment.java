@@ -12,16 +12,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.activity.RecipeActivity;
+import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
+import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RecipeDetailFragment extends Fragment {
 
-      public static final String TAG = "LifecycleEvents";
+      public static final String TAG = "LifecycleEvents in DetailFragment";
       public static final String MESSAGE_KEY="message_key";
-
-
 
     public RecipeDetailFragment() {
         // Required empty public constructor
@@ -39,6 +40,7 @@ public class RecipeDetailFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.i(TAG,"onAttach");
+
     }
 
     @Override
@@ -54,12 +56,23 @@ public class RecipeDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
+
         Bundle arguments = getArguments();
         //MESSAGE_KEY = recipe name here. later for DataBase use
         if (arguments != null) {
             String message = arguments.getString(MESSAGE_KEY);
             TextView tvMessage = (TextView) view.findViewById(R.id.recipe_detail_textview);
             tvMessage.setText(message);
+
+            DatabaseHelper db = DatabaseHelper.getInstance(this.getActivity());
+            Recipe rp = db.getRecipeByName(message);
+            TextView title = (TextView) view.findViewById(R.id.frd_Title);
+            title.setText(rp.getRecipeName());
+
+            TextView direction = (TextView) view.findViewById(R.id.frd_direction);
+            direction.setText(rp.getCookingDirections());
+
+
         }
 
         return view;
@@ -95,4 +108,5 @@ public class RecipeDetailFragment extends Fragment {
         super.onDetach();
         Log.i(TAG,"onDetach");
     }
+
 }
