@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -32,7 +32,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical" >
 
                 <EditText
-                    android:id="@+id/recipeNamePlainText"
+                    android:id="@+id/update_rpName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -44,16 +44,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:fontFamily="serif"
                     android:hint="Enter Recipe Name"
                     android:inputType="textPersonName"
+                    android:singleLine="true"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:singleLine="true"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="357dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
@@ -67,7 +67,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                     app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText">
 
                     <ImageView
-                        android:id="@+id/recipeImageImageView"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -85,7 +84,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         app:srcCompat="@drawable/recipe_main" />
 
                     <Button
-                        android:id="@+id/imageGalleryBtn"
                         android:layout_width="89dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -104,7 +102,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText" />
 
                     <Button
-                        android:id="@+id/imageUrlBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -112,7 +109,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:text="Url" />
 
                     <Button
-                        android:id="@+id/recipeDoneBtn"
                         android:layout_width="91dp"
                         android:layout_height="50dp"
                         android:layout_marginBottom="8dp"
@@ -134,7 +130,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/recipeDirection"
+                    android:id="@+id/update_direction"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginEnd="8dp"
@@ -156,7 +152,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                     app:layout_constraintTop_toBottomOf="@+id/recipeNamePlainText" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout_newDish"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
@@ -183,17 +178,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV1"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV1"
                                 android:layout_width="90dp"
                                 android:layout_height="match_parent"
                                 android:digits="0123456789."
@@ -203,7 +196,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV1"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:hint="Unit"
@@ -214,17 +206,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV2"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV2"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -234,7 +224,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV2"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
@@ -245,17 +234,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV3"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV3"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -265,7 +252,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV3"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
@@ -276,17 +262,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV4"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV4"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -296,7 +280,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV4"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
@@ -307,17 +290,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV5"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV5"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -327,7 +308,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV5"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
@@ -338,17 +318,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV6"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV6"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -358,7 +336,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV6"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
@@ -369,17 +346,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV7"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV7"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -389,7 +364,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV7"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
@@ -400,17 +374,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV8"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV8"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -420,7 +392,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV8"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
@@ -431,17 +402,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV9"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV9"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -451,7 +420,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV9"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"
@@ -462,17 +430,15 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                         <TableRow>
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientNameTV10"
                                 android:layout_width="180dp"
                                 android:layout_height="match_parent"
                                 android:hint="Ingredient"
                                 android:maxLength="17"
+                                android:singleLine="true"
                                 android:text=""
-                                android:textSize="18sp"
-                                android:singleLine="true" />
+                                android:textSize="18sp" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientQuantityTV10"
                                 android:layout_width="90dp"
                                 android:layout_height="wrap_content"
                                 android:digits="0123456789."
@@ -482,7 +448,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
                                 android:singleLine="true" />
 
                             <AutoCompleteTextView
-                                android:id="@+id/ingredientUnitTV10"
                                 android:layout_width="110dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Unit"

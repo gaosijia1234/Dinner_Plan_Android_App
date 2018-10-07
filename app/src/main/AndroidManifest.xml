@@ -20,7 +20,8 @@
         <activity android:name=".activity.MealActivity" />
         <activity android:name=".activity.GroceryActivity" />
         <activity android:name=".activity.NewdishActivity" />
-        <activity android:name=".activity.DayMealActivity"></activity>
+        <activity android:name=".activity.DayMealActivity" />
+        <activity android:name=".activity.UpDateRecipeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.sijiagao.whatsfordinner.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -80,6 +81,10 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
 
     @Override
     public void onListItemLongClick_Mode(String name) {
+
+        Intent newDishIntent = new Intent(getApplicationContext(), UpDateRecipeActivity.class);
+        newDishIntent.putExtra("name",name);
+        startActivity(newDishIntent);
 
     }
 

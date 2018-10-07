@@ -32,11 +32,11 @@ public class NewdishActivity extends AppCompatActivity {
     public static final String TAG = "NewdishActivity";
 
     public static final int PICK_IMAGE = 100;
-    Uri imageUri;
+    public Uri imageUri;
 
 
 
-    ImageView recipeImageImageView;
+    public ImageView recipeImageImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,13 +104,14 @@ public class NewdishActivity extends AppCompatActivity {
 
     public void imageGalleryBtnClick(View view) {
         Log.i(TAG,"imageGalleryBtnClick");
-
         openGallery();
     }
 
     public void openGallery(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Log.i(TAG,"imageGalleryBtnClick2");
         startActivityForResult(gallery, PICK_IMAGE);
+        Log.i(TAG,"imageGalleryBtnClick5");
     }
 
     @Override
@@ -118,6 +119,7 @@ public class NewdishActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
+            Log.i(TAG,"imageGalleryBtnClick3");
             recipeImageImageView.setImageURI(imageUri);
         }
     }
