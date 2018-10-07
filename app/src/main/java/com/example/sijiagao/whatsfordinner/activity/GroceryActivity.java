@@ -15,6 +15,7 @@ public class GroceryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery);
 
+        /*Backend test
         DatabaseHelper db = DatabaseHelper.getInstance(this);
         db.addRecipeToMeal("Lemon Water");
         TreeMap<String, Integer> test = db.getAllMeal();
@@ -27,6 +28,6 @@ public class GroceryActivity extends AppCompatActivity {
         TreeMap<String, IngredientUnit> test7 = db.getAllGroceryItems();
         db.clearMealAndGrocery();
         TreeMap<String, Integer> test3 = db.getAllMeal();
-        TreeMap<String, IngredientUnit> test4 = db.getAllGroceryItems();
+        TreeMap<String, IngredientUnit> test4 = db.getAllGroceryItems();*/
     }
 }
