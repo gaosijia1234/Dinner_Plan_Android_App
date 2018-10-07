@@ -12,7 +12,6 @@ import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -26,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_RECIPES ="recipes";
     private static final String TABLE_RECIPE_INGREDIENTS ="recipeIngredients";
     private static final String TABLE_MEALS = "meals";
+    private static final String TABLE_GROCERY = "grocery";
 
     //RECIPES TABLE
     private static final String ATTRIBUTE_RECIPE_NAME  ="name";
@@ -42,9 +42,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String ATTRIBUTE_MEAL_RECIPE_NAME = "name";
     private static final String ATTRIBUTE_MEAL_RECIPE_COUNT = "count";
 
+    private static final String ATTRIBUTE_GROCERY_INGREDIENT_NAME = "ingredient";
+    private static final String ATTRIBUTE_GROCERY_INGREDIENT_UNIT = "unit";
+    private static final String ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY = "quantity";
+
     private static final String TAG = DatabaseHelper.class.getName();
     private static DatabaseHelper sInstance;
-    //privaye TreeMap<String, Unit>
 
     /**
      * Constructor should be private to prevent direct instantiation.
@@ -98,9 +101,18 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "PRIMARY KEY (" + ATTRIBUTE_MEAL_RECIPE_NAME + ")" +
                 ")";
 
+        String CREATE_GROCERY_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_GROCERY +
+                "(" +
+                ATTRIBUTE_GROCERY_INGREDIENT_NAME + " VARCHAR(225), " +
+                ATTRIBUTE_GROCERY_INGREDIENT_UNIT + " VARCHAR(225), " +
+                ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY + " DOUBLE, " +
+                "PRIMARY KEY (" + ATTRIBUTE_GROCERY_INGREDIENT_NAME + "," + ATTRIBUTE_GROCERY_INGREDIENT_UNIT + ")" +
+                ")";
+
         db.execSQL(CREATE_RECIPES_TABLE);
         db.execSQL(CREATE_RECIPE_INGREDIENT_TABLE);
         db.execSQL(CREATE_MEAL_TABLE);
+        db.execSQL(CREATE_GROCERY_TABLE);
     }
 
     @Override
@@ -114,6 +126,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    /*------------------------------------Recipe & Recipe Ingredient Table-----------------------------------------*/
     //tested
     public boolean checkRecipeExistence(String recipeName) {
         SQLiteDatabase db = getReadableDatabase();
@@ -347,7 +360,120 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //tested
+    private List<String> getAllRecipeNames(List<Recipe> recipes){
+        List<String> recipeNames = new ArrayList<>();
+        for(Recipe r: recipes){
+            recipeNames.add(r.getRecipeName());
+        }
+
+        return recipeNames;
+    }
+
+
+    /*--------------------------------Meal & Grocery Table---------------------------------------*/
+    //tested
     public void addRecipeToMeal(String recipeName){
+        addRecipeToMealTable(recipeName);
+        addIngredientToGroceryByRecipe(recipeName);
+    }
+
+    //tested
+    public void updateSingleGroceryItem(String ingredientName,String unitName, String operation, Double quantity){
+        SQLiteDatabase db = getWritableDatabase();
+
+        double currentQuantity = getExistingGroceryItemQuantity(ingredientName, unitName);
+        double newQuantity = 0;
+        if(operation.equals("ADD")){
+            newQuantity = currentQuantity + quantity;
+        }else{
+            newQuantity = currentQuantity - quantity;
+        }
+
+        db.beginTransaction();
+        try{
+            if(newQuantity != 0){
+                ContentValues values = new ContentValues();
+                values.put(ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY, newQuantity);
+                db.update(TABLE_GROCERY, values, ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" +
+                        ingredientName + "' AND " + ATTRIBUTE_GROCERY_INGREDIENT_UNIT + "='" + unitName + "'", null);
+                db.setTransactionSuccessful();
+            }else{
+                db.delete(TABLE_GROCERY,  ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" +
+                        ingredientName + "' AND " + ATTRIBUTE_GROCERY_INGREDIENT_UNIT + "='" + unitName + "'", null);
+                db.setTransactionSuccessful();
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to update grocery item quantity in grocery table from database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    //tested
+    public TreeMap<String, Integer> getAllMeal(){
+        SQLiteDatabase db = getReadableDatabase();
+        TreeMap<String, Integer> mealMap = new TreeMap<>();
+        String MEAL_QUERY = "SELECT * FROM " + TABLE_MEALS;
+        Cursor c = db.rawQuery(MEAL_QUERY, null);
+        if(c.getCount() == 0){
+            return mealMap;
+        }else{
+            try{
+                c.moveToFirst();
+                while(!c.isAfterLast()){
+                    mealMap.put(c.getString(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_NAME)),
+                            c.getInt(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_COUNT)));
+                    c.moveToNext();
+                }
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to get all meals in meal table from database");
+            }finally {
+                if(!c.isClosed()){
+                    c.close();
+                }
+            }
+        }
+
+        return mealMap;
+    }
+
+    //tested
+    public TreeMap<String, IngredientUnit> getAllGroceryItems(){
+        SQLiteDatabase db = getReadableDatabase();
+        TreeMap<String, IngredientUnit> groceryMap = new TreeMap<>();
+        String GROCERY_QUERY = "SELECT * FROM " + TABLE_GROCERY;
+        Cursor c = db.rawQuery(GROCERY_QUERY, null);
+        if(c.getCount() == 0){
+            return groceryMap;
+        }else{
+            try{
+                c.moveToFirst();
+                while(!c.isAfterLast()){
+                    groceryMap.put(c.getString(c.getColumnIndex(ATTRIBUTE_GROCERY_INGREDIENT_NAME)),
+                            new IngredientUnit(c.getString(c.getColumnIndex(ATTRIBUTE_GROCERY_INGREDIENT_UNIT)),
+                                    c.getDouble(c.getColumnIndex(ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY))));
+                    c.moveToNext();
+                }
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to get all grocery items in grocery table from database");
+            }finally {
+                if(!c.isClosed()){
+                    c.close();
+                }
+            }
+        }
+
+        return groceryMap;
+    }
+
+    //tested
+    public void clearMealAndGrocery() {
+        clearMeals();
+        clearGrocery();
+    }
+
+    //tested
+    private void addRecipeToMealTable(String recipeName){
         SQLiteDatabase db = getWritableDatabase();
 
         boolean mealExistance = checkExistingMeal(recipeName);
@@ -382,6 +508,140 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //tested
+    private void addIngredientToGroceryByRecipe(String recipeName){
+        SQLiteDatabase db = getWritableDatabase();
+
+        Recipe recipe = getRecipeByName(recipeName);
+        for(Ingredient i : recipe.getIngredients()){
+            boolean groceryRecordExistance = checkExistingGroceryItem(i.getIngredientName(), i.getUnit().getUnitName());
+            if(!groceryRecordExistance){
+                db.beginTransaction();
+                try{
+                    ContentValues values = new ContentValues();
+                    values.put(ATTRIBUTE_GROCERY_INGREDIENT_NAME, i.getIngredientName());
+                    values.put(ATTRIBUTE_GROCERY_INGREDIENT_UNIT, i.getUnit().getUnitName());
+                    values.put(ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY, i.getUnit().getQuantity());
+                    db.insertOrThrow(TABLE_GROCERY, null, values);
+                    db.setTransactionSuccessful();
+                }catch (Exception e){
+                    Log.d(TAG, "Error while trying to add new grocery item in grocery table in database");
+                }finally {
+                    db.endTransaction();
+                }
+            }else{
+                db.beginTransaction();
+                try{
+                    ContentValues values = new ContentValues();
+                    values.put(ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY,
+                            getExistingGroceryItemQuantity(i.getIngredientName(), i.getUnit().getUnitName()) + i.getUnit().getQuantity());
+                    db.update(TABLE_GROCERY, values, ATTRIBUTE_GROCERY_INGREDIENT_NAME +
+                            "='" + i.getIngredientName() + "' AND " + ATTRIBUTE_GROCERY_INGREDIENT_UNIT +
+                            "='" + i.getUnit().getUnitName() + "'", null);
+                    db.setTransactionSuccessful();
+                }catch(Exception e){
+                    Log.d(TAG, "Error while trying to increase grocery item quantity in grocery table in database");
+                }finally {
+                    db.endTransaction();
+                }
+            }
+        }
+    }
+
+    //tested
+    private Boolean checkExistingMeal(String recipeName){
+        SQLiteDatabase db = getReadableDatabase();
+        String MEAL_CHECK_QUERY = "SELECT *" + " FROM " + TABLE_MEALS +
+                " WHERE " + ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'";
+        Cursor c = db.rawQuery(MEAL_CHECK_QUERY, null);
+        return c.getCount() != 0;
+    }
+
+    //tested
+    private Boolean checkExistingGroceryItem(String ingredientName, String unitName){
+        SQLiteDatabase db = getReadableDatabase();
+        String GROCERY_ITEM_QUERY = "SELECT * FROM " + TABLE_GROCERY +
+                " WHERE " + ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" + ingredientName + "' AND " +
+                ATTRIBUTE_GROCERY_INGREDIENT_UNIT + "='" + unitName + "'";
+        Cursor c = db.rawQuery(GROCERY_ITEM_QUERY, null);
+        return c.getCount() != 0;
+    }
+
+    //tested
+    private int getExsitingRecipeCount(String recipeName){
+        SQLiteDatabase db = getReadableDatabase();
+        int count = 0;
+
+        String MEAL_COUNT_QUERY = "SELECT " + ATTRIBUTE_MEAL_RECIPE_COUNT + " FROM " + TABLE_MEALS +
+                " WHERE " + ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'";
+        Cursor c = db.rawQuery(MEAL_COUNT_QUERY, null);
+        try{
+            c.moveToFirst();
+            count =  c.getInt(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_COUNT));
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get existing recipe count in meal table from database");
+        }finally {
+            if( c != null && !c.isClosed()){
+                c.close();
+            }
+        }
+
+        return count;
+    }
+
+    //tested
+    private double getExistingGroceryItemQuantity(String ingredientName, String unitName){
+        SQLiteDatabase db = getReadableDatabase();
+        double quantity = 0;
+
+        String GROCERY_ITEM_QUERY = "SELECT " + ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY + " FROM " + TABLE_GROCERY +
+                " WHERE " + ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" + ingredientName + "' AND " +
+                ATTRIBUTE_GROCERY_INGREDIENT_UNIT + "='" + unitName + "'";
+        Cursor c = db.rawQuery(GROCERY_ITEM_QUERY, null);
+        try{
+            c.moveToFirst();
+            quantity =  c.getDouble(c.getColumnIndex(ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY));
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get existing grocery item count in grocery table from database");
+        }finally {
+            if( c != null && !c.isClosed()){
+                c.close();
+            }
+        }
+
+        return quantity;
+    }
+
+    //tested
+    private void clearMeals(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            db.delete(TABLE_MEALS, null, null);
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while deleting meals in meal table from database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    //tested
+    private void clearGrocery(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            db.delete(TABLE_GROCERY, null, null);
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while deleting grocery items in grocery table from database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    /*//tested
     public void consumeRecipeFromMeal(String recipeName){
         SQLiteDatabase db = getWritableDatabase();
         int count = getExsitingRecipeCount(recipeName);
@@ -410,85 +670,5 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 db.endTransaction();
             }
         }
-    }
-
-    //tested
-    public TreeMap<String, Integer> getAllMeal(){
-        SQLiteDatabase db = getReadableDatabase();
-        TreeMap<String, Integer> mealMap = new TreeMap<>();
-        String MEAL_QUERY = "SELECT * FROM " + TABLE_MEALS;
-        Cursor c = db.rawQuery(MEAL_QUERY, null);
-        if(c.getCount() == 0){
-            return mealMap;
-        }else{
-            try{
-                c.moveToFirst();
-                while(!c.isAfterLast()){
-                    mealMap.put(c.getString(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_NAME)),
-                            c.getInt(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_COUNT)));
-                    c.moveToNext();
-                }
-            }catch (Exception e){
-                Log.d(TAG, "Error while trying to get all meals in meal table from database");
-            }finally {
-                if(!c.isClosed()){
-                    c.close();
-                }
-            }
-        }
-
-        return mealMap;
-    }
-
-    //tested
-    public void clearMeals(){
-        SQLiteDatabase db = getWritableDatabase();
-        try{
-            db.delete(TABLE_MEALS, null, null);
-        }catch(Exception e){
-            Log.d(TAG, "Error while deleting meals in meal table from database");
-        }
-    }
-
-    //tested
-    private List<String> getAllRecipeNames(List<Recipe> recipes){
-        List<String> recipeNames = new ArrayList<>();
-        for(Recipe r: recipes){
-            recipeNames.add(r.getRecipeName());
-        }
-
-
-        return recipeNames;
-    }
-
-    //tested
-    private Boolean checkExistingMeal(String recipeName){
-        SQLiteDatabase db = getReadableDatabase();
-        String MEAL_CHECK_QUERY = "SELECT *" + " FROM " + TABLE_MEALS +
-                " WHERE " + ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'";
-        Cursor c = db.rawQuery(MEAL_CHECK_QUERY, null);
-        return c.getCount() != 0;
-    }
-
-    //tested
-    private int getExsitingRecipeCount(String recipeName){
-        SQLiteDatabase db = getReadableDatabase();
-        int count = 0;
-
-        String MEAL_COUNT_QUERY = "SELECT " + ATTRIBUTE_MEAL_RECIPE_COUNT + " FROM " + TABLE_MEALS +
-                " WHERE " + ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'";
-        Cursor c = db.rawQuery(MEAL_COUNT_QUERY, null);
-        try{
-            c.moveToFirst();
-            count =  c.getInt(c.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_COUNT));
-        }catch (Exception e){
-            Log.d(TAG, "Error while trying to get existing recipe count in meal table from database");
-        }finally {
-            if( c != null && !c.isClosed()){
-                c.close();
-            }
-        }
-
-        return count;
-    }
+    }*/
 }

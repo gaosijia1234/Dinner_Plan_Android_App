@@ -13,18 +13,12 @@ public class Recipe implements Serializable{
     private String cookingDirections;
     private String imagePath;
 
-    public Recipe() {
-
-    }
-
     public Recipe(String theName, List<Ingredient> theIngredients, String theDirections, String thePath){
         this.recipeName = theName;
         this.ingredients = theIngredients;
         this.cookingDirections = theDirections;
         this.imagePath = thePath;
     }
-
-
 
     public String getRecipeName() {
         return recipeName;
