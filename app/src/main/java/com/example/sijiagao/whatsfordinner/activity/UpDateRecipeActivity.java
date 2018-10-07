@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
@@ -27,6 +29,7 @@ public class UpDateRecipeActivity extends AppCompatActivity {
     private TextView recipeDirectionText ;
     private ArrayList<TextView> tvList;
     private List<Ingredient> igList;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +51,16 @@ public class UpDateRecipeActivity extends AppCompatActivity {
         
         findViews(this, findViewById(R.id.update_iglist),tvList);
         String[] myIngredient = db.getExistingIngredientList().toArray(new String[0]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, myIngredient);
         
         for (int i =0, j=0 ;i< igList.size() ; i++, j+=3){
             tvList.get(j).setText(igList.get(i).getIngredientName());
             tvList.get(j+1).setText(Double.toString(igList.get(i).getUnit().getQuantity()));
             tvList.get(j+2).setText(igList.get(i).getUnit().getUnitName());
             tvList.get(j+1).setKeyListener((DigitsKeyListener.getInstance(true,true)));
+            AutoCompleteTextView acTextView = (AutoCompleteTextView) tvList.get(j);
+            acTextView.setThreshold(1);
+            acTextView.setAdapter(adapter);
         }
     }
 
@@ -76,7 +83,9 @@ public class UpDateRecipeActivity extends AppCompatActivity {
         tempRp.setIngredients(igList);
 
         db.updateRecipe(tempRp);
-      
+         
+       
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
