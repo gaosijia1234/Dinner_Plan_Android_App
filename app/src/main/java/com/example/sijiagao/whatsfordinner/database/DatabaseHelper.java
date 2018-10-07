@@ -12,7 +12,6 @@ import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -26,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_RECIPES ="recipes";
     private static final String TABLE_RECIPE_INGREDIENTS ="recipeIngredients";
     private static final String TABLE_MEALS = "meals";
+    private static final String TABLE_GROCERY = "grocery";
 
     //RECIPES TABLE
     private static final String ATTRIBUTE_RECIPE_NAME  ="name";
@@ -42,9 +42,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String ATTRIBUTE_MEAL_RECIPE_NAME = "name";
     private static final String ATTRIBUTE_MEAL_RECIPE_COUNT = "count";
 
+    private static final String ATTRIBUTE_GROCERY_INGREDIENT_NAME = "ingredient";
+    private static final String ATTRIBUTE_GROCERY_INGREDIENT_UNIT = "unit";
+    private static final String ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY = "quantity";
+
     private static final String TAG = DatabaseHelper.class.getName();
     private static DatabaseHelper sInstance;
-    //privaye TreeMap<String, Unit>
 
     /**
      * Constructor should be private to prevent direct instantiation.
@@ -98,9 +101,18 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "PRIMARY KEY (" + ATTRIBUTE_MEAL_RECIPE_NAME + ")" +
                 ")";
 
+        String CREATE_GROCERY_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_GROCERY +
+                "(" +
+                ATTRIBUTE_GROCERY_INGREDIENT_NAME + " VARCHAR(225), " +
+                ATTRIBUTE_GROCERY_INGREDIENT_UNIT + " VARCHAR(225), " +
+                ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY + " DOUBLE, " +
+                "PRIMARY KEY (" + ATTRIBUTE_GROCERY_INGREDIENT_NAME + "," + ATTRIBUTE_GROCERY_INGREDIENT_UNIT + ")" +
+                ")";
+
         db.execSQL(CREATE_RECIPES_TABLE);
         db.execSQL(CREATE_RECIPE_INGREDIENT_TABLE);
         db.execSQL(CREATE_MEAL_TABLE);
+        db.execSQL(CREATE_GROCERY_TABLE);
     }
 
     @Override
@@ -449,6 +461,47 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             Log.d(TAG, "Error while deleting meals in meal table from database");
         }
     }
+
+    /*public TreeMap<String, IngredientUnit> getGroceryItems() {
+        insertGroceryItems();
+        return grocery;
+    }
+
+    private void insertGroceryItems(){
+        SQLiteDatabase db = getReadableDatabase();
+        grocery = new TreeMap<>();
+        String MEAL_RECIPE_QUERY = "SELECT * FROM " + TABLE_MEALS;
+        Cursor c1 = db.rawQuery(MEAL_RECIPE_QUERY, null, null);
+        if(c1.getCount() == 0){
+            return;
+        }else{
+            c1.moveToFirst();
+            try{
+                while(!c1.isAfterLast()){
+                    String recipeName = c1.getString(c1.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_NAME));
+                    int count = c1.getInt(c1.getColumnIndex(ATTRIBUTE_MEAL_RECIPE_COUNT));
+                    Recipe recipe = getRecipeByName(recipeName);
+                    for(Ingredient i: recipe.getIngredients()){
+                        if(grocery.containsKey(i.getIngredientName())){
+                            IngredientUnit unit = grocery.get(i.getIngredientName());
+                            unit.setQuantity(unit.getQuantity() + i.getUnit().getQuantity() * count);
+                            grocery.put(i.getIngredientName(), unit);
+                        }else{
+                            IngredientUnit unit = i.getUnit();
+                            unit.setQuantity(unit.getQuantity() * count);
+                            grocery.put(i.getIngredientName(), unit);
+                        }
+                    }
+                }
+            }catch(Exception e){
+                Log.d(TAG, "Error while querying meal recipe name and count in meal table from database");
+            }finally {
+                if(!c1.isClosed()){
+                    c1.close();
+                }
+            }
+        }
+    }*/
 
     //tested
     private List<String> getAllRecipeNames(List<Recipe> recipes){
