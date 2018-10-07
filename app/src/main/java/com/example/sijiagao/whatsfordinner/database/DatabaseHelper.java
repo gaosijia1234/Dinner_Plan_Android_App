@@ -206,8 +206,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY, r.getUnit().getQuantity());
                 values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
 
-                db.update(TABLE_RECIPE_INGREDIENTS, values2, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ?",
-                        new String[]{updatedRecipe.getRecipeName()});
+                db.update(TABLE_RECIPE_INGREDIENTS, values2, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ? AND " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + "= ?",
+                        new String[]{updatedRecipe.getRecipeName(), r.getIngredientName()});
             }
             db.setTransactionSuccessful();
         }catch (Exception e){
