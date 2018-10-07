@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class RecipeDetailFragment extends Fragment {
 
-      public static final String TAG = "LifecycleEvents in DetailFragment";
+      public static final String TAG = "LifecycleEvents";
       public static final String MESSAGE_KEY="message_key";
 
     public RecipeDetailFragment() {

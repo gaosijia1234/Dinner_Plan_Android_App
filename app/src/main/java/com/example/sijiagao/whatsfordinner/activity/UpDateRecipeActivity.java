@@ -48,6 +48,11 @@ public class UpDateRecipeActivity extends AppCompatActivity {
         }
     }
 
+    public void clickUpdate(View view) {
+
+    }
+
+
     public static void findViews(Context context, View v, ArrayList array){
         try {
             if (v instanceof ViewGroup) {
@@ -67,3 +72,4 @@ public class UpDateRecipeActivity extends AppCompatActivity {
 
 
 }
+
