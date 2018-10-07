@@ -16,14 +16,17 @@
         <TextView
             android:id="@+id/frd_Title"
             android:layout_width="match_parent"
-            android:layout_height="27dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
             android:gravity="center"
             android:text="Recipe Name"
-            android:textSize="20sp" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textSize="35sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="104dp"
+            android:layout_height="101dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -43,18 +46,21 @@
                     android:id="@+id/frd_ingredient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:text="Ingredients:"
-                    android:textSize="18sp" />
+                    android:layout_marginLeft="8dp"
+                    android:paddingLeft="0dp"
+                    android:text="INGREDIENTS:"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <ListView
+                    android:id="@+id/iglistView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp" />
             </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/recipe_detail_textview"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:text="I'm detail fragment" />
 
         <View
             android:id="@+id/view"
@@ -65,14 +71,18 @@
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="32dp"
             android:fadeScrollbars="false"
             android:text="Direction:"
-            android:textSize="25sp" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <ScrollView
+
             android:layout_width="match_parent"
-            android:layout_height="390dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,7 +92,7 @@
                 <TextView
                     android:id="@+id/frd_direction"
                     android:layout_width="match_parent"
-                    android:layout_height="346dp"
+                    android:layout_height="match_parent"
                     android:text="1 In a large bowl, mix together the beef, worcestershire sauce"
                     android:textSize="20sp" />
             </LinearLayout>

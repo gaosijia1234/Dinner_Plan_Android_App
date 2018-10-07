@@ -3,6 +3,7 @@ package com.example.sijiagao.whatsfordinner.model.recipe;
 import com.example.sijiagao.whatsfordinner.model.ingredient.Ingredient;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe implements Serializable{
@@ -31,6 +32,7 @@ public class Recipe implements Serializable{
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
+
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
