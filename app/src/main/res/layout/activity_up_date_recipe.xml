@@ -126,7 +126,7 @@
                         android:layout_marginTop="0dp"
                         android:layout_weight="1"
                         android:fontFamily="serif"
-                        android:onClick="clickDone"
+                        android:onClick="clickUpdate"
                         android:text="Update"
                         android:textSize="10dp"
                         app:layout_constraintBottom_toTopOf="@+id/editText"
