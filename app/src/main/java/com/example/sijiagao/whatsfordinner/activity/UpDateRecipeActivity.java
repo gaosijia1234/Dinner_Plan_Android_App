@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
+import com.example.sijiagao.whatsfordinner.model.ingredient.Ingredient;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UpDateRecipeActivity extends AppCompatActivity {
 
@@ -20,26 +22,31 @@ public class UpDateRecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_up_date_recipe);
+        setUpExistContent();
 
+    }
+
+
+    public void setUpExistContent() {
         String rpName = getIntent().getStringExtra("name");
         DatabaseHelper db = DatabaseHelper.getInstance(this);
         Recipe myCurrentRecipt = db.getRecipeByName(rpName);
-
-        ArrayList<TextView> tvList = new ArrayList<>();
-        //findViews(this, findViewById(R.id.linearLayout_newDish),tvList);
-        Log.i("update",rpName);
-
 
         TextView recipeNamePlainText = findViewById(R.id.update_rpName);
         recipeNamePlainText.setText(myCurrentRecipt.getRecipeName());
         TextView recipeDirectionText = findViewById(R.id.update_direction);
         recipeDirectionText.setText(myCurrentRecipt.getCookingDirections());
 
+        ArrayList<TextView> tvList = new ArrayList<>();
+        List<Ingredient> igList =  myCurrentRecipt.getIngredients();
+        findViews(this, findViewById(R.id.update_iglist),tvList);
 
-
+        for (int i =0, j=0 ;i< igList.size() ; i++, j+=3){
+            tvList.get(j).setText(igList.get(i).getIngredientName());
+            tvList.get(j+1).setText(Double.toString(igList.get(i).getUnit().getQuantity()));
+            tvList.get(j+2).setText(igList.get(i).getUnit().getUnitName());
+        }
     }
-
-
 
     public static void findViews(Context context, View v, ArrayList array){
         try {
@@ -51,10 +58,12 @@ public class UpDateRecipeActivity extends AppCompatActivity {
                 }
             } else if (v instanceof TextView) {
                 //Log.i(TAG,  ((TextView) v).getText().toString());
-                 array.add(((TextView) v).getText());
+                 array.add(((TextView) v));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 }
