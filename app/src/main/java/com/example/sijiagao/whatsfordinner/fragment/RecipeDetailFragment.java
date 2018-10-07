@@ -9,12 +9,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.activity.RecipeActivity;
 import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,6 +77,18 @@ public class RecipeDetailFragment extends Fragment {
             TextView direction = (TextView) view.findViewById(R.id.frd_direction);
             direction.setText(rp.getCookingDirections());
 
+            ArrayList<String> igList = new ArrayList<>();
+
+            for (int i=0 ; i<rp.getIngredients().size() ; i++) {
+                 String temp = rp.getIngredients().get(i).getIngredientName()+
+                  " " + Double.toString(rp.getIngredients().get(i).getUnit().getQuantity()) +
+                         " " + rp.getIngredients().get(i).getUnit().getUnitName();
+                 igList.add(temp);
+             }
+
+           ListView lv;
+           lv =(ListView) view.findViewById(R.id.iglistView);
+           lv.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.ingredient_listview, igList));
 
         }
 

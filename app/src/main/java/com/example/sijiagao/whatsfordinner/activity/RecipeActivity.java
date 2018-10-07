@@ -72,6 +72,8 @@ public class RecipeActivity extends AppCompatActivity implements RecipeListFragm
     @Override
     public void onListItemClick_PortraitMode(String rName) {
 //        add recipe number to meal later
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        db.addRecipeToMeal(rName);
 
 
     }
