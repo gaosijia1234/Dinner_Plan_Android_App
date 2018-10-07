@@ -17,12 +17,16 @@ public class GroceryActivity extends AppCompatActivity {
 
         DatabaseHelper db = DatabaseHelper.getInstance(this);
         db.addRecipeToMeal("Lemon Water");
-        db.addRecipeToMeal("Lemon Chicken");
         TreeMap<String, Integer> test = db.getAllMeal();
         TreeMap<String, IngredientUnit> test2 = db.getAllGroceryItems();
-        db.clearGrocery();
+        db.updateSingleGroceryItem("lemon", "slice", "ADD", 1.0);
+        TreeMap<String, IngredientUnit> test5 = db.getAllGroceryItems();
+        db.updateSingleGroceryItem("lemon", "slice", "SUB", 1.0);
+        TreeMap<String, IngredientUnit> test6 = db.getAllGroceryItems();
+        db.updateSingleGroceryItem("lemon", "slice", "SUB", 1.0);
+        TreeMap<String, IngredientUnit> test7 = db.getAllGroceryItems();
+        db.clearMealAndGrocery();
         TreeMap<String, Integer> test3 = db.getAllMeal();
         TreeMap<String, IngredientUnit> test4 = db.getAllGroceryItems();
-
     }
 }
