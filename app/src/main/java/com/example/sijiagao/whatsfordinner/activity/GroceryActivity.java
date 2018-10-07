@@ -1,5 +1,6 @@
 package com.example.sijiagao.whatsfordinner.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ public class GroceryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery);
+        startActivity(new Intent(this, ListDemoActivity.class));
 
         /*db.updateSingleGroceryItem("lemon", "slice", "ADD", 1.0);
         TreeMap<String, IngredientUnit> test5 = db.getAllGroceryItems();
