@@ -42,6 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String ATTRIBUTE_MEAL_RECIPE_NAME = "name";
     private static final String ATTRIBUTE_MEAL_RECIPE_COUNT = "count";
 
+    //GROCERY TABLE
     private static final String ATTRIBUTE_GROCERY_INGREDIENT_NAME = "ingredient";
     private static final String ATTRIBUTE_GROCERY_INGREDIENT_UNIT = "unit";
     private static final String ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY = "quantity";
@@ -57,6 +58,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Get an instance of database.
+     * @param context the activity itself
+     * @return an instance of database
+     */
     public static synchronized DatabaseHelper getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new DatabaseHelper(context.getApplicationContext());
@@ -64,15 +70,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return sInstance;
     }
 
-    // Called when the database connection is being configured.
-    // Configure database settings for things like foreign key support, write-ahead logging, etc.
+    /**
+     * Configure database settings for things like foreign key support, write-ahead logging, etc.
+     * Called when the database connection is being configured.
+     * @param db the database
+     */
     @Override
-    //not used
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
         db.setForeignKeyConstraintsEnabled(true);
     }
 
+    /**
+     * Create tables in database.
+     * @param db the database
+     */
     @Override
     //tested
     public void onCreate(SQLiteDatabase db) {
@@ -115,18 +127,31 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_GROCERY_TABLE);
     }
 
+    /**
+     * Upgrade database from the old version to a new version.
+     * @param db the database
+     * @param oldVersion the old version number
+     * @param newVersion the new version number
+     */
     @Override
-    //not tested
+    //not used
     public void onUpgrade(SQLiteDatabase db , int oldVersion, int newVersion) {
         if(oldVersion != newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE_INGREDIENTS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEALS);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_GROCERY);
             onCreate(db);
         }
     }
 
     /*------------------------------------Recipe & Recipe Ingredient Table-----------------------------------------*/
+
+    /**
+     * Check a recipe existence in recipe table
+     * @param recipeName the recipe name (key in table)
+     * @return true if recipe exists, otherwise false
+     */
     //tested
     public boolean checkRecipeExistence(String recipeName) {
         SQLiteDatabase db = getReadableDatabase();
@@ -137,127 +162,41 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return c.getCount() != 0;
     }
 
-    private boolean checkRecipeIngredientExistence(String recipeName, String ingredientName){
-        SQLiteDatabase db = getReadableDatabase();
-
-        String RECIPE_INGREDIENT_EXISTENCE_QUERY = "SELECT * FROM " + TABLE_RECIPE_INGREDIENTS + " WHERE " +
-                ATTRIBUTE_RECIPE_INGREDIENTS_NAME + "='" + recipeName + "' AND " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT +
-                "='" + ingredientName + "'";
-        Cursor c = db.rawQuery(RECIPE_INGREDIENT_EXISTENCE_QUERY, null);
-        return c.getCount() != 0;
-    }
-
+    /**
+     * Add a recipe in recipe & recipe ingredient table
+     * @param recipe the recipe object to be added
+     */
     //tested
     public void addRecipe(Recipe recipe){
-        SQLiteDatabase db = getWritableDatabase();
-
-        db.beginTransaction();
-        try{
-            ContentValues values1 = new ContentValues();
-            values1.put(ATTRIBUTE_RECIPE_NAME, recipe.getRecipeName());
-            values1.put(ATTRIBUTE_RECIPE_DIRECTIONS, recipe.getCookingDirections());
-            values1.put(ATTRIBUTE_RECIPE_IMAGE, recipe.getImagePath());
-
-            db.insertOrThrow(TABLE_RECIPES, null, values1);
-
-            db.setTransactionSuccessful();
-        } catch(Exception e){
-            Log.d(TAG, "Error while trying to add recipe in recipe table in database");
-        } finally {
-            db.endTransaction();
-        }
-
-        db.beginTransaction();
-        try{
-            for(Ingredient r: recipe.getIngredients()){
-                ContentValues values2 = new ContentValues();
-                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_NAME, recipe.getRecipeName());
-                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT, r.getIngredientName());
-                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY, r.getUnit().getQuantity());
-                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
-
-                db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
-            }
-            db.setTransactionSuccessful();
-        }catch(Exception e){
-            Log.d(TAG, "Error while trying to add recipe in recipe ingredient table in database");
-        } finally {
-            db.endTransaction();
-        }
+        addRecipeToRecipeTable(recipe);
+        addRecipeToRecipeIngredientTable(recipe);
     }
 
+    /**
+     * Update a recipe in recipe & recipe ingredient table
+     * @param updatedRecipe the recipe object to be updated
+     */
     //tested
     public void updateRecipe(Recipe updatedRecipe){
-        SQLiteDatabase db = getWritableDatabase();
-
-        db.beginTransaction();
-        try{
-            ContentValues values = new ContentValues();
-            values.put(ATTRIBUTE_RECIPE_NAME, updatedRecipe.getRecipeName());
-            values.put(ATTRIBUTE_RECIPE_DIRECTIONS, updatedRecipe.getCookingDirections());
-            values.put(ATTRIBUTE_RECIPE_IMAGE, updatedRecipe.getImagePath());
-
-            db.update(TABLE_RECIPES, values, ATTRIBUTE_RECIPE_NAME + " = ?",
-                new String[]{updatedRecipe.getRecipeName()});
-
-            db.setTransactionSuccessful();
-        }catch(Exception e){
-            Log.d(TAG, "Error while trying to update recipe in recipe table in database");
-        }finally {
-            db.endTransaction();
-        }
-
-        db.beginTransaction();
-        try{
-            for(Ingredient r: updatedRecipe.getIngredients()){
-                ContentValues values2 = new ContentValues();
-                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_NAME, updatedRecipe.getRecipeName());
-                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT, r.getIngredientName());
-                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY, r.getUnit().getQuantity());
-                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
-
-                if(checkRecipeIngredientExistence(updatedRecipe.getRecipeName(), r.getIngredientName())){
-                    db.update(TABLE_RECIPE_INGREDIENTS, values2, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ? AND " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + "= ?",
-                            new String[]{updatedRecipe.getRecipeName(), r.getIngredientName()});
-                }else{
-                    db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
-                }
-            }
-            db.setTransactionSuccessful();
-        }catch (Exception e){
-            Log.d(TAG, "Error while trying to update recipe in recipe ingredient table in database");
-        }finally {
-            db.endTransaction();
-        }
+        updateRecipeToRecipeTable(updatedRecipe);
+        updateRecipeToRecipeIngredientTable(updatedRecipe);
     }
 
+    /**
+     * Delete a recipe in recipe & recipe ingredient table
+     * @param recipeName the recipe name that need to delete
+     */
     //tested
     public void deleteRecipe(String recipeName){
-        SQLiteDatabase db = getWritableDatabase();
-
-        db.beginTransaction();
-        try{
-            db.delete(TABLE_RECIPES, ATTRIBUTE_RECIPE_NAME + " = ?",
-                    new String[]{recipeName});
-            db.setTransactionSuccessful();
-        }catch (Exception e){
-            Log.d(TAG, "Error while trying to delete recipe in recipe table in database");
-        }finally {
-            db.endTransaction();
-        }
-
-        db.beginTransaction();
-        try{
-            db.delete(TABLE_RECIPE_INGREDIENTS, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ?",
-                    new String[]{recipeName});
-            db.setTransactionSuccessful();
-        }catch (Exception e){
-            Log.d(TAG, "Error while trying to delete recipe in recipe ingredient table in database");
-        }finally {
-            db.endTransaction();
-        }
+        deleteRecipeFromRecipeIngredientTable(recipeName);
+        deleteRecipeFromRecipeTable(recipeName);
     }
 
+    /**
+     * Find a recipe by name from recipe & recipe ingredient table
+     * @param recipeName the target recipe name
+     * @return the recipe object with the target recipe name
+     */
     //tested
     public Recipe getRecipeByName(String recipeName){
         Recipe recipe = null;
@@ -281,7 +220,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 c1.moveToNext();
             }
         }catch (Exception e){
-            Log.d(TAG, "Error while trying to get recipe ingredients from database");
+            Log.d(TAG, "Error while trying to get recipe ingredients in recipe ingredient table from database");
         } finally {
             if( c1 != null && !c1.isClosed()){
                 c1.close();
@@ -301,7 +240,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     c2.getString(c2.getColumnIndex(ATTRIBUTE_RECIPE_IMAGE))
             );
         }catch (Exception e){
-            Log.d(TAG, "Error while trying to get recipe from database");
+            Log.d(TAG, "Error while trying to get recipe in recipe table from database");
         } finally {
             if( c1 != null && !c1.isClosed()){
                 c1.close();
@@ -311,6 +250,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipe;
     }
 
+    /**
+     * Get all recipe from recipe & recipe ingredient table
+     * @return the list of recipes
+     */
     //tested
     public List<Recipe> getAllRecipes(){
         SQLiteDatabase db = getReadableDatabase();
@@ -336,11 +279,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipeList;
     }
 
+    /**
+     * Get all recipe names in recipe and recipe ingredient table
+     * @return the list of recipe names
+     */
     //tested
     public List<String> getAllRecipeNames(){
         return getAllRecipeNames(getAllRecipes());
     }
 
+    /**
+     * Gat all ingredients used in recipe ingredient table
+     * @return the list of ingredient names
+     */
     //tested
     public List<String> getExistingIngredientList(){
         SQLiteDatabase db = getReadableDatabase();
@@ -362,7 +313,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                     c.moveToNext();
                 }
             }catch (Exception e){
-                Log.d(TAG, "Error while trying to get existing ingredients from database");
+                Log.d(TAG, "Error while trying to get existing ingredients in recipe ingredient table from database");
             }finally {
                 if(!c.isClosed()){
                     c.close();
@@ -373,7 +324,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
-    //tested
     private List<String> getAllRecipeNames(List<Recipe> recipes){
         List<String> recipeNames = new ArrayList<>();
         for(Recipe r: recipes){
@@ -383,14 +333,191 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipeNames;
     }
 
+    private void addRecipeToRecipeTable(Recipe recipe){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            ContentValues values1 = new ContentValues();
+            values1.put(ATTRIBUTE_RECIPE_NAME, recipe.getRecipeName());
+            values1.put(ATTRIBUTE_RECIPE_DIRECTIONS, recipe.getCookingDirections());
+            values1.put(ATTRIBUTE_RECIPE_IMAGE, recipe.getImagePath());
+
+            db.insertOrThrow(TABLE_RECIPES, null, values1);
+
+            db.setTransactionSuccessful();
+        } catch(Exception e){
+            Log.d(TAG, "Error while trying to add a recipe in recipe table in database");
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    private void addRecipeToRecipeIngredientTable(Recipe recipe){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            for(Ingredient r: recipe.getIngredients()){
+                ContentValues values2 = new ContentValues();
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_NAME, recipe.getRecipeName());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT, r.getIngredientName());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY, r.getUnit().getQuantity());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
+
+                db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
+            }
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while trying to add a recipe in recipe ingredient table in database");
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    private boolean checkRecipeIngredientExistence(String recipeName, String ingredientName){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String RECIPE_INGREDIENT_EXISTENCE_QUERY = "SELECT * FROM " + TABLE_RECIPE_INGREDIENTS + " WHERE " +
+                ATTRIBUTE_RECIPE_INGREDIENTS_NAME + "='" + recipeName + "' AND " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT +
+                "='" + ingredientName + "'";
+        Cursor c = db.rawQuery(RECIPE_INGREDIENT_EXISTENCE_QUERY, null);
+        return c.getCount() != 0;
+    }
+
+    private void updateRecipeToRecipeIngredientTable(Recipe updatedRecipe){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            for(Ingredient r: updatedRecipe.getIngredients()){
+                ContentValues values2 = new ContentValues();
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_NAME, updatedRecipe.getRecipeName());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT, r.getIngredientName());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY, r.getUnit().getQuantity());
+                values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
+
+                if(checkRecipeIngredientExistence(updatedRecipe.getRecipeName(), r.getIngredientName())){
+                    db.update(TABLE_RECIPE_INGREDIENTS, values2, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ? AND " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + "= ?",
+                            new String[]{updatedRecipe.getRecipeName(), r.getIngredientName()});
+                }else{
+                    db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
+                }
+            }
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to update recipe in recipe ingredient table in database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    private void updateRecipeToRecipeTable(Recipe updatedRecipe){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            values.put(ATTRIBUTE_RECIPE_NAME, updatedRecipe.getRecipeName());
+            values.put(ATTRIBUTE_RECIPE_DIRECTIONS, updatedRecipe.getCookingDirections());
+            values.put(ATTRIBUTE_RECIPE_IMAGE, updatedRecipe.getImagePath());
+
+            db.update(TABLE_RECIPES, values, ATTRIBUTE_RECIPE_NAME + " = ?",
+                    new String[]{updatedRecipe.getRecipeName()});
+
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while trying to update recipe in recipe table in database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    private void deleteRecipeFromRecipeIngredientTable(String recipeName){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            db.delete(TABLE_RECIPE_INGREDIENTS, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ?",
+                    new String[]{recipeName});
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to delete a recipe from recipe ingredient table in database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    private void deleteRecipeFromRecipeTable(String recipeName){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            db.delete(TABLE_RECIPES, ATTRIBUTE_RECIPE_NAME + " = ?",
+                    new String[]{recipeName});
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to delete a recipe from recipe table in database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
 
     /*--------------------------------Meal & Grocery Table---------------------------------------*/
+
+    /**
+     * Add recipe to selected meal table and add its ingredients into grocery table.
+     * @param recipeName the target recipe name
+     */
     //tested
     public void addRecipeToMeal(String recipeName){
         addRecipeToMealTable(recipeName);
         addIngredientToGroceryByRecipe(recipeName);
     }
 
+    /**
+     * Consume a recipe in meal table when user assign it to a plan slot.
+     * @param recipeName the target recipe name
+     */
+    //tested
+    public void consumeRecipeFromMeal(String recipeName){
+        SQLiteDatabase db = getWritableDatabase();
+        int count = getExsitingRecipeCount(recipeName);
+
+        if(count == 1){
+            db.beginTransaction();
+            try{
+                db.delete(TABLE_MEALS, ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'", null);
+                db.setTransactionSuccessful();
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to delete a recipe in meal table from database");
+            }finally {
+                db.endTransaction();
+            }
+        }else{
+            db.beginTransaction();
+            try{
+                ContentValues values1 = new ContentValues();
+                values1.put(ATTRIBUTE_MEAL_RECIPE_NAME, recipeName);
+                values1.put(ATTRIBUTE_MEAL_RECIPE_COUNT, count - 1);
+                db.update(TABLE_MEALS, values1, ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'", null);
+                db.setTransactionSuccessful();
+            }catch (Exception e){
+                Log.d(TAG, "Error while trying to add new recipe in meal table in database");
+            }finally {
+                db.endTransaction();
+            }
+        }
+    }
+
+    /**
+     * Update grocery item quantity in grocery table
+     * @param ingredientName the target ingredient name
+     * @param unitName the target unit name
+     * @param operation operation type (ADD or SUB)
+     * @param quantity the target quantity
+     */
     //tested
     public void updateSingleGroceryItem(String ingredientName,String unitName, String operation, Double quantity){
         SQLiteDatabase db = getWritableDatabase();
@@ -423,6 +550,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    /**
+     * Get all selected meal from meal table
+     * @return the map with recipe name and corresponding quantity
+     */
     //tested
     public TreeMap<String, Integer> getAllMeal(){
         SQLiteDatabase db = getReadableDatabase();
@@ -451,6 +582,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return mealMap;
     }
 
+    /**
+     * Get all grocery items in grocery table
+     * @return the map with ingredient name and corresponding unit
+     */
     //tested
     public TreeMap<String, IngredientUnit> getAllGroceryItems(){
         SQLiteDatabase db = getReadableDatabase();
@@ -478,12 +613,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
 
         return groceryMap;
-    }
-
-    //tested
-    public void clearMealAndGrocery() {
-        clearMeals();
-        clearGrocery();
     }
 
     //tested
@@ -626,21 +755,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //tested
-    private void clearMeals(){
-        SQLiteDatabase db = getWritableDatabase();
-
-        db.beginTransaction();
-        try{
-            db.delete(TABLE_MEALS, null, null);
-            db.setTransactionSuccessful();
-        }catch(Exception e){
-            Log.d(TAG, "Error while deleting meals in meal table from database");
-        }finally {
-            db.endTransaction();
-        }
-    }
-
-    //tested
     private void clearGrocery(){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -655,34 +769,5 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
-    /*//tested
-    public void consumeRecipeFromMeal(String recipeName){
-        SQLiteDatabase db = getWritableDatabase();
-        int count = getExsitingRecipeCount(recipeName);
 
-        if(count == 1){
-            db.beginTransaction();
-            try{
-                db.delete(TABLE_MEALS, ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'", null);
-                db.setTransactionSuccessful();
-            }catch (Exception e){
-                Log.d(TAG, "Error while trying to delete a recipe in meal table from database");
-            }finally {
-                db.endTransaction();
-            }
-        }else{
-            db.beginTransaction();
-            try{
-                ContentValues values1 = new ContentValues();
-                values1.put(ATTRIBUTE_MEAL_RECIPE_NAME, recipeName);
-                values1.put(ATTRIBUTE_MEAL_RECIPE_COUNT, count - 1);
-                db.update(TABLE_MEALS, values1, ATTRIBUTE_MEAL_RECIPE_NAME + "='" + recipeName + "'", null);
-                db.setTransactionSuccessful();
-            }catch (Exception e){
-                Log.d(TAG, "Error while trying to add new recipe in meal table in database");
-            }finally {
-                db.endTransaction();
-            }
-        }
-    }*/
 }
