@@ -66,8 +66,6 @@ public class RecipeDetailFragment extends Fragment {
         //MESSAGE_KEY = recipe name here. later for DataBase use
         if (arguments != null) {
             String message = arguments.getString(MESSAGE_KEY);
-            TextView tvMessage = (TextView) view.findViewById(R.id.recipe_detail_textview);
-            tvMessage.setText(message);
 
             DatabaseHelper db = DatabaseHelper.getInstance(this.getActivity());
             Recipe rp = db.getRecipeByName(message);
@@ -80,8 +78,8 @@ public class RecipeDetailFragment extends Fragment {
             ArrayList<String> igList = new ArrayList<>();
 
             for (int i=0 ; i<rp.getIngredients().size() ; i++) {
-                 String temp = rp.getIngredients().get(i).getIngredientName()+
-                  " " + Double.toString(rp.getIngredients().get(i).getUnit().getQuantity()) +
+                 String temp = rp.getIngredients().get(i).getIngredientName()+" "+
+                         Double.toString(rp.getIngredients().get(i).getUnit().getQuantity()) +
                          " " + rp.getIngredients().get(i).getUnit().getUnitName();
                  igList.add(temp);
              }
