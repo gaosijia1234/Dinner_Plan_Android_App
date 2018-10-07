@@ -2,7 +2,12 @@ package com.example.sijiagao.whatsfordinner.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.net.UrlQuerySanitizer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -23,10 +28,12 @@ import com.example.sijiagao.whatsfordinner.model.ingredient.Ingredient;
 import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NewdishActivity extends AppCompatActivity {
+
     public static final String TAG = "NewdishActivity";
     public static final int PICK_IMAGE = 100;
     public Uri imageUri;
@@ -35,7 +42,8 @@ public class NewdishActivity extends AppCompatActivity {
     private ImageView recipeImageImageView;
     private ArrayList<TextView> tvList;
     private List<Ingredient> igList ;
-    private Recipe myCurrentRecipt;
+    private Recipe myCurrentRecipe;
+    Bitmap bitmap;
 
 
 
@@ -44,6 +52,10 @@ public class NewdishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newdish);
         setUp();
+
+        String urlImage = "https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg";
+        new GetImageFromUrl(recipeImageImageView).execute(urlImage);
+
     }
 
     public void setUp(){
@@ -52,7 +64,7 @@ public class NewdishActivity extends AppCompatActivity {
         recipeImageImageView = findViewById(R.id.recipeImageImageView);
         tvList = new ArrayList<>();
         igList = new ArrayList<>();
-        myCurrentRecipt = new Recipe();
+        myCurrentRecipe = new Recipe();
         findViews(this, findViewById(R.id.linearLayout_newDish),tvList);
 
         DatabaseHelper db = DatabaseHelper.getInstance(this);
@@ -88,6 +100,7 @@ public class NewdishActivity extends AppCompatActivity {
         }
     }
 
+
     public void imageUrlBtnClick(View view) {
         Log.i(TAG,"imageUrlBtnClick");
 
@@ -97,16 +110,13 @@ public class NewdishActivity extends AppCompatActivity {
         Log.i(TAG,"clickAddImage");
     }
 
-
-
-
     // Click Done Button to save data to DataBase //
     public void clickDone(View view) {
         Log.i(TAG,"clickDone");
         DatabaseHelper helper = DatabaseHelper.getInstance(this);
 
-        myCurrentRecipt.setRecipeName(recipeNamePlainText.getText().toString());
-        myCurrentRecipt.setCookingDirections(recipeDirectionText.getText().toString());
+        myCurrentRecipe.setRecipeName(recipeNamePlainText.getText().toString());
+        myCurrentRecipe.setCookingDirections(recipeDirectionText.getText().toString());
 
         for (int i=0; i<tvList.size();i+= 3) {
             String igName=tvList.get(i).getText().toString();
@@ -120,12 +130,12 @@ public class NewdishActivity extends AppCompatActivity {
             }
         }
 
-        myCurrentRecipt.setIngredients(igList);
-        String recipeName = myCurrentRecipt.getRecipeName();
+        myCurrentRecipe.setIngredients(igList);
+        String recipeName = myCurrentRecipe.getRecipeName();
 
            if (!recipeName.matches("") && !helper.checkRecipeExistence(recipeName)) {
                Log.i(TAG,"true or fasle is :"+ Boolean.toString(helper.checkRecipeExistence(recipeName)));
-               helper.addRecipe(myCurrentRecipt);
+               helper.addRecipe(myCurrentRecipe);
                Toast toast = Toast.makeText(this, "Recipe Added", Toast.LENGTH_SHORT);
                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                toast.show();
@@ -160,5 +170,37 @@ public class NewdishActivity extends AppCompatActivity {
         }
     }
 
+
+   public class GetImageFromUrl extends AsyncTask<String,Void,Bitmap> {
+      ImageView imgV;
+
+       public GetImageFromUrl(ImageView imageView) {
+           this.imgV = imageView;
+       }
+
+       @Override
+       protected Bitmap doInBackground(String... url) {
+           String urldisplay = url[0];
+           bitmap = null;
+           Log.i(TAG,"bitmap class");
+           try {
+
+               InputStream srt = new java.net.URL(urldisplay).openStream();
+                 bitmap = BitmapFactory.decodeStream(srt);
+           }
+   catch( Exception e) {
+               e.printStackTrace();
+           }
+
+           return bitmap;
+       }
+
+       @Override
+       protected void onPostExecute(Bitmap bitmap) {
+           imgV.setImageBitmap(bitmap);
+       }
+
+
+   }
 
 }
