@@ -58,8 +58,8 @@ public class UpDateRecipeActivity extends AppCompatActivity {
     }
 
     public void clickUpdate(View view) {
-        Recipe tempRp = new Recipe();
-        tempRp.setRecipeName(recipeNamePlainText.getText().toString());
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        Recipe tempRp = db.getRecipeByName(recipeNamePlainText.getText().toString());
         tempRp.setCookingDirections(recipeDirectionText.getText().toString());
         igList.clear();
         for (int i=0; i<tvList.size();i+= 3) {
@@ -74,7 +74,7 @@ public class UpDateRecipeActivity extends AppCompatActivity {
             }
         }
         tempRp.setIngredients(igList);
-        DatabaseHelper db = DatabaseHelper.getInstance(this);
+
         db.updateRecipe(tempRp);
       
         Intent intent = new Intent(this, MainActivity.class);
