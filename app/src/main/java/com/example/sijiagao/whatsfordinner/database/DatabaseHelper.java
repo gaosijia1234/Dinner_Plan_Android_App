@@ -137,6 +137,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return c.getCount() != 0;
     }
 
+    private boolean checkRecipeIngredientExistence(String recipeName, String ingredientName){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String RECIPE_INGREDIENT_EXISTENCE_QUERY = "SELECT * FROM " + TABLE_RECIPE_INGREDIENTS + " WHERE " +
+                ATTRIBUTE_RECIPE_INGREDIENTS_NAME + "='" + recipeName + "' AND " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT +
+                "='" + ingredientName + "'";
+        Cursor c = db.rawQuery(RECIPE_INGREDIENT_EXISTENCE_QUERY, null);
+        return c.getCount() != 0;
+    }
+
     //tested
     public void addRecipe(Recipe recipe){
         SQLiteDatabase db = getWritableDatabase();
@@ -206,8 +216,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_QUANTITY, r.getUnit().getQuantity());
                 values2.put(ATTRIBUTE_RECIPE_INGREDIENTS_UNIT, r.getUnit().getUnitName());
 
-                db.update(TABLE_RECIPE_INGREDIENTS, values2, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ? AND " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + "= ?",
-                        new String[]{updatedRecipe.getRecipeName(), r.getIngredientName()});
+                if(checkRecipeIngredientExistence(updatedRecipe.getRecipeName(), r.getIngredientName())){
+                    db.update(TABLE_RECIPE_INGREDIENTS, values2, ATTRIBUTE_RECIPE_INGREDIENTS_NAME + " = ? AND " + ATTRIBUTE_RECIPE_INGREDIENTS_INGREDIENT + "= ?",
+                            new String[]{updatedRecipe.getRecipeName(), r.getIngredientName()});
+                }else{
+                    db.insertOrThrow(TABLE_RECIPE_INGREDIENTS, null, values2);
+                }
             }
             db.setTransactionSuccessful();
         }catch (Exception e){
