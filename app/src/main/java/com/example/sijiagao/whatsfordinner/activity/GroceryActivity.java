@@ -20,7 +20,9 @@ public class GroceryActivity extends AppCompatActivity {
         db.addRecipeToMeal("Lemon Chicken");
         TreeMap<String, Integer> test = db.getAllMeal();
         TreeMap<String, IngredientUnit> test2 = db.getAllGroceryItems();
-
+        db.clearGrocery();
+        TreeMap<String, Integer> test3 = db.getAllMeal();
+        TreeMap<String, IngredientUnit> test4 = db.getAllGroceryItems();
 
     }
 }

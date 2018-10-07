@@ -437,10 +437,30 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //tested
     public void clearMeals(){
         SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
         try{
             db.delete(TABLE_MEALS, null, null);
+            db.setTransactionSuccessful();
         }catch(Exception e){
             Log.d(TAG, "Error while deleting meals in meal table from database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    //tested
+    public void clearGrocery(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            db.delete(TABLE_GROCERY, null, null);
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while deleting grocery items in grocery table from database");
+        }finally {
+            db.endTransaction();
         }
     }
 
