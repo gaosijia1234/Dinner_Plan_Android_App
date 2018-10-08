@@ -21,7 +21,8 @@
         <activity android:name=".activity.GroceryActivity" />
         <activity android:name=".activity.NewdishActivity" />
         <activity android:name=".activity.DayMealActivity" />
-        <activity android:name=".activity.UpDateRecipeActivity"></activity>
+        <activity android:name=".activity.UpDateRecipeActivity" />
+        <activity android:name=".activity.ListDemoActivity"></activity>
     </application>
 
 </manifest>
