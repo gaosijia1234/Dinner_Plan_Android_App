@@ -19,23 +19,6 @@ public class GroceryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grocery);
         startActivity(new Intent(this, ListDemoActivity.class));
 
-//        DatabaseHelper db = DatabaseHelper.getInstance(this);
-//
-//        db.updateSingleGroceryItem("lemon", "slice", "ADD", 1.0);
-//        TreeMap<String, IngredientUnit> test1 = db.getAllGroceryItems();
-//        db.updateSingleGroceryItem("lemon", "slice", "ADD", 1.0);
-//        TreeMap<String, IngredientUnit> test23 = db.getAllGroceryItems();
-//        db.updateSingleGroceryItem("lemon", "slice", "ADD", 1.0);
-//        TreeMap<String, IngredientUnit> tes45 = db.getAllGroceryItems();
-//
-//        db.updateSingleGroceryItem("lemon", "slice", "SUB", 1.0);
-//        TreeMap<String, IngredientUnit> test5 = db.getAllGroceryItems();
-//        db.updateSingleGroceryItem("lemon", "slice", "SUB", 1.0);
-//        TreeMap<String, IngredientUnit> test6 = db.getAllGroceryItems();
-//        db.updateSingleGroceryItem("lemon", "slice", "SUB", 1.0);
-//        TreeMap<String, IngredientUnit> test7 = db.getAllGroceryItems();
-//
-//        TreeMap<String, Integer> test3 = db.getAllMeal();
-//        TreeMap<String, IngredientUnit> test4 = db.getAllGroceryItems();
+
     }
 }
