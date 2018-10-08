@@ -3,26 +3,80 @@ package com.example.sijiagao.whatsfordinner.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sijiagao.whatsfordinner.R;
 
-public class DayMealActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class DayMealActivity extends AppCompatActivity  {
 
     TextView breakfastInputTV;
     TextView lunchInputTV;
     TextView dinnerInputTV;
     public static final String EATINGOUT = "eatingout";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_meal);
+
+        Spinner breakfast_sp = (Spinner) findViewById(R.id.breakfast_sp);
+
+        // Spinner click listener
+        breakfast_sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        }); {
+
+        }
+
+        // Spinner Drop down elements
+        List<String> categories = new ArrayList<String>();
+        categories.add("Automobile");
+        categories.add("Business Services");
+        categories.add("Computers");
+        categories.add("Education");
+        categories.add("Personal");
+        categories.add("Travel");
+
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        breakfast_sp.setAdapter(dataAdapter);
+
     }
+
+
 
     public void breakfastDoneBtnClick(View view){
         breakfastInputTV = findViewById(R.id.breakfastInputTV);
         String bfInput = breakfastInputTV.getText().toString();
+
+        Spinner breakfast_sp = (Spinner) findViewById(R.id.breakfast_sp);
+
+        breakfastInputTV.setText(breakfast_sp.getPrompt());
 
         // if eating out
         if (bfInput.equals(EATINGOUT)){
