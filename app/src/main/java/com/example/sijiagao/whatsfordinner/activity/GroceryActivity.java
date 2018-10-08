@@ -16,15 +16,5 @@ public class GroceryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery);
-
-        /*db.updateSingleGroceryItem("lemon", "slice", "ADD", 1.0);
-        TreeMap<String, IngredientUnit> test5 = db.getAllGroceryItems();
-        db.updateSingleGroceryItem("lemon", "slice", "SUB", 1.0);
-        TreeMap<String, IngredientUnit> test6 = db.getAllGroceryItems();
-        db.updateSingleGroceryItem("lemon", "slice", "SUB", 1.0);
-        TreeMap<String, IngredientUnit> test7 = db.getAllGroceryItems();
-
-        TreeMap<String, Integer> test3 = db.getAllMeal();
-        TreeMap<String, IngredientUnit> test4 = db.getAllGroceryItems();*/
     }
 }
