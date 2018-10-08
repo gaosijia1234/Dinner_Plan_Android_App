@@ -18,43 +18,43 @@ public class MealActivity extends AppCompatActivity {
 
     protected void mondayBtnClick(View view) {
         Intent i = new Intent(this, DayMealActivity.class);
-        i.putExtra("day", 1);
+        i.putExtra("day", "Monday");
         startActivity(i);
     }
 
     protected void tuesdayBtnClick(View view) {
         Intent i = new Intent(this, DayMealActivity.class);
-        i.putExtra("day", 2);
+        i.putExtra("day", "Tuesday");
         startActivity(i);
     }
 
     protected void wednesdayBtnClick(View view) {
         Intent i = new Intent(this, DayMealActivity.class);
-        i.putExtra("day", 3);
+        i.putExtra("day", "Wednesday");
         startActivity(i);
     }
 
     protected void thursdayBtnClick(View view) {
         Intent i = new Intent(this, DayMealActivity.class);
-        i.putExtra("day", 4);
+        i.putExtra("day", "Thursday");
         startActivity(i);
     }
 
     protected void fridayBtnClick(View view) {
         Intent i = new Intent(this, DayMealActivity.class);
-        i.putExtra("day", 5);
+        i.putExtra("day", "Friday");
         startActivity(i);
     }
 
     protected void saturdayBtnClick(View view) {
         Intent i = new Intent(this, DayMealActivity.class);
-        i.putExtra("day", 6);
+        i.putExtra("day", "Saturday");
         startActivity(i);
     }
 
     protected void btnSundayClick(View view) {
         Intent i = new Intent(this, DayMealActivity.class);
-        i.putExtra("day", 7);
+        i.putExtra("day", "Sunday");
         startActivity(i);
     }
 
