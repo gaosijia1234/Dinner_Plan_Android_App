@@ -12,6 +12,8 @@ import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 import com.example.sijiagao.whatsfordinner.model.recipe.Recipe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -26,6 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_RECIPE_INGREDIENTS ="recipeIngredients";
     private static final String TABLE_MEALS = "meals";
     private static final String TABLE_GROCERY = "grocery";
+    private static final String TABLE_MEAL_PLAN = "mealPlan";
 
     //RECIPES TABLE
     private static final String ATTRIBUTE_RECIPE_NAME  ="name";
@@ -46,6 +49,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String ATTRIBUTE_GROCERY_INGREDIENT_NAME = "ingredient";
     private static final String ATTRIBUTE_GROCERY_INGREDIENT_UNIT = "unit";
     private static final String ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY = "quantity";
+
+    //PLAN TABLE
+    private static final String ATTRIBUTE_MEAL_PLAN_DAY = "day";
+    private static final String ATTRIBUTE_MEAL_PLAN_TIME = "time";
+    private static final String ATTRIBUTE_MEAL_PLAN_RECIPE = "recipe";
 
     private static final String TAG = DatabaseHelper.class.getName();
     private static DatabaseHelper sInstance;
@@ -121,10 +129,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "PRIMARY KEY (" + ATTRIBUTE_GROCERY_INGREDIENT_NAME + "," + ATTRIBUTE_GROCERY_INGREDIENT_UNIT + ")" +
                 ")";
 
+        String CREATE_MEAL_PLAN_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_MEAL_PLAN +
+                "(" +
+                ATTRIBUTE_MEAL_PLAN_DAY + " VARCHAR(225), " +
+                ATTRIBUTE_MEAL_PLAN_TIME + " VARCHAR(225), " +
+                ATTRIBUTE_MEAL_PLAN_RECIPE + " VARCHAR(225), " +
+                "PRIMARY KEY (" + ATTRIBUTE_MEAL_PLAN_DAY + "," + ATTRIBUTE_MEAL_PLAN_TIME + ")" +
+                ")";
+
         db.execSQL(CREATE_RECIPES_TABLE);
         db.execSQL(CREATE_RECIPE_INGREDIENT_TABLE);
         db.execSQL(CREATE_MEAL_TABLE);
         db.execSQL(CREATE_GROCERY_TABLE);
+        db.execSQL(CREATE_MEAL_PLAN_TABLE);
+
+        planTableSetup(db);
     }
 
     /**
@@ -141,6 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEALS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_GROCERY);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEAL_PLAN);
             onCreate(db);
         }
     }
@@ -789,7 +809,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //tested
-    private void clearGrocery(){
+    private void clearGroceryTable(){
         SQLiteDatabase db = getWritableDatabase();
 
         db.beginTransaction();
@@ -801,6 +821,100 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }finally {
             db.endTransaction();
         }
+    }
+
+
+    /*------------------------------Meal Plan Table-----------------------------------------------*/
+    public void assignRecipeToPlanSlot(String day, String time, String recipe){
+        updateMealPlan(day, time, recipe);
+        consumeRecipeFromMeal(recipe);
+    }
+
+    public void clearMealPlanAndGrocery(){
+        clearMealPlanTable();
+        clearGroceryTable();
+    }
+
+    public List<String> getMealPlanByDay(String day){
+        SQLiteDatabase db = getReadableDatabase();
+        List<String> recipes = new ArrayList<>();
+
+        String PLAN_QUERY = "SELECT " + ATTRIBUTE_MEAL_PLAN_RECIPE + " FROM " + TABLE_MEAL_PLAN + " WHERE " + ATTRIBUTE_MEAL_PLAN_DAY +
+                "='" + day + "'";
+        Cursor c = db.rawQuery(PLAN_QUERY, null);
+        try{
+            c.moveToFirst();
+            while(!c.isAfterLast()){
+                recipes.add(c.getString(c.getColumnIndex(ATTRIBUTE_MEAL_PLAN_RECIPE)));
+                c.moveToNext();
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get all plans in plan table from database");
+        }finally {
+            if(!c.isClosed()){
+                c.close();
+            }
+        }
+
+        return recipes;
+    }
+
+    private void planTableSetup(SQLiteDatabase db){
+        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        String[] times = {"Breakfast", "Lunch", "Dinner"};
+        String recipe = "Eating Out";
+        for(String d: days){
+            for(String t: times){
+                db.beginTransaction();
+                try{
+                    ContentValues values = new ContentValues();
+                    values.put(ATTRIBUTE_MEAL_PLAN_DAY, d);
+                    values.put(ATTRIBUTE_MEAL_PLAN_TIME, t);
+                    values.put(ATTRIBUTE_MEAL_PLAN_RECIPE, recipe);
+                    db.insertOrThrow(TABLE_MEAL_PLAN, null, values);
+                    db.setTransactionSuccessful();
+                }catch(Exception e){
+                    Log.d(TAG, "Error while setting up meal plan table from database");
+                }finally {
+                    db.endTransaction();
+                }
+            }
+        }
+    }
+
+    private void updateMealPlan(String day, String time, String recipe){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            values.put(ATTRIBUTE_MEAL_PLAN_DAY, day);
+            values.put(ATTRIBUTE_MEAL_PLAN_TIME, time);
+            values.put(ATTRIBUTE_MEAL_PLAN_RECIPE, recipe);
+            db.update(TABLE_MEAL_PLAN, values, ATTRIBUTE_MEAL_PLAN_DAY + "= ? AND " +
+                ATTRIBUTE_MEAL_PLAN_TIME + "= ?", new String[]{day, time});
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while update meal plan slot in plan table from database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    private void clearMealPlanTable(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try{
+            db.delete(TABLE_MEAL_PLAN, null, null);
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while clearing meal plan table from database");
+        }finally {
+            db.endTransaction();
+        }
+
+        planTableSetup(db);
     }
 
 

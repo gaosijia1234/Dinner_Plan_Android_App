@@ -18,7 +18,5 @@ public class GroceryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery);
         startActivity(new Intent(this, ListDemoActivity.class));
-
-
     }
 }
