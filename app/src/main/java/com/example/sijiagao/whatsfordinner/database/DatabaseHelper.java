@@ -571,7 +571,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 //    }
 
 
-    public String updateSingleGroceryItem(String ingredientName,String unitName, String operation, Double quantity){
+    public void updateSingleGroceryItem(String ingredientName,String unitName, String operation, Double quantity){
         SQLiteDatabase db = getWritableDatabase();
 
         double currentQuantity = getExistingGroceryItemQuantity(ingredientName, unitName);
@@ -600,8 +600,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }finally {
             db.endTransaction();
         }
-
-        return ingredientName + " " + newQuantity + " " + unitName;
     }
 
     /**
@@ -754,7 +752,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //tested
-    private Boolean checkExistingGroceryItem(String ingredientName, String unitName){
+    public Boolean checkExistingGroceryItem(String ingredientName, String unitName){
         SQLiteDatabase db = getReadableDatabase();
         String GROCERY_ITEM_QUERY = "SELECT * FROM " + TABLE_GROCERY +
                 " WHERE " + ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" + ingredientName + "' AND " +

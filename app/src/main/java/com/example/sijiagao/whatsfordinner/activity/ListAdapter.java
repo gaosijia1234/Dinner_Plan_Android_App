@@ -77,9 +77,15 @@ public class ListAdapter extends ArrayAdapter<String> {
                 @Override
                 public void onClick(View v) {
                     allGroceryItems = db.getAllGroceryItems();
-                    String s = db.updateSingleGroceryItem(ingreName, unitName, "SUB",  1.0);
-                    holder.textView.setText(s);
-
+                    db.updateSingleGroceryItem(ingreName, unitName, "SUB",  1.0);
+                    if(db.checkExistingGroceryItem(ingreName, unitName)){
+                        String s = ingreName +  " " +
+                                db.getAllGroceryItems().get(ingreName).getQuantity() + " " +
+                                db.getAllGroceryItems().get(ingreName).getUnitName();
+                        holder.textView.setText(s);
+                    }else{
+                        remove(item);
+                    }
                 }
             });
 
@@ -89,9 +95,11 @@ public class ListAdapter extends ArrayAdapter<String> {
                 public void onClick(View v) {
 //                    remove(item);
                     allGroceryItems = db.getAllGroceryItems();
-                    String s = db.updateSingleGroceryItem(ingreName, unitName, "ADD",  1.0);
+                    db.updateSingleGroceryItem(ingreName, unitName, "ADD",  1.0);
+                    String s = ingreName +  " " +
+                            db.getAllGroceryItems().get(ingreName).getQuantity() + " " +
+                            db.getAllGroceryItems().get(ingreName).getUnitName();
                     holder.textView.setText(s);
-
                 }
             });
 
