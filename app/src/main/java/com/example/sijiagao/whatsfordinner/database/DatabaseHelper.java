@@ -557,7 +557,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         double currentQuantity = getExistingGroceryItemQuantity(ingredientName, unitName);
         double newQuantity = 0;
         if(operation.equals("ADD")){
-            newQuantity = currentQuantity + quantity;　
+            newQuantity = currentQuantity + quantity;
         }else{
             newQuantity = currentQuantity - quantity;
         }
