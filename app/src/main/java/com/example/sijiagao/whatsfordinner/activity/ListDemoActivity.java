@@ -9,12 +9,17 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
+import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ListDemoActivity extends AppCompatActivity {
     private ListAdapter adapter;
+    TreeMap<String, IngredientUnit> allGroceryItems;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,8 +52,11 @@ public class ListDemoActivity extends AppCompatActivity {
     }
 
     private void setupList() {
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        allGroceryItems = db.getAllGroceryItems();
+
         ListView listView = (ListView) findViewById(R.id.list_view);
-        adapter = new ListAdapter(this, createList(5));
+        adapter = new ListAdapter(this, createList(allGroceryItems.size()), db);
         listView.setAdapter(adapter);
     }
 
@@ -56,8 +64,8 @@ public class ListDemoActivity extends AppCompatActivity {
     private List<String> createList(int n) {
         List<String> list = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            list.add("View " + i);
+        for (Map.Entry<String, IngredientUnit> map : allGroceryItems.entrySet()){
+            list.add(map.getKey() + " " + map.getValue().getQuantity() + " " + map.getValue().getUnitName());
         }
 
         return list;

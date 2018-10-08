@@ -14,20 +14,24 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 
 import java.util.List;
+import java.util.TreeMap;
+
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
+import com.example.sijiagao.whatsfordinner.model.ingredient.IngredientUnit;
 
 
-/**
- * Created by Chau Thai on 4/12/16.
- */
 public class ListAdapter extends ArrayAdapter<String> {
     private final LayoutInflater mInflater;
     private final ViewBinderHelper binderHelper;
+    DatabaseHelper db;
+    TreeMap<String, IngredientUnit> allGroceryItems;
 
-    public ListAdapter(Context context, List<String> objects) {
+    public ListAdapter(Context context, List<String> objects, DatabaseHelper db) {
         super(context, R.layout.row_list, objects);
         mInflater = LayoutInflater.from(context);
         binderHelper = new ViewBinderHelper();
+        this.db = db;
 
         // uncomment if you want to open only one row at a time
         // binderHelper.setOpenOnlyOne(true);
@@ -35,7 +39,7 @@ public class ListAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.row_list, parent, false);
@@ -44,10 +48,8 @@ public class ListAdapter extends ArrayAdapter<String> {
             holder.swipeLayout = (SwipeRevealLayout) convertView.findViewById(R.id.swipe_layout);
             holder.frontView = convertView.findViewById(R.id.front_layout);
             holder.deleteView = convertView.findViewById(R.id.delete_layout);
-            holder.textView = (TextView) convertView.findViewById(R.id.text);
-
             holder.moreView = convertView.findViewById(R.id.more_layout);
-
+            holder.textView = (TextView) convertView.findViewById(R.id.text);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -58,11 +60,26 @@ public class ListAdapter extends ArrayAdapter<String> {
             binderHelper.bind(holder.swipeLayout, item);
             holder.textView.setText(item);
 
-            // chagne the function to delete 1
+            String parts[] = item.trim().replaceAll("[^\\w ]", "").split("\\s+");
+            final String ingreName = parts[0];
+            final String quantity = parts[1];
+            final String unitName = parts[2];
+
+            final double quantityNum = Double.parseDouble(quantity);
+            final String s;
+
+            //            holder.textView.setText(ingreName);
+
+
+
+            // change the function to delete 1
             holder.deleteView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    remove(item);
+                    allGroceryItems = db.getAllGroceryItems();
+                    String s = db.updateSingleGroceryItem(ingreName, unitName, "SUB",  1.0);
+                    holder.textView.setText(s);
+
                 }
             });
 
@@ -70,7 +87,11 @@ public class ListAdapter extends ArrayAdapter<String> {
             holder.moreView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    remove(item);
+//                    remove(item);
+                    allGroceryItems = db.getAllGroceryItems();
+                    String s = db.updateSingleGroceryItem(ingreName, unitName, "ADD",  1.0);
+                    holder.textView.setText(s);
+
                 }
             });
 
@@ -107,8 +128,7 @@ public class ListAdapter extends ArrayAdapter<String> {
         SwipeRevealLayout swipeLayout;
         View frontView;
         View deleteView;
-        TextView textView;
-
         View moreView;
+        TextView textView;
     }
 }

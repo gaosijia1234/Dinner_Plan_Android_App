@@ -225,7 +225,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         String RECIPE_INGREDIENTS_QUERY =
                 "SELECT * FROM " + TABLE_RECIPE_INGREDIENTS + " WHERE " + ATTRIBUTE_RECIPE_INGREDIENTS_NAME +
-                " = '" + recipeName.trim() + "' COLLATE NOCASE";
+                        " = '" + recipeName.trim() + "' COLLATE NOCASE";
         Cursor c1 = db.rawQuery(RECIPE_INGREDIENTS_QUERY, null);
         try{
             c1.moveToFirst();
@@ -249,7 +249,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         String RECIPE_QUERY =
                 "SELECT * FROM " + TABLE_RECIPES + " WHERE " + ATTRIBUTE_RECIPE_NAME + " = '" +
-                recipeName.trim() + "' COLLATE NOCASE";
+                        recipeName.trim() + "' COLLATE NOCASE";
         Cursor c2 = db.rawQuery(RECIPE_QUERY, null);
         try{
             c2.moveToFirst();
@@ -539,7 +539,39 @@ public class DatabaseHelper extends SQLiteOpenHelper{
      * @param quantity the target quantity
      */
     //tested
-    public void updateSingleGroceryItem(String ingredientName,String unitName, String operation, Double quantity){
+//    public void updateSingleGroceryItem(String ingredientName,String unitName, String operation, Double quantity){
+//        SQLiteDatabase db = getWritableDatabase();
+//
+//        double currentQuantity = getExistingGroceryItemQuantity(ingredientName, unitName);
+//        double newQuantity = 0;
+//        if(operation.equals("ADD")){
+//            newQuantity = currentQuantity + quantity;
+//        }else{
+//            newQuantity = currentQuantity - quantity;
+//        }
+//
+//        db.beginTransaction();
+//        try{
+//            if(newQuantity != 0){
+//                ContentValues values = new ContentValues();
+//                values.put(ATTRIBUTE_GROCERY_INGREDIENT_QUANTITY, newQuantity);
+//                db.update(TABLE_GROCERY, values, ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" +
+//                        ingredientName + "' AND " + ATTRIBUTE_GROCERY_INGREDIENT_UNIT + "='" + unitName + "'", null);
+//                db.setTransactionSuccessful();
+//            }else{
+//                db.delete(TABLE_GROCERY,  ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" +
+//                        ingredientName + "' AND " + ATTRIBUTE_GROCERY_INGREDIENT_UNIT + "='" + unitName + "'", null);
+//                db.setTransactionSuccessful();
+//            }
+//        }catch (Exception e){
+//            Log.d(TAG, "Error while trying to update grocery item quantity in grocery table from database");
+//        }finally {
+//            db.endTransaction();
+//        }
+//    }
+
+
+    public String updateSingleGroceryItem(String ingredientName,String unitName, String operation, Double quantity){
         SQLiteDatabase db = getWritableDatabase();
 
         double currentQuantity = getExistingGroceryItemQuantity(ingredientName, unitName);
@@ -568,6 +600,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }finally {
             db.endTransaction();
         }
+
+        return ingredientName + " " + newQuantity + " " + unitName;
     }
 
     /**
@@ -858,7 +892,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             values.put(ATTRIBUTE_MEAL_PLAN_TIME, time);
             values.put(ATTRIBUTE_MEAL_PLAN_RECIPE, recipe);
             db.update(TABLE_MEAL_PLAN, values, ATTRIBUTE_MEAL_PLAN_DAY + "= ? AND " +
-                ATTRIBUTE_MEAL_PLAN_TIME + "= ?", new String[]{day, time});
+                    ATTRIBUTE_MEAL_PLAN_TIME + "= ?", new String[]{day, time});
             db.setTransactionSuccessful();
         }catch(Exception e){
             Log.d(TAG, "Error while update meal plan slot in plan table from database");
