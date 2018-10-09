@@ -143,6 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_GROCERY_TABLE);
         db.execSQL(CREATE_MEAL_PLAN_TABLE);
 
+        mealTableSetup(db);
         planTableSetup(db);
     }
 
@@ -816,6 +817,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             db.setTransactionSuccessful();
         }catch(Exception e){
             Log.d(TAG, "Error while deleting grocery items in grocery table from database");
+        }finally {
+            db.endTransaction();
+        }
+    }
+
+    private void mealTableSetup(SQLiteDatabase db){
+        db.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            values.put(ATTRIBUTE_MEAL_RECIPE_NAME, "Eating Out");
+            values.put(ATTRIBUTE_MEAL_RECIPE_COUNT, Integer.MAX_VALUE);
+            db.insertOrThrow(TABLE_MEALS, null, values);
+            db.setTransactionSuccessful();
+        }catch(Exception e){
+            Log.d(TAG, "Error while setting up meal table from database");
         }finally {
             db.endTransaction();
         }
