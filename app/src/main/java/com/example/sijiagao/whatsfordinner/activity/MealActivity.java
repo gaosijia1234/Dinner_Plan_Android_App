@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.sijiagao.whatsfordinner.R;
+import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
+
+import java.util.List;
+import java.util.TreeMap;
 
 public class MealActivity extends AppCompatActivity {
 
@@ -13,6 +17,24 @@ public class MealActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal);
+
+        /*
+        Backend test
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        TreeMap<String, Integer> test = db.getAllMeal();
+        List<String> two = db.getMealPlanByDay("Monday");
+
+        db.assignRecipeToPlanSlot("Monday", "Breakfast", "Lemon");
+        db.assignRecipeToPlanSlot("Monday", "Lunch", "Lemon");
+        db.assignRecipeToPlanSlot("Monday", "Dinner", "Lemon");
+        List<String> one = db.getMealPlanByDay("Monday");
+        TreeMap<String, Integer> test2 = db.getAllMeal();
+
+        db.assignRecipeToPlanSlot("Monday", "Breakfast", "Eating Out");
+        db.assignRecipeToPlanSlot("Monday", "Lunch", "Eating Out");
+        db.assignRecipeToPlanSlot("Monday", "Dinner", "Eating Out");
+        List<String> three = db.getMealPlanByDay("Monday");
+        TreeMap<String, Integer> test3 = db.getAllMeal();*/
     }
 
 
