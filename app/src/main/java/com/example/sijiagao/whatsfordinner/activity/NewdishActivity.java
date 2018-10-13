@@ -45,8 +45,6 @@ public class NewdishActivity extends AppCompatActivity {
     private Recipe myCurrentRecipe;
     Bitmap bitmap;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
