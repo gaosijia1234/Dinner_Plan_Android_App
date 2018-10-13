@@ -130,19 +130,6 @@
                         android:text="Submit Lunch" />
                 </LinearLayout>
 
-                <!--breakfast-->
-
-                <!--end breackfast-->
-
-                <!--lunch-->
-
-                <!--end of lunch-->
-
-                <!--dinner-->
-
-                <!--end of dinner-->
-
-
                 <LinearLayout
                     android:id="@+id/dinner"
                     android:layout_width="match_parent"
