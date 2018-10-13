@@ -60,17 +60,18 @@ public class ListAdapter extends ArrayAdapter<String> {
             binderHelper.bind(holder.swipeLayout, item);
             holder.textView.setText(item);
 
-            String parts[] = item.trim().replaceAll("[^\\w ]", "").split("\\s+");
-            final String ingreName = parts[0];
-            final String quantity = parts[1];
-            final String unitName = parts[2];
-
-            final double quantityNum = Double.parseDouble(quantity);
-            final String s;
-
-            //            holder.textView.setText(ingreName);
-
-
+            String parts[] = item.trim().split("\\s+");
+            final String quantity = parts[parts.length - 2];
+            final String unitName = parts[parts.length - 1];
+            StringBuilder temp = new StringBuilder();
+            for(int i = 0; i <= parts.length - 3; i++){
+                if(i == 0){
+                    temp.append(parts[i]);
+                }else{
+                    temp.append(" ").append(parts[i]);
+                }
+            }
+            final String ingreName = temp.toString();
 
             // change the function to delete 1
             holder.deleteView.setOnClickListener(new View.OnClickListener() {
