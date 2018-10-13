@@ -853,14 +853,26 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = getReadableDatabase();
         List<String> recipes = new ArrayList<>();
 
-        String PLAN_QUERY = "SELECT " + ATTRIBUTE_MEAL_PLAN_RECIPE + " FROM " + TABLE_MEAL_PLAN + " WHERE " + ATTRIBUTE_MEAL_PLAN_DAY +
-                "='" + day + "'";
-        Cursor c = db.rawQuery(PLAN_QUERY, null);
+        String BREAKFAST_QUERY = "SELECT " + ATTRIBUTE_MEAL_PLAN_RECIPE + " FROM " + TABLE_MEAL_PLAN + " WHERE " + ATTRIBUTE_MEAL_PLAN_DAY +
+                "='" + day + "' AND " + ATTRIBUTE_MEAL_PLAN_TIME + "='Breakfast'";
+        String LUNCH_QUERY = "SELECT " + ATTRIBUTE_MEAL_PLAN_RECIPE + " FROM " + TABLE_MEAL_PLAN + " WHERE " + ATTRIBUTE_MEAL_PLAN_DAY +
+                "='" + day + "' AND " + ATTRIBUTE_MEAL_PLAN_TIME + "='Lunch'";
+        String DINNER_QUERY = "SELECT " + ATTRIBUTE_MEAL_PLAN_RECIPE + " FROM " + TABLE_MEAL_PLAN + " WHERE " + ATTRIBUTE_MEAL_PLAN_DAY +
+                "='" + day + "' AND " + ATTRIBUTE_MEAL_PLAN_TIME + "='Dinner'";
+        Cursor c = db.rawQuery(BREAKFAST_QUERY, null);
+        Cursor c1 = db.rawQuery(LUNCH_QUERY, null);
+        Cursor c2 = db.rawQuery(DINNER_QUERY, null);
         try{
             c.moveToFirst();
-            while(!c.isAfterLast()){
-                recipes.add(c.getString(c.getColumnIndex(ATTRIBUTE_MEAL_PLAN_RECIPE)));
-                c.moveToNext();
+            c1.moveToFirst();
+            c2.moveToFirst();
+            if(!c.isAfterLast() && !c1.isAfterLast() && !c2.isAfterLast()){
+                String breakfast = c.getString(c.getColumnIndex(ATTRIBUTE_MEAL_PLAN_RECIPE));
+                String lunch = c1.getString(c.getColumnIndex(ATTRIBUTE_MEAL_PLAN_RECIPE));
+                String dinner = c2.getString(c.getColumnIndex(ATTRIBUTE_MEAL_PLAN_RECIPE));
+                recipes.add(breakfast);
+                recipes.add(lunch);
+                recipes.add(dinner);
             }
         }catch (Exception e){
             Log.d(TAG, "Error while trying to get all plans in plan table from database");
