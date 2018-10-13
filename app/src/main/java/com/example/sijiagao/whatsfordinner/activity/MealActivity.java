@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.sijiagao.whatsfordinner.R;
 import com.example.sijiagao.whatsfordinner.database.DatabaseHelper;
@@ -70,5 +71,8 @@ public class MealActivity extends AppCompatActivity {
         // clear the data, call database function
         DatabaseHelper db = DatabaseHelper.getInstance(this);
         db.clearMealPlanAndGrocery();
+        Toast.makeText
+                (getApplicationContext(), "Your meals of day and groceries are both cleared", Toast.LENGTH_SHORT)
+                .show();
     }
 }
