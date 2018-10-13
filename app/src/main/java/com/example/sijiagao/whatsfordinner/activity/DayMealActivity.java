@@ -27,13 +27,12 @@ public class DayMealActivity extends AppCompatActivity {
     private int breakfast_position;
     private int lunch_position;
     private int dinner_position;
-    ArrayList<String> mealList;
+    private ArrayList<String> mealList;
     private String today;
     private ArrayAdapter<String> bfAdapter;
     private ArrayAdapter<String> luAdapter;
     private ArrayAdapter<String> diAdapter;
 
-    public static final String EATINGOUT = "eatingout";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
