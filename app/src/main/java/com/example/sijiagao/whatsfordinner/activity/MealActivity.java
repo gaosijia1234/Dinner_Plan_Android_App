@@ -61,4 +61,14 @@ public class MealActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void weekDaysDoneOnClick(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    public void weekDaysClearOnClick(View view){
+        // clear the data, call database function
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        db.clearMealPlanAndGrocery();
+    }
 }
