@@ -63,26 +63,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center"
-        >
+        android:gravity="bottom" >
 
-        <Button
-            android:id="@+id/weekDaysClear"
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
 
-            android:onClick="weekDaysClearOnClick"
-            android:text="Clear"
-            android:textSize="24sp" />
+            >
+            <Button
+                android:id="@+id/weekDaysClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="weekDaysClearOnClick"
+                android:text="Clear"
+                android:textSize="24sp"
+                android:layout_alignParentLeft="true"/>
 
-        <Button
-            android:id="@+id/weekDaysDone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:onClick="weekDaysDoneOnClick"
-            android:text="Done"
-            android:textSize="24sp" />
+            <Button
+                android:id="@+id/weekDaysDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="weekDaysDoneOnClick"
+                android:text="Done"
+                android:textSize="24sp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
     </LinearLayout>
 </TableLayout>
