@@ -668,6 +668,22 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return groceryMap;
     }
 
+    /**
+     * Check if one ingredient exists in grocery shopping list or not.
+     * @param ingredientName the name of target ingredient
+     * @param unitName the unit name of target ingredient
+     * @return true if it exists, otherwise false
+     */
+    //tested
+    public Boolean checkExistingGroceryItem(String ingredientName, String unitName){
+        SQLiteDatabase db = getReadableDatabase();
+        String GROCERY_ITEM_QUERY = "SELECT * FROM " + TABLE_GROCERY +
+                " WHERE " + ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" + ingredientName + "' AND " +
+                ATTRIBUTE_GROCERY_INGREDIENT_UNIT + "='" + unitName + "'";
+        Cursor c = db.rawQuery(GROCERY_ITEM_QUERY, null);
+        return c.getCount() != 0;
+    }
+
     //tested
     private void addRecipeToMealTable(String recipeName){
         SQLiteDatabase db = getWritableDatabase();
@@ -753,16 +769,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //tested
-    public Boolean checkExistingGroceryItem(String ingredientName, String unitName){
-        SQLiteDatabase db = getReadableDatabase();
-        String GROCERY_ITEM_QUERY = "SELECT * FROM " + TABLE_GROCERY +
-                " WHERE " + ATTRIBUTE_GROCERY_INGREDIENT_NAME + "='" + ingredientName + "' AND " +
-                ATTRIBUTE_GROCERY_INGREDIENT_UNIT + "='" + unitName + "'";
-        Cursor c = db.rawQuery(GROCERY_ITEM_QUERY, null);
-        return c.getCount() != 0;
-    }
-
-    //tested
     private int getExsitingRecipeCount(String recipeName){
         SQLiteDatabase db = getReadableDatabase();
         int count = 0;
@@ -822,6 +828,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //tested
     private void mealTableSetup(SQLiteDatabase db){
         db.beginTransaction();
         try{
@@ -839,16 +846,32 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
 
     /*------------------------------Meal Plan Table-----------------------------------------------*/
+
+    /**
+     * Assign a recipe to specific day and time
+     * @param day the target weekday
+     * @param time the target day time
+     * @param recipe the target recipe
+     */
+    //tested
     public void assignRecipeToPlanSlot(String day, String time, String recipe){
         updateMealPlan(day, time, recipe);
         consumeRecipeFromMeal(recipe);
     }
 
+    /**
+     * Clear meal plan and grocery list.
+     */
     public void clearMealPlanAndGrocery(){
         clearMealPlanTable();
         clearGroceryTable();
     }
 
+    /**
+     * Get a specific day's meal plan.
+     * @param day the target weekday
+     * @return the String list of meal plan from breakfast to dinner
+     */
     public List<String> getMealPlanByDay(String day){
         SQLiteDatabase db = getReadableDatabase();
         List<String> recipes = new ArrayList<>();
@@ -885,6 +908,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return recipes;
     }
 
+    //tested
     private void planTableSetup(SQLiteDatabase db){
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         String[] times = {"Breakfast", "Lunch", "Dinner"};
@@ -908,6 +932,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
     }
 
+    //tested
     private void updateMealPlan(String day, String time, String recipe){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -942,6 +967,4 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         planTableSetup(db);
     }
-
-
 }
