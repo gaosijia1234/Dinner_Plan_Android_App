@@ -42,11 +42,13 @@
         android:id="@+id/fragment_list"
         android:name="com.example.sijiagao.whatsfordinner.fragment.RecipeListFragment"
         android:layout_width="match_parent"
-        android:layout_height="513dp"
+        android:layout_height="git"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_margin="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </android.support.constraint.ConstraintLayout>
