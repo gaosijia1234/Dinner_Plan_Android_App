@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         groceryImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent groceryIntent = new Intent(getApplicationContext(), GroceryActivity.class);
+                Intent groceryIntent = new Intent(getApplicationContext(), ListDemoActivity.class);
                 startActivity(groceryIntent);
             }
         });
