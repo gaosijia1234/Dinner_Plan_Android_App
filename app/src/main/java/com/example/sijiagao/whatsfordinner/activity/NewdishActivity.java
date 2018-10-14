@@ -51,8 +51,8 @@ public class NewdishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_newdish);
         setUp();
 
-        String urlImage = "https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg";
-        new GetImageFromUrl(recipeImageImageView).execute(urlImage);
+        //String urlImage = "https://upload.wikimedia.org/wikipedia/commons/b/b4/JPEG_example_JPG_RIP_100.jpg";
+        //new GetImageFromUrl(recipeImageImageView).execute(urlImage);
 
     }
 

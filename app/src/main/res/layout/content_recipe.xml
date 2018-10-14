@@ -42,7 +42,7 @@
         android:id="@+id/fragment_list"
         android:name="com.example.sijiagao.whatsfordinner.fragment.RecipeListFragment"
         android:layout_width="match_parent"
-        android:layout_height="git"
+        android:layout_height="513dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_margin="0dp"
