@@ -83,7 +83,9 @@ public class UpDateRecipeActivity extends AppCompatActivity {
         tempRp.setIngredients(igList);
 
         db.updateRecipe(tempRp);
-         
+        Toast.makeText(getApplicationContext(),
+                "Update " + tvList.get(0).getText().toString() + " successfully",
+                Toast.LENGTH_SHORT).show();
        
 
         Intent intent = new Intent(this, MainActivity.class);
