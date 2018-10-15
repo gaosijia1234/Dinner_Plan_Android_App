@@ -9,6 +9,7 @@ Name: Xiaoyu Jiang -- Email: xiaoyu.jiang@sjsu.edu -- Student ID: 010701730
 Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
 
 Name: Sijia Gao -- Email: sijia.gao@sjsu.edu -- Student ID: 012563863 \
+
 Responsibility: 
   1. UI Part: design the Main page\
               design initial version of New Dish page\
