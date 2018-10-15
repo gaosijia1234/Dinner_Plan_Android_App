@@ -10,10 +10,10 @@ Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
 
 Name: Sijia Gao -- Email: sijia.gao@sjsu.edu -- Student ID: 012563863 
 Responsibility: 
-  1. UI Part: design the Main page
-              design initial version of New Dish page
-              design Grocery page
-              design meal page and each day's meal choice page
+  1. UI Part: design the Main page\
+              design initial version of New Dish page\
+              design Grocery page\
+              design meal page and each day's meal choice page\
   2. Functional part: use listAdapter on grocery activity
                       add scroll bar on each grocery item to enable delete or add 
                       add image buttons or buttons click functions on each activity
