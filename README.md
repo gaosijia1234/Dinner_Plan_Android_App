@@ -4,17 +4,17 @@ Semester: Fall 2018
 Class: CS 175 Mobile Device Development
 Team Information
 
-##Name: Xiaoyu Jiang -- Email: xiaoyu.jiang@sjsu.edu -- Student ID: 010701730 
+## Name: Xiaoyu Jiang -- Email: xiaoyu.jiang@sjsu.edu -- Student ID: 010701730 
 
 Responsibility: 
   1. 
 
-##Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
+## Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
 
 Responsibility: 
   1. 
 
-##Name: Sijia Gao -- Email: sijia.gao@sjsu.edu -- Student ID: 012563863 
+## Name: Sijia Gao -- Email: sijia.gao@sjsu.edu -- Student ID: 012563863 
 
 Responsibility: 
   1. UI Part: design the Main page\
