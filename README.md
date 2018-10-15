@@ -26,9 +26,9 @@ Responsibility:
                       add image buttons or buttons click functions on each activity
                       
 
-Assignment Information
+### Assignment Information
 Assignment: Programming Assignment #1
 Additional Information
-How to compile and execute your program?
+### How to compile and execute your program?
 
-What else do you want to let your professor / TA know about this submission?
+### What else do you want to let your professor / TA know about this submission?
