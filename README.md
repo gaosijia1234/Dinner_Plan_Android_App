@@ -24,7 +24,7 @@ Responsibility:
 
 Responsibility: 
   1. UI Part: design the Main page\
-              design initial version of New Dish page\
+     &npsp;&nbsp;&npsp;&nbsp;         design initial version of New Dish page\
               design Grocery page\
               design meal page and each day's meal choice page
   2. Functional part: use listAdapter on grocery activity\
