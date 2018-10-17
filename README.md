@@ -31,12 +31,15 @@ Responsibility:
 #### Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
 
 Responsibility: 
-  #### 1. Front-End Development:
+  #### 1. Front-End Development: 
   developed fragment for Recipe page to enable landscape and portrait feature\
+  enabled landscape and portrait feature for New Dish\
   fixed layout on New Dish page\
   built Recipe page 
   #### 2. Back-End Development:
-  designed Database 
+  designed Database\
+  enabled update recipe feature by long press a specific recipe\
+
   
 ***************  ***  ***************  ***  ***************  ***  ***************  *** ***************
 
