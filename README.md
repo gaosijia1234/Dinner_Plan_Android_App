@@ -12,7 +12,8 @@ Class: CS 175 Mobile Device Development
 #### Name: Xiaoyu Jiang -- Email: xiaoyu.jiang@sjsu.edu -- Student ID: 010701730 
 
 Responsibility: 
-  1. 
+  1. Build Database and all database functions on adding New Dish\
+  
 
 #### Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
 
@@ -32,8 +33,9 @@ Responsibility:
                       
 ## How to compile and execute your program?
 
-Download the project and run it on 
+Download the project and run 
 
 ## Rubric And Total Assess Points
 
+https://github.com/SJSU-Fall2018-CS175/What-sForDinner/blob/master/175%20rubric.pdf
 
