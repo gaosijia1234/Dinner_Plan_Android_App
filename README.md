@@ -9,6 +9,8 @@ Class: CS 175 Mobile Device Development
 
 ## Team Information
 
+***************  ***  ***************  ***  ***************  ***  ***************  *** ***************
+
 #### Name: Xiaoyu Jiang -- Email: xiaoyu.jiang@sjsu.edu -- Student ID: 010701730 
 
 Responsibility: 
@@ -23,6 +25,9 @@ Responsibility:
   fixed data information\
   connected the front-end and back-end\
   debug both sides
+  
+***************  ***  ***************  ***  ***************  ***  ***************  *** ***************
+
 #### Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
 
 Responsibility: 
@@ -33,6 +38,7 @@ Responsibility:
   #### 2. Back-End Development:
   designed Database 
   
+***************  ***  ***************  ***  ***************  ***  ***************  *** ***************
 
 #### Name: Sijia Gao -- Email: sijiagaowork@gmail.com -- Student ID: 012563863 
 
