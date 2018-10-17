@@ -49,7 +49,7 @@ Responsibility:
                       
 ## How to compile and execute your program?
 
-Download the project and run 
+Download the project, delete 175 rubric.pdf file and run 
 
 ## Rubric And Total Assess Points
 
