@@ -14,7 +14,7 @@ Responsibility:
 Responsibility: 
   1. 
 
-## Name: Sijia Gao -- Email: sijia.gao@sjsu.edu -- Student ID: 012563863 
+## Name: Sijia Gao -- Email: sijiagaowork@gmail.com -- Student ID: 012563863 
 
 Responsibility: 
   1. UI Part: design the Main page\
