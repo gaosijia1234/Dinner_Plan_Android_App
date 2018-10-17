@@ -2,19 +2,24 @@
 
 Semester: Fall 2018
 Class: CS 175 Mobile Device Development
-Team Information
 
-## Name: Xiaoyu Jiang -- Email: xiaoyu.jiang@sjsu.edu -- Student ID: 010701730 
+## YouTube Demonstration 
+  
+  https://www.youtube.com/watch?v=rnvbpF0P6Ek
+
+## Team Information
+
+### Name: Xiaoyu Jiang -- Email: xiaoyu.jiang@sjsu.edu -- Student ID: 010701730 
 
 Responsibility: 
   1. 
 
-## Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
+### Name: Rui Jin -- Email: rui.jin@sjsu.edu -- Student ID: 011339042
 
 Responsibility: 
   1. 
 
-## Name: Sijia Gao -- Email: sijiagaowork@gmail.com -- Student ID: 012563863 
+### Name: Sijia Gao -- Email: sijiagaowork@gmail.com -- Student ID: 012563863 
 
 Responsibility: 
   1. UI Part: design the Main page\
@@ -26,9 +31,9 @@ Responsibility:
                       add image buttons or buttons click functions on each activity
                       
 
-### Assignment Information
+## Assignment Information
 Assignment: Programming Assignment #1
 Additional Information
-### How to compile and execute your program?
+## How to compile and execute your program?
 
-### What else do you want to let your professor / TA know about this submission?
+## What else do you want to let your professor / TA know about this submission?
