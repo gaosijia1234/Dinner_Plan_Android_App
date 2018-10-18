@@ -5,7 +5,7 @@ Class: CS 175 Mobile Device Development
 
 ## YouTube Demonstration 
   
-  https://www.youtube.com/watch?v=rnvbpF0P6Ek
+  https://www.youtube.com/watch?v=IidfcGHaEPY&t=12s
 
 ## Team Information
 
